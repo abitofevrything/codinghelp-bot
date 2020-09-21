@@ -4,7 +4,7 @@ module.exports = {
 	aliases: ['welcome', 'code', 'share-your-code', 'seecode'], // Include if you have other names you want to use for this command as well.
 	execute(message, args) {
 
-        message.channel.send("Please share your code as shown in the <#383032186317832202> channel. If it is too long for Discord, please upload it to a place like CodeShare.io and share the link to the code here so we can take a look at it. For security reasons we do not allow uploading of files or pictures on our server. Thank you!")
+        message.channel.send("Please share your code as shown in the <#383032186317832202> channel. If it is too long for Discord, please upload it to a place like CodeShare.io and share the link to the code here so we can take a look at it. Thank you!")
 
 	},
 	
