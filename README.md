@@ -5,7 +5,11 @@
 This is a bot that I created and decided to make it open-source.
 
 ## Table of Contents
-None yet!
+=> [Setup Bot](#setup-bot)
+
+=> [Current ToDo List](#current-todo-list)
+
+=> [Contributions](#contributions)
 
 ### Setup Bot
 1. Go to Discord's [Developer Portal](https://discordapp.com/developers/applications).
@@ -23,4 +27,22 @@ None yet!
 > Alternatively, `npx peterthehan/create-discord-bot` will generate a bot invite link for you when you create a bot project and you provide a valid bot token.
 
 > A Discord bot's client ID is not the same as its token. Keep your token and any file containing it **private**. If your token ever leaks or you suspect it may have leaked, simply `regenerate` a new token to invalidate your compromised token.
+
+## Current ToDo List
+1. Copy [Utility Bot](https://github.com/DudeThatsErin/utility-bot) into this bot.
+
+2. Add Warnings System.
+
+3. Add Kicking System.
+
+4. Add Banning System.
+
+5. Display all of these in the Audit Logs.
+
+6. Add "++faq" command to link to the beginner FAQs in the server.
+
+7. Add "++elaborate" command to ask a user to elaborate when asking a question.
+
+## Contributions
+I love getting contributions. All you have to do is join the [r/CodingHelp Discord Server](https://discord.gg/REjFpZ9) and you can make suggestions and help contribute to the bots success!
 
