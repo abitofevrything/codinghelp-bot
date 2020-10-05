@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'share-code', // name the command something
-	description: 'Tells people to share their code as shown in the #welcome channel.', // Describe your command; shows this with the help command
+	description: 'Tells people to share their code as shown in the <#383032186317832202> channel.', // Describe your command; shows this with the help command
 	aliases: ['welcome', 'code', 'share-your-code', 'seecode'], // Include if you have other names you want to use for this command as well.
 	execute(message, args) {
 
