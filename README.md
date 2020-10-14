@@ -29,15 +29,7 @@ This is a bot that I created and decided to make it open-source.
 > A Discord bot's client ID is not the same as its token. Keep your token and any file containing it **private**. If your token ever leaks or you suspect it may have leaked, simply `regenerate` a new token to invalidate your compromised token.
 
 ## Current ToDo List
-1. Copy [Utility Bot](https://github.com/DudeThatsErin/utility-bot) into this bot.
-
-2. Add Warnings System.
-
-3. Add Kicking System.
-
-4. Add Banning System.
-
-5. Display all of these in the Audit Logs.
+I use Notion for our To Do List. You can check out the current list [here!](https://www.notion.so/r-CodingHelp-Bot-485d3cd9b0d54f93aa4445ffd7ebc2fd)
 
 ## Contributions
 I love getting contributions. All you have to do is join the [r/CodingHelp Discord Server](https://discord.gg/REjFpZ9) and you can make suggestions and help contribute to the bots success!
