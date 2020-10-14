@@ -7,7 +7,7 @@ This is a bot that I created and decided to make it open-source.
 ## Table of Contents
 => [Setup Bot](#setup-bot)
 
-=> [Current ToDo List](#current-todo-list)
+=> [Current To Do List](#current-todo-list)
 
 => [Contributions](#contributions)
 
@@ -28,7 +28,7 @@ This is a bot that I created and decided to make it open-source.
 
 > A Discord bot's client ID is not the same as its token. Keep your token and any file containing it **private**. If your token ever leaks or you suspect it may have leaked, simply `regenerate` a new token to invalidate your compromised token.
 
-## Current ToDo List
+## Current To Do List
 I use Notion for our To Do List. You can check out the current list [here!](https://www.notion.so/r-CodingHelp-Bot-485d3cd9b0d54f93aa4445ffd7ebc2fd)
 
 ## Contributions
