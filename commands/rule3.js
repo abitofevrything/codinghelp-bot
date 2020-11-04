@@ -1,9 +1,18 @@
+const Discord = require('discord.js');
+
 module.exports = {
-	name: 'rule3', // name the command something
-	description: 'Displays rule 3 for our users',
+	name: 'rule3', 
+	description: 'This displays rule 3 for our users.',
 	execute(message, args) {
 
-		message.channel.send("Please follow **Rule 3** which states Restarter (bot) will keep nicknames ascii characters only. This is to make mentioning users easier and make mobile users experience better.")
+		const rule3 = new Discord.MessageEmbed()
+		.setColor('#1a1a1a')
+		.setTitle('Rule 3')
+		.setURL('https://codinghelp.site/wiki/rules/discord-server-rules/')
+		.setThumbnail('https://imgur.com/U6cwQxj.png')
+		.setDescription(`If you need help with a problem in your code, always provide the raw code in GitHub gist or a similar place. If you aren’t sure what places, you can check [this article](https://codinghelp.site/wiki/faq/share-code/).`)
+
+		message.channel.send(rule3)
 
 	},
 	

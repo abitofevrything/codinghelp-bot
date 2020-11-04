@@ -5,7 +5,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 
 // require config file
-const { prefix, token, config } = require('/root/ch-bot/config.json');
+const { prefix, token, config } = require('/root/bots/ch-bot/config.json');
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -15,12 +15,12 @@ client.commands = new Discord.Collection();
 client.login(token);
 
 // Read the Commands folder
-const commandFiles = fs.readdirSync('/root/ch-bot/commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('/root/bots/ch-bot/commands').filter(file => file.endsWith('.js'));
 
 // Include the other files we have
 for (const file of commandFiles) {
 	console.log(file.slice(0,-3));
-	const command = require(`/root/ch-bot/commands/${file.slice(0,-3)}`)
+	const command = require(`/root/bots/ch-bot/commands/${file.slice(0,-3)}`)
 	client.commands.set(command.name, command);
 }
 
