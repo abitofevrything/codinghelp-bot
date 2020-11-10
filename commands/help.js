@@ -1,48 +1,55 @@
-const { prefix, config } = require('C:/Users/Dudet/Desktop/Bot/c/config.json');
+const { prefix, config } = require('F:/LIVE_BOTS/codinghelp-bot/config.json');
 const Discord = require("discord.js");
+var client = require("F:/LIVE_BOTS/codinghelp-bot/index.js").client;
 
-module.exports = {
-	name: 'help',
-	description: 'List all of my commands or info about a specific command.',
-	aliases: ['commands'],
-	usage: '[command name]',
-	cooldown: 5,
-	execute(message, args) {
-		const data = [];
-		const { commands } = message.client;
+const helpEmbed = new Discord.MessageEmbed()
+    .setColor('#0099ff')
+    .setTitle('Help Menu')
+    .setDescription('Use `++help <command>` for more information.')
+    .addFields(
+        { name: 'Rules', value: '```css\nrule1\nrule2\nrule3\nrule4```', inline: true },
+        { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nhire\npatience```', inline: true },
+        { name: 'Utilities', value: '```css\nhelp\nping\nprune\n```', inline: true },
+    );
 
-		if (!args.length) {
-			data.push('Here\'s a list of all my commands:');
-			data.push(commands.map(command => command.name).join(', '));
-			data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
-			
-			return message.author.send(data, { split: true })
-				.then(() => {
-					if (message.channel.type === 'dm') return;
-					message.reply('I\'ve sent you a DM with all my commands!');
-				})
-				.catch(error => {
-					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-					message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
-				});
+	module.exports = {
+		name: 'help', 
+		description: 'Displays all information regarding commands',
+		aliases: ['h', 'halp', 'commands'],
+		usage: '[command name]',
+		inHelp: 'yes',
+		execute(message, args) {
+		if(args.length > 0) {
+			var cmd = client.commands.get(args[0]) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(args[0]));
+			if(!cmd) return message.channel.send("That command could not be found!");
+			if(!cmd.inHelp) return message.channel.send("No help for that command could be found!");
+			else{
+				const emb = new Discord.MessageEmbed().setColor(16773617).setTitle(`Help for \`${cmd.name}\``);
+				if(cmd.descripton){
+					emb.setDescription(cmd.descripton);
+				}else{
+					emb.setDescription("No description could be found");
+				}
+				if(cmd.usage){
+					emb.addField("Usage", cmd.usage, true);
+				}
+				if(cmd.aliases){
+					emb.addField("Aliases", cmd.aliases.join(", "), true);
+				}
+				if(cmd.aliases && command.aliases.length > 0){
+					var aliases = "```\n";
+					cmd.aliases.forEach(alias => {
+						useage += alias;
+					});
+					aliases += "```";
+					emb.addField("Aliases", aliases, false);
+				}
+				message.channel.send(emb);
+			}
+		}else{
+			message.channel.send(helpEmbed);
 		}
-
-		const name = args[0].toLowerCase();
-		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
-
-		if (!command) {
-			return message.reply('that\'s not a valid command!');
-		}
-
-		data.push(`**Name:** ${command.name}`);
-
-		if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
-		if (command.description) data.push(`**Description:** ${command.description}`);
-		if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
-
-		data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
-
-		message.channel.send(data, { split: true });
-
-	},
-};
+	
+		},
+		
+	};

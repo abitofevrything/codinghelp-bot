@@ -1,0 +1,17 @@
+{
+  "name": "ch-bot",
+  "version": "1.0.0",
+  "description": "CodingHelp's Discord Bot for easier functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "++ping"
+  },
+  "author": "Erin Skidds",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.4.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pm2": "^4.4.1"
+  }
+}
