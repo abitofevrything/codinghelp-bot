@@ -6,9 +6,8 @@ const helpEmbed = new Discord.MessageEmbed()
     .setTitle('Help Menu')
     .setDescription('Use `++help <command>` for more information.')
     .addFields(
-        { name: 'Rules', value: '```css\nrule1\nrule2\nrule3\nrule4```', inline: true },
         { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nhire\npatience```', inline: true },
-        { name: 'Utilities', value: '```css\nhelp\nping\nprune\n```', inline: true },
+        { name: 'Utilities', value: '```css\nhelp\nping\nprune\nrules\n```', inline: true },
     );
 
 	module.exports = {
@@ -25,7 +24,7 @@ const helpEmbed = new Discord.MessageEmbed()
 			else{
 				const emb = new Discord.MessageEmbed().setColor(16773617).setTitle(`Help for \`${cmd.name}\``);
 				if(cmd.descripton){
-					emb.setDescription(cmd.descripton);
+					emb.setDescription(cmd.description, true);
 				}else{
 					emb.setDescription("No description could be found");
 				}
@@ -34,14 +33,6 @@ const helpEmbed = new Discord.MessageEmbed()
 				}
 				if(cmd.aliases){
 					emb.addField("Aliases", cmd.aliases.join(", "), true);
-				}
-				if(cmd.aliases && cmd.aliases.length > 0){
-					const aliases = "```\n";
-					cmd.aliases.forEach(alias => {
-						usage += alias;
-					});
-					aliases += "```";
-					emb.addField("Aliases", aliases, false);
 				}
 				message.channel.send(emb);
 			}
