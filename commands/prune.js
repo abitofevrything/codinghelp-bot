@@ -6,6 +6,7 @@ module.exports = {
     description: 'Delete up to 99 messages. Only users with the `MANAGE_MESSAGES` role will be able to use this command.', // Describe your command; shows this with the help command
     aliases: ['delete', 'goaway'], // Include if you have other names you want to use for this command as well.
     usage: '++[command] number',
+    inHelp: 'yes',
     execute(message, args) {
 
         const amount = parseInt(args[0]);
