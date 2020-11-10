@@ -29,10 +29,13 @@ const helpEmbed = new Discord.MessageEmbed()
 					emb.setDescription("No description could be found");
 				}
 				if(cmd.usage){
-					emb.addField("Usage", cmd.usage, true);
+					emb.addField("Usage", cmd.usage, false);
+				}
+				if (cmd.example) {
+					emb.addField("Example", cmd.example, false);
 				}
 				if(cmd.aliases){
-					emb.addField("Aliases", cmd.aliases.join(", "), true);
+					emb.addField("Aliases", cmd.aliases.join(", "), false);
 				}
 				message.channel.send(emb);
 			}

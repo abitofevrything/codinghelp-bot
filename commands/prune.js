@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    inHelp: 'yes',
-    name: 'prune', // name the command something
-    description: 'Delete up to 99 messages. Only users with the `MANAGE_MESSAGES` role will be able to use this command.', // Describe your command; shows this with the help command
-    aliases: ['delete', 'goaway'], // Include if you have other names you want to use for this command as well.
+    name: 'prune', 
+    description: 'Delete up to 99 messages. Only users with the `MANAGE_MESSAGES` role will be able to use this command.',
+    aliases: ['delete', 'goaway'],
     usage: '++[command] number',
+    example: '++prune 10',
     inHelp: 'yes',
     execute(message, args) {
 

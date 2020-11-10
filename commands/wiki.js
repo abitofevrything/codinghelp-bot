@@ -3,6 +3,7 @@ module.exports = {
     description: 'Refers people to the wiki for their questions.', // Describe your command; shows this with the help command
     aliases: ['knowledgebase', 'kb', 'site'], // Include if you have other names you want to use for this command as well.
     usage: '++[command]',
+    example: '++wiki',
     inHelp: 'yes',
     execute(message, args) {
   

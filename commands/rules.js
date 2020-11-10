@@ -32,16 +32,17 @@ const rule4 = new Discord.MessageEmbed()
 .setThumbnail('https://imgur.com/U6cwQxj.png')
 .setDescription(`Do not message the mods directly for any reason. If you are wanting to message the mods, please use the Modmail bot. If you are messaging the mods directly, your messages will be ignored. If you are continually messaging the mods, you will be warned or banned.`);
 
+// Actual Rule Command
 module.exports = {
-    inHelp: 'yes',
-    name: "rule",
-    description: "Asks users",
+    name: "rules",
+    description: "Asks users to make sure they are following the rules.",
     aliases: ['follow', 'pls'],
     usage: '++[command] @username rule number',
- 
+    example: '++rules @username 1',
+    inHelp: 'yes',
     execute(message, args) {
-        const rules = [];
-        rules.push(rule1);
+        const rules = []; // Keeps all of the rules inside an array.
+        rules.push(rule1); // Pushes the rule1 embed. Each one below it pushes it's own embed. Each line is a separate rule and that is how the array knows 1 from 2 from 3, etc.
         rules.push(rule2);
         rules.push(rule3);
         rules.push(rule4);
@@ -49,7 +50,7 @@ module.exports = {
         const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
         if(!user) return message.channel.send('You need to specify a user via mention or the ID.'); // if a user isn't mentioned.
 
-        if (args[0] === 'all') {
+        if (args[0] === 'all') { // Displays all of the rules when ++rules all is run.
             let text = '';
             for (let i = 0; i < rules.length ; i++) {
                 text += rules[i] + '\n';
@@ -58,24 +59,24 @@ module.exports = {
         }
  
         else {
-            if(!message.member.hasPermission("MANAGE_GUILD")){
+            if(!message.member.hasPermission("MANAGE_GUILD")){ // Requires users to have hte MANAGE_GUILD perm
                 message.channel.send('You can\'t use that');
                 return;
                 }    
  
-            if(!user) {
+            if(!user) { // Gives an error if the user isn't specified.
                 message.channel.send('You need to specify a user via mention or the ID.');
                 message.delete();
                 return;
                 }
             const nb = parseInt(args[1])
-            if (nb < 1 || nb > rules.length || isNaN(nb)) {
+            if (nb < 1 || nb > rules.length || isNaN(nb)) { // Gives an error if a correct rule number isn't specified.
                 message.channel.send ("Please enter a valid rule number. If you aren't sure what is a valid rule number, please check: https://codinghelp.site/wiki/rules/discord-server-rules");
                 message.delete();
                 return;
             };
             let usr = message.mentions.members.first();
-            message.channel.send(`${usr}, Please follow the rules: \n`, rules[nb-1]);
+            message.channel.send(`${usr}, Please follow the rules: \n`, rules[nb-1]); // Pings the user and deletes the message and asks them to follow the rules.
             }
         message.channel.bulkDelete(2); //Happens To Every Command
     }
