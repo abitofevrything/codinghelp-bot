@@ -19,6 +19,7 @@ const rule2 = new Discord.MessageEmbed()
 If you are found to be asking if you can ask a question or if anyone is available several times after being reminded each time, you will be warned or banned.`);
 
 module.exports = {
+    inHelp: 'yes',
     name: "rule",
     description: "Display Rules",
  
