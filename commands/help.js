@@ -35,10 +35,10 @@ const helpEmbed = new Discord.MessageEmbed()
 				if(cmd.aliases){
 					emb.addField("Aliases", cmd.aliases.join(", "), true);
 				}
-				if(cmd.aliases && command.aliases.length > 0){
+				if(cmd.aliases && cmd.aliases.length > 0){
 					const aliases = "```\n";
 					cmd.aliases.forEach(alias => {
-						useage += alias;
+						usage += alias;
 					});
 					aliases += "```";
 					emb.addField("Aliases", aliases, false);
