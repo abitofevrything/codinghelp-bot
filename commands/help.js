@@ -1,6 +1,5 @@
 const { prefix, config } = require('../config.json');
 const Discord = require("discord.js");
-const client = require("../index.js").client;
 
 const helpEmbed = new Discord.MessageEmbed()
     .setColor('#0099ff')
@@ -20,7 +19,7 @@ const helpEmbed = new Discord.MessageEmbed()
 		inHelp: 'yes',
 		execute(message, args) {
 		if(args.length > 0) {
-			var cmd = client.commands.get(args[0]) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(args[0]));
+			const cmd = message.client.commands.get(args[0]) || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(args[0]));
 			if(!cmd) return message.channel.send("That command could not be found!");
 			if(!cmd.inHelp) return message.channel.send("No help for that command could be found!");
 			else{
@@ -37,7 +36,7 @@ const helpEmbed = new Discord.MessageEmbed()
 					emb.addField("Aliases", cmd.aliases.join(", "), true);
 				}
 				if(cmd.aliases && command.aliases.length > 0){
-					var aliases = "```\n";
+					const aliases = "```\n";
 					cmd.aliases.forEach(alias => {
 						useage += alias;
 					});
