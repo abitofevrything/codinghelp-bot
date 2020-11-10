@@ -23,7 +23,7 @@ const helpEmbed = new Discord.MessageEmbed()
 			if(!cmd.inHelp) return message.channel.send("No help for that command could be found!");
 			else{
 				const emb = new Discord.MessageEmbed().setColor(16773617).setTitle(`Help for \`${cmd.name}\``);
-				if(cmd.descripton){
+				if(cmd.description){
 					emb.setDescription(cmd.description, true);
 				}else{
 					emb.setDescription("No description could be found");
