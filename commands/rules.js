@@ -1,6 +1,5 @@
 const { prefix, config } = require('F:/LIVE_BOTS/codinghelp-bot/config.json');
 const Discord = require("discord.js");
-var client = require("F:/LIVE_BOTS/codinghelp-bot/index.js").client;
 
 //Rule Embeds
 const rule1 = new Discord.MessageEmbed()
@@ -46,7 +45,6 @@ module.exports = {
                 return;
                 }    
  
-            const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
             if(!user) {
                 message.channel.send('Please specify a user, via mention or ID');
                 message.delete();

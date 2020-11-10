@@ -1,6 +1,6 @@
 const { prefix, config } = require('../config.json');
 const Discord = require("discord.js");
-var client = require("../index.js").client;
+const client = require("../index.js").client;
 
 const helpEmbed = new Discord.MessageEmbed()
     .setColor('#0099ff')
@@ -9,7 +9,7 @@ const helpEmbed = new Discord.MessageEmbed()
     .addFields(
         { name: 'Rules', value: '```css\nrule1\nrule2\nrule3\nrule4```', inline: true },
         { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nhire\npatience```', inline: true },
-        { name: 'Utilities', value: '```css\nhelp\nping\n```', inline: true },
+        { name: 'Utilities', value: '```css\nhelp\nping\nprune\n```', inline: true },
     );
 
 	module.exports = {
