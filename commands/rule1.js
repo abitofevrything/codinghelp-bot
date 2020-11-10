@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = {
-	name: 'rule9', // name the command something
+	name: 'rule1', // name the command something
 	description: 'Diplays Rule 1 for our users.', // Describe your command; shows this with the help command
 	execute(message, args) {
 

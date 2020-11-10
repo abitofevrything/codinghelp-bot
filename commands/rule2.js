@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = {
-	name: 'rule8', 
+	name: 'rule2', 
 	description: 'This displays rule 2 for our users.',
 	execute(message, args) {
 

@@ -1,5 +1,4 @@
 module.exports = {
-	inHelp: 'yes',
 	name: 'elaborate', 
 	description: 'Asks people to elaborate by including code or by including more information.',
 	aliases: ['explain', 'more-info', 'moreinfo'],
