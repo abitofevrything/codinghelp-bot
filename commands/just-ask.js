@@ -1,13 +1,26 @@
+const Discord = require("discord.js");
+const { prefix, config } = require('F:/LIVE_BOTS/codinghelp-bot/config.json');
+
+
 module.exports = {
-	name: 'justask', // name the command something
-	description: 'Tells users to just ask their question instead of asking if someone is here or if someone can help them.', // Describe your command; shows this with the help command
-	aliases: ['ja', 'ask'], // Include if you have other names you want to use for this command as well.
-	usage: '++[command]',
+	name: 'justask',
+	description: 'Tells users to just ask their question instead of asking if someone is here or if someone can help them.',
+	aliases: ['ja', 'ask'],
+	usage: '++[command] @username or userID',
 	inHelp: 'yes',
     execute(message, args) {
-
-        message.channel.send("Please just ask your question. Rule 4 prohibits you from asking if someone is available or if someone can help you. Please include any code that is necessary. If you have any questions please refer to <#383032186317832202>. Thank you!")
-
+		
+		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
+		if(!user) {
+			message.channel.send('You need to specificy a user via mention or the ID.');
+			message.delete();
+			return;
+		}
+		else { 
+			let usr = message.mentions.members.first();
+			message.channel.send(`Hey, ${usr}!` +  ' Please just ask your question according to our rules. Rule 2 explains that you should just ask instead of asking any of the following questions. Click the link below as your quesiton could have been answered there as well.\n**Do not ask the following quesitons:**\n```css\nIs anyone available?\nCan someone please help me?\nWhenever someone gets online, can you help me?\n```\nOur Website: https://codinghelp.site');
+		}
+		message.channel.bulkDelete(1);
 	},
 	
 };

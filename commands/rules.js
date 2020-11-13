@@ -35,10 +35,9 @@ const rule4 = new Discord.MessageEmbed()
 // Actual Rule Command
 module.exports = {
     name: "rules",
-    description: "Asks users to make sure they are following the rules.",
+    description: "Asks users to make sure they are following the rules. This deletes your message pinging the bot and the one right under that.",
     aliases: ['follow', 'pls'],
-    usage: '++[command] @username rule number',
-    example: '++rules @username 1',
+    usage: '++rules @username or user ID rule number[1-4]',
     inHelp: 'yes',
     execute(message, args) {
         const rules = []; // Keeps all of the rules inside an array.
@@ -59,7 +58,7 @@ module.exports = {
         }
  
         else {
-            if(!message.member.hasPermission("MANAGE_GUILD")){ // Requires users to have hte MANAGE_GUILD perm
+            if(!message.member.hasPermission("MANAGE_GUILD")){ // Requires users to have the MANAGE_GUILD perm
                 message.channel.send('You can\'t use that');
                 return;
                 }    
