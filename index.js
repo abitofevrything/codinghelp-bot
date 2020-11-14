@@ -28,6 +28,14 @@ for (const file of commandFiles) {
 // this event will only trigger one time after logging in
 client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
+
+	client.user.setPresence({
+		status: "dnd",  // You can show online, idle... Do not disturb is dnd
+		activity: {
+			name: "++help",  // The message shown
+			type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
+		}
+	});
 });
 
 client.on('message', message => { // Looking for a message
@@ -44,6 +52,8 @@ const command = client.commands.get(commandName)
 	|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 if (!command) return;
+
+if (!message.guild) return;
 
 if (command.guildOnly && message.channel.type !== 'text') {
 	return message.reply('I can\'t execute that command inside DMs!');
