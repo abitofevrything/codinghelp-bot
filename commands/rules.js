@@ -58,7 +58,7 @@ module.exports = {
         }
  
         else {
-            if(!message.member.hasPermission("MANAGE_GUILD")){ // Requires users to have the MANAGE_GUILD perm
+            if(!message.member.hasPermission("SEND_MESSAGES")){ // Allows any user that can send messages, use this command.
                 message.channel.send('You can\'t use that');
                 return;
                 }    
