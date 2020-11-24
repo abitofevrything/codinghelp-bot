@@ -28,7 +28,7 @@ module.exports = {
       points.set(key, memberPoints)  
     }
     memberPoints['points'] += 50;
-    message.channel.send(`Hey ${member}! You were just thanked! You got 10 points! Congratulations!`);
+    message.channel.send(`Hey ${member}! You were just thanked! You got 50 points! Congratulations!`);
 
     }, // End Execute
     

@@ -20,7 +20,7 @@ module.exports = {
           }
           points.set(key, memberPoints);  
         }
-        if (memberPoints <= 99) {
+        if (memberPoints <= 499) {
           message.reply(`Hello! You have ` + memberPoints['points'] + ` points. Start chatting to earn points! If you help out our members, each time you are thanked, you get 50 points!`);
         }
         if (memberPoints >= 500) {
