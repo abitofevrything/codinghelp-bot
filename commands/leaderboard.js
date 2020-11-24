@@ -1,4 +1,7 @@
-const client = require("discord.js");
+const Discord = require("discord.js");
+const client = new Discord.Client();
+const SQLite = require("better-sqlite3");
+const sql = new SQLite('./scores.sqlite');
 
 module.exports = {
     name: 'leaderboard', 
@@ -7,30 +10,46 @@ module.exports = {
     usage: '++leaderboard',
     inHelp: 'yes',
     execute(message, args) {
+      let score;
+      if (message.guild) {
+        score = client.getScore.get(message.author.id, message.guild.id);
+        if (!score) {
+          score = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, points: 0, level: 1 }
+        }
+        score.points++;
+        const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
+        if(score.level < curLevel) {
+          score.level++;
+          message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
+        }
+        client.setScore.run(score);
+      }
+      if (message.guild) {
+        score = client.getScore.get(message.author.id, message.guild.id);
+        if (!score) {
+          score = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, points: 0, level: 1 }
+        }
+        score.points++;
+        const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
+        if(score.level < curLevel) {
+          score.level++;
+          message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
+        }
+        client.setScore.run(score);
+      }
+      const top10 = sql.prepare("SELECT * FROM scores WHERE guild = ? ORDER BY points DESC LIMIT 10;").all(message.guild.id);
+
+      // Now shake it and show it! (as a nice embed, too!)
+    const embed = new Discord.MessageEmbed()
+      .setTitle("Leaderboard")
+      .setAuthor(client.user.username, client.user.avatarURL())
+      .setDescription("Our top 10 points leaders!")
+      .setColor(0x00AE86);
   
-            // Get a filtered list (for this guild only), and convert to an array while we're at it.
-            const filtered = client.points.filter( p => p.guild === message.guild.id ).array();
-          
-            // Sort it to get the top results... well... at the top. Y'know.
-            const sorted = filtered.sort((a, b) => b.points - a.points);
-          
-            // Slice it, dice it, get the top 10 of it!
-            const top10 = sorted.splice(0, 10);
-          
-            // Now shake it and show it! (as a nice embed, too!)
-            const embed = new Discord.MessageEmbed()
-              .setTitle("Leaderboard")
-              .setAuthor(client.user.username, message.guild.iconURL())
-              .setDescription("Our top 10 points leaders!")
-              .setColor(0x00AE86);
-            for(const data of top10) {
-              try {
-                embed.addField(client.users.cache.get(data.user).tag, `${data.points} points (level ${data.level})`);
-              } catch {
-                embed.addField(`<@${data.user}>`, `${data.points} points (level ${data.level})`);
-              }
-            }
-            return message.channel.send({embed});
+    for(const data of top10) {
+      embed.addFields({ name: client.users.cache.get(data.user).tag, value: `${data.points} points (level ${data.level})` });
+    }
+    return message.channel.send({embed});
 
     }, // End Execute
     
