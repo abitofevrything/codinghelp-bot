@@ -130,7 +130,7 @@ client.on("ready", () => {
 		return;
 	  }
 	  if (curLevel >= 50) {
-		member.roles.add(assistant);
+		member.roles.add(experienced);
 		message.reply('Congratulations! You now have the <@780851563031691286> role! This gives you access to a special channel as well as a cool new username color! WOO HOO!');
 		return;
 	  }
