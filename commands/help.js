@@ -6,7 +6,7 @@ const helpEmbed = new Discord.MessageEmbed()
     .setTitle('Help Menu')
     .setDescription('Use `++help <command>` for more information.')
     .addFields(
-        { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nhire\npatience\nwrong-channel\n```', inline: true },
+        { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nhire\npatience\nwrong-channel\nformat\n```', inline: true },
         { name: 'Utilities', value: '```css\nhelp\nping\nprune\nrules\nbin\n```', inline: true },
     );
 

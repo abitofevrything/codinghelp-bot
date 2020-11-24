@@ -29,13 +29,14 @@ for (const file of commandFiles) {
 client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 
-	client.user.setPresence({
-		status: "dnd",  // You can show online, idle... Do not disturb is dnd
-		activity: {
-			name: "++help",  // The message shown
-			type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
-		}
-	});
+  // Sets Bot's Status
+  client.user.setPresence({
+    status: "dnd", 
+    activity: {
+        name: "++help",  
+        type: "PLAYING" 
+    }
+  });
 });
 
 client.on('message', message => { // Looking for a message
