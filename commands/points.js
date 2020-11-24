@@ -18,10 +18,15 @@ module.exports = {
             guild: message.guild.id,
             points: 0
           }
-          points.set(key, memberPoints)  
+          points.set(key, memberPoints);  
         }
-        message.reply(memberPoints['points'])
-        return;
+        if (memberPoints <= 99) {
+          message.reply(`Hello! You have ` + memberPoints['points'] + ` points. Start chatting to earn points! If you help out our members, each time you are thanked, you get 50 points!`);
+        }
+        if (memberPoints >= 500) {
+          message.reply(`Thank you! We appreciate you helping out our members! You have ` + memberPoints + ` points. Keep earning more points to get higher on our leaderboard!`);
+        }
+        
 
     }, // End Execute
     
