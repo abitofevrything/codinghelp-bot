@@ -2,10 +2,10 @@ const Discord = require("discord.js");
 const points = new Discord.Collection();
 
 module.exports = {
-    name: 'give', 
-    description: 'This is hwo you can give points to other users.\n**Note:** You must have MANAGE_MEMBERS permission to use this command.', 
-    aliases: ['donate'], 
-    usage: '++give @username or ID [number of points]',
+    name: 'thanks', 
+    description: 'This is how you can give points to other users. Every time you thank them you give them 10 points.', 
+    aliases: ['donate', 'give', 'thx', 'helped', 'helping'], 
+    usage: '++thanks @username or ID',
     inHelp: 'yes',
     execute(message, args) {
 
@@ -16,18 +16,18 @@ module.exports = {
     }
 
     const key = `${message.guild.id}-${member.id}`;
+   
     let memberPoints = points.get(key);
     if (!memberPoints) {
-        memberPoints = {
-          user: message.author.id,
-          guild: message.guild.id,
-          points: 0
-        }
-        points.set(key, memberPoints)  
+      memberPoints = {
+        user: message.author.id,
+        guild: message.guild.id,
+        points: 0
       }
-    memberPoints['points'] += 10;
-    message.channel.send(`You gave 10 points to ${member}~`)
-    return;
+   
+      points.set(key, memberPoints)  
+    }
+    memberPoints['points'] += args[1];
     
 
     }, // End Execute
