@@ -115,6 +115,25 @@ client.on("ready", () => {
 		score.level++;
 		message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
 	  }
+	  let assistant = message.guild.roles.cache.get(r => r.id === "780472757313601566");
+	  let experienced = message.guild.roles.cache.get(r => r.id === "780851563031691286");
+	  let rookie = message.guild.roles.cache.get(r => r.id === "780851658447912972");
+
+	  if (curLevel >= 10) {
+		member.roles.add(rookie);
+		message.reply('Congratulations! You now have the <@780851658447912972> role! This gives you access to a special channel as well as a cool new username color! WOO HOO!');
+		return;
+	  }
+	  if (curLevel >= 20) {
+		member.roles.add(assistant);
+		message.reply('Congratulations! You now have the <@780472757313601566> role! This gives you access to a special channel as well as a cool new username color! WOO HOO!');
+		return;
+	  }
+	  if (curLevel >= 50) {
+		member.roles.add(assistant);
+		message.reply('Congratulations! You now have the <@780851563031691286> role! This gives you access to a special channel as well as a cool new username color! WOO HOO!');
+		return;
+	  }
 	  client.setScore.run(score);
 	}
   

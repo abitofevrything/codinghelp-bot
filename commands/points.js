@@ -41,11 +41,14 @@ module.exports = {
         client.setScore.run(score);
       }
 
-        if (score.points <= 499) {
+        if (curLevel === 1) {
           message.reply(`Hello! You have ` + score.points + ` points and are at level ` + score.level + `. Start chatting to earn points! If you help out our members, each time you are thanked, you get 50 points!`);
         }
+        if (curLevel <= 9) {
+          message.reply( `Hello! You have ` + score.points + ` points and are at level ` + score.level + `. You have `);
+        }
         if (score.points >= 500) {
-          message.reply(`Thank you! We appreciate you helping out our members! You have ` + score.points + ` points. Keep earning more points to get higher on our leaderboard! You are currently at level ` + score.level + `.`);
+          message.reply(`Thank you! We appreciate you helping out our members! You have ` + score.points + ` points. Keep earning more points to get higher on our leaderboard! You are currently at level ` + score.level + `. Once you get `);
         }
         
 
