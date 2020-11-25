@@ -8,7 +8,10 @@ module.exports = {
 
     if(!message.member.hasPermission(['MANAGE_MEMBERS'])) 
     return message.reply(':x: You do not have permission to use this command!')
-    else {message.channel.send(`🏓 Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);}
+    else {message.channel.send(`🏓 Pong!`);}
   },
-  
 };
+
+module.exports.help = {
+
+}

@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const client = require('../index.js');
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
 
@@ -55,7 +55,7 @@ module.exports = {
       // Now shake it and show it! (as a nice embed, too!)
     const embed = new Discord.MessageEmbed()
       .setTitle("Leaderboard")
-      .setAuthor(client.user.username, client.user.avatarURL())
+      .setAuthor(message.author.username, message.author.avatarURL())
       .setDescription("Our top 10 points leaders!")
       .setColor(0x00AE86);
   
