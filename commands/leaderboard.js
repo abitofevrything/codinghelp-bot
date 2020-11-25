@@ -20,11 +20,11 @@ module.exports = {
       }
     
       // And then we have two prepared statements to get and set the score data.
-      client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
-      client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
+      message.client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
+      message.client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
       let score;
       if (message.guild) {
-        score = client.getScore.get(message.author.id, message.guild.id);
+        score = message.client.getScore.get(message.author.id, message.guild.id);
         if (!score) {
           score = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, points: 0, level: 1 }
         }
@@ -34,10 +34,10 @@ module.exports = {
           score.level++;
           message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
         }
-        client.setScore.run(score);
+        message.client.setScore.run(score);
       }
       if (message.guild) {
-        score = client.getScore.get(message.author.id, message.guild.id);
+        score = message.client.getScore.get(message.author.id, message.guild.id);
         if (!score) {
           score = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, points: 0, level: 1 }
         }
@@ -47,7 +47,7 @@ module.exports = {
           score.level++;
           message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
         }
-        client.setScore.run(score);
+        message.client.setScore.run(score);
       }
       const top10 = sql.prepare("SELECT * FROM scores WHERE guild = ? ORDER BY points DESC LIMIT 10;").all(message.guild.id);
 
