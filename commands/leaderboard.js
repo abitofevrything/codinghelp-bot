@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const client = require('../index.js');
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
 
@@ -60,7 +59,7 @@ module.exports = {
       .setColor(0x00AE86);
   
     for(const data of top10) {
-      embed.addFields({ name: client.users.cache.get(data.user).tag, value: `${data.points} points (level ${data.level})` });
+      embed.addFields({ name: message.client.users.cache.get(data.user).tag, value: `${data.points} points (level ${data.level})` });
     }
     return message.channel.send({embed});
 
