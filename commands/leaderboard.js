@@ -57,12 +57,12 @@ module.exports = {
       .setAuthor(message.author.username, message.author.avatarURL())
       .setDescription("Our top 10 points leaders!")
       .setColor(0x00AE86);
-  
+  Promise.all(top10.map(data => message.client.users.fetch(data.user).then(user => [data, user]))).then(top10Users => {
     for(const data of top10) {
       embed.addFields({ name: message.client.users.cache.get(data.user).tag, value: `${data.points} points (level ${data.level})` });
     }
-    return message.channel.send({embed});
-
+    message.channel.send({embed});
+  });
     }, // End Execute
     
   }; // End module.exports
