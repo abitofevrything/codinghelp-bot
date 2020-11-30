@@ -5,7 +5,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 
 // require config file
-const { prefix, token, config } = require('F:/LIVE_BOTS/codinghelp-bot/config.json');
+const { prefix, token, config } = require('./config.json');
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -19,14 +19,26 @@ const sql = new SQLite('./scores.sqlite');
 client.login(token);
 
 // Read the Commands folder
-const commandFiles = fs.readdirSync('F:/LIVE_BOTS/codinghelp-bot/commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 // Include the other files we have
 for (const file of commandFiles) {
 	console.log(file.slice(0,-3));
-	const command = require(`F:/LIVE_BOTS/codinghelp-bot/commands/${file.slice(0,-3)}`)
+	const command = require(`./commands/${file.slice(0,-3)}`)
 	client.commands.set(command.name, command);
 }
+
+/*Channel ids for:
+ * 1 (CHALLENGE_ANNOUNCEMENTS_CHANNEL) :  the channel id for the channel where the challenge will be posted
+ * 2 (CHALLENGE_SUBMISSIONS_DUMP_CHANNEL) : the channel (should be mod/helper-only) where user's subissions will be put for review. These can be submitted with the !submit command
+*/
+const CHALLENGE_ANNOUNCEMENTS_CHANNEL = 782275132013543434;
+const CHALLENGE_SUBMISSIONS_DUMP_CHANNEL = 782617080935088179;
+
+let contestData = {
+    challenges : [],
+    participants : {},
+};
 
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
@@ -41,6 +53,16 @@ client.once('ready', () => {
         type: "PLAYING" 
     }
   });
+
+      //Read contest data from file. If using files is unavailible (hosting restrictions), switch to code that will load the data from a cloud server instead
+	  fs.readFile("contestdata.txt", (err, data) => {
+        if (err) {
+            console.error("Unable to load data from file : " + err);
+            return;
+        }
+        contestData = JSON.parse(data.toString());
+		console.log("Loaded contest data from file");
+	  });
 });
 
 client.on('message', message => { // Looking for a message
@@ -139,3 +161,33 @@ client.on("ready", () => {
   
 	// Command-specific code here!
   });
+
+  // Challenge Code
+  //Same here, but for writing to the file. Once again, switch to cloud server saving if files are unavailible
+function updateFile() {
+    fs.writeFile("contestdata.txt", JSON.stringify(contestData), err => {
+        if (err) {
+            console.error("Unable to save data to file : " + err);
+            console.error("Dumping data to console for recovery purposes");
+            console.log(JSON.stringify(contestData));
+        }
+    });
+}
+  //Whenerver a message is sent, update the sent challenges (ideally we would want an event that triggers at midnight on the day, but this works fine too)
+client.on('message', message => {
+    if (message.author.bot) return;
+    if (new Date().getMonth() < 10 /* Change to 10 for testing if needed - this will prevent challenges from being published before december*/) return;
+    for (let i = 1; i < contestData.challenges.length; i++) {
+        if (contestData.challenges[i] == undefined) continue;
+        if (!contestData.challenges[i].sent && new Date().getDay() >= i) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle(contestData.challenges[i].title)
+            .addField("Challenge : ", contestData.challenges[i].description);
+
+            message.guild.channels.cache.find(channel => channel.id == CHALLENGE_ANNOUNCEMENTS_CHANNEL).send(embed).then(msg => {
+                contestData.challenges[i].sent = true;
+                updateFile();
+            });
+        }
+    }
+})

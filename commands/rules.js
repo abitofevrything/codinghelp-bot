@@ -1,4 +1,4 @@
-const { prefix, config } = require('F:/LIVE_BOTS/codinghelp-bot/config.json');
+const { prefix, config } = require('../config.json');
 const Discord = require("discord.js");
 
 //Rule Embeds
