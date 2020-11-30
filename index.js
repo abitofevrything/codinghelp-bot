@@ -164,15 +164,13 @@ client.on("ready", () => {
 
   // Challenge Code
   //Same here, but for writing to the file. Once again, switch to cloud server saving if files are unavailible
-/*function updateFile() {
-   fs.writeFile("contestdata.txt", JSON.stringify(contestData), err => {
-        if (err) {
-            console.error("Unable to save data to file : " + err);
-            console.error("Dumping data to console for recovery purposes");
-            console.log(JSON.stringify(contestData));
-        }
-    });
-}*/
+  fs.writeFile("contestdata.txt", JSON.stringify(contestData), err => {
+	if (err) {
+		console.error("Unable to save data to file : " + err);
+		console.error("Dumping data to console for recovery purposes");
+		console.log(JSON.stringify(contestData));
+	}
+  });
   //Whenerver a message is sent, update the sent challenges (ideally we would want an event that triggers at midnight on the day, but this works fine too)
 client.on('message', message => {
     if (message.author.bot) return;
