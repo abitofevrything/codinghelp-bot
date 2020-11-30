@@ -1,4 +1,4 @@
-
+const cData = require('../contestData');
 
 module.exports = {
     name: 'addchallenge',

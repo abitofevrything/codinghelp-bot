@@ -163,6 +163,7 @@ client.on("ready", () => {
   });
 
   // Challenge Code
+  const cData = require('./contestData');
   //Same here, but for writing to the file. Once again, switch to cloud server saving if files are unavailible
   fs.writeFile("contestdata.txt", JSON.stringify(contestData), err => {
 	if (err) {
