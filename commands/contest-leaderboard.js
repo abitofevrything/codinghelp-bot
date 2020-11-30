@@ -11,6 +11,7 @@ module.exports = {
         let leaderboardMessage = '```';
         let posMessage = 'You haven\'t participated yet!';
         let count = 1;
+	let contestData = cData.getData();
         for (let user of Object.values(contestData.participants).sort((a, b) => b.score - a.score)) {
             leaderboardMessage += (count++) + '. ' + user.name + ' '.repeat(17 - user.name.length) + user.score + '\n';
             if (user.name == message.author.username) {
@@ -27,4 +28,4 @@ module.exports = {
         message.channel.send(embed);
 
     },
-  };
+};

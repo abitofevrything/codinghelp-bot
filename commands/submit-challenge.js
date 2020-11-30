@@ -21,7 +21,7 @@ module.exports = {
         return;
     }
 
-
+    let contestData = cData.getData();
     let user = message.author.username;
     if (contestData.participants[user] == undefined) {
         contestData.participants[user] = {
@@ -49,7 +49,7 @@ module.exports = {
 
     message.guild.channels.cache.find(channel => channel.id == CHALLENGE_SUBMISSIONS_DUMP_CHANNEL).send(`${user} submitted an answer for challenge #${args[0]}! Submission : \n${contestData.participants[user].submissions[args[0]].submissionText}\n\nRun \`!addpoints ${user} ${args[0]} [number of points]\` to award this user points for this challenge`);
 
-    updateFile();
+    cData.setData(contestData);
 
     },
   };
