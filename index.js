@@ -173,9 +173,10 @@ client.on("ready", () => {
 	}
   });
   //Whenerver a message is sent, update the sent challenges (ideally we would want an event that triggers at midnight on the day, but this works fine too)
-client.on('message', message => {
+  client.on('message', message => {
     if (message.author.bot) return;
     if (new Date().getMonth() < 10 /* Change to 10 for testing if needed - this will prevent challenges from being published before december*/) return;
+    let contestData = cData.getData();
     for (let i = 1; i < contestData.challenges.length; i++) {
         if (contestData.challenges[i] == undefined) continue;
         if (!contestData.challenges[i].sent && new Date().getDay() >= i) {
@@ -185,7 +186,7 @@ client.on('message', message => {
 
             message.guild.channels.cache.find(channel => channel.id == CHALLENGE_ANNOUNCEMENTS_CHANNEL).send(embed).then(msg => {
                 contestData.challenges[i].sent = true;
-                updateFile();
+                cData.setData(contestData);
             });
         }
     }
