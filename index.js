@@ -175,7 +175,7 @@ client.on("ready", () => {
   //Whenerver a message is sent, update the sent challenges (ideally we would want an event that triggers at midnight on the day, but this works fine too)
   client.on('message', message => {
     if (message.author.bot) return;
-    if (new Date().getMonth() < 10 /* Change to 10 for testing if needed - this will prevent challenges from being published before december*/) return;
+    if (new Date().getMonth() < 11 /* Change to 10 for testing if needed - this will prevent challenges from being published before december*/) return;
     let contestData = cData.getData();
     for (let i = 1; i < contestData.challenges.length; i++) {
         if (contestData.challenges[i] == undefined) continue;

@@ -8,7 +8,7 @@ module.exports = {
     inHelp: 'yes',
     execute(message, args) {
   
-        if (!message.member.hasPermission("MANAGE_GUILD")) {
+        if (!message.member.roles.cache.has("782276070850035752")) {
             message.channel.send(":x: You can't do that!");
         } else {
             let contestData = cData.getData();
