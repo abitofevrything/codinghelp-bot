@@ -1,4 +1,5 @@
 const cData = require('../contestData');
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'contest-leaderboard',

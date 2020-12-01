@@ -1,4 +1,1 @@
-{
-"challenges":[],
-"participants":{}
-}
+{"challenges":[],"participants":{}}
