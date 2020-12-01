@@ -1,4 +1,5 @@
 const cData = require('../contestData');
+const CHALLENGE_SUBMISSIONS_DUMP_CHANNEL = 782617080935088179;
 
 module.exports = {
     name: 'submit',
