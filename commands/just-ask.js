@@ -5,7 +5,7 @@ const { prefix, config } = require('../config.json');
 module.exports = {
 	name: 'justask',
 	description: 'Tells users to just ask their question instead of asking if someone is here or if someone can help them.',
-	aliases: ['ja', 'ask'],
+	aliases: ['ja', 'ask', 'just-ask'],
 	usage: '++[command] @username or userID',
 	inHelp: 'yes',
     execute(message, args) {

@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
     name: 'invite',
     description: 'Pushes an invite link.',
-    aliases: ['link'],
+    aliases: ['link', 'invites'],
     usage: '.invite',
     inHelp: 'yes',
     execute(message, args) {

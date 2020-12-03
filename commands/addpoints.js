@@ -1,4 +1,5 @@
 const cData = require('../contestData');
+const Discord = require("discord.js");
 
 module.exports = {
     name: 'addpoints',
@@ -12,6 +13,7 @@ module.exports = {
             message.channel.send(":x: You can't do that!");
         } else {
             let contestData = cData.getData();
+            console.log(JSON.stringify(contestData));
             if (contestData.participants[args[0]].submissions[args[1]].pending) {
                 contestData.participants[args[0]].score += Number.parseInt(args[2]);
                 contestData.participants[args[0]].pending--;

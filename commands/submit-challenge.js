@@ -46,9 +46,9 @@ module.exports = {
     if (contestData.participants[user].submissions[args[0]].message) {
         contestData.participants[user].submissions[args[0]].message.delete();
     }
-    message.channel.send("@" + user + ", your submission for day " + args[0] + " has been added!\nIf you wish to update your submission, simply rerun this command. This won't work once your submission has been reviewed.");
+    message.reply(" your submission for day " + args[0] + " has been added!\nIf you wish to update your submission, simply rerun this command. This won't work once your submission has been reviewed.");
 
-    message.guild.channels.cache.find(channel => channel.id == CHALLENGE_SUBMISSIONS_DUMP_CHANNEL).send(`${user} submitted an answer for challenge #${args[0]}! Submission : \n${contestData.participants[user].submissions[args[0]].submissionText}\n\nRun \`!addpoints ${user} ${args[0]} [number of points]\` to award this user points for this challenge`);
+    message.guild.channels.cache.find(channel => channel.id == CHALLENGE_SUBMISSIONS_DUMP_CHANNEL).send(`${user} submitted an answer for challenge #${args[0]}! Submission : \n${contestData.participants[user].submissions[args[0]].submissionText}\n\nRun \`++addpoints ${user} ${args[0]} [number of points]\` to award this user points for this challenge`);
 
     cData.setData(contestData);
 

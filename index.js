@@ -43,7 +43,13 @@ let contestData = {
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
 client.once('ready', () => {
-	console.log(`Logged in as ${client.user.tag}!`);
+	 // Sends embed when bot is reloaded
+	 const onEmbed = new Discord.MessageEmbed() // WORKS!
+	 .setColor('#000000')
+	 .setFooter(`The bot is now online. :) If you have issues please ping cute.as.ducks#5567 (Erin).`);
+   let channel = client.channels.cache.find(c => c.id === '757041736047656980');
+ 
+   channel.send(onEmbed);
 
   // Sets Bot's Status
   client.user.setPresence({
@@ -163,23 +169,15 @@ client.on("ready", () => {
   });
 
   // Challenge Code
+  //Whenever a message is sent, update the sent challenges (ideally we would want an event that triggers at midnight on the day, but this works fine too)
   const cData = require('./contestData');
-  //Same here, but for writing to the file. Once again, switch to cloud server saving if files are unavailible
-  fs.writeFile("contestdata.txt", JSON.stringify(contestData), err => {
-	if (err) {
-		console.error("Unable to save data to file : " + err);
-		console.error("Dumping data to console for recovery purposes");
-		console.log(JSON.stringify(contestData));
-	}
-  });
-  //Whenerver a message is sent, update the sent challenges (ideally we would want an event that triggers at midnight on the day, but this works fine too)
   client.on('message', message => {
     if (message.author.bot) return;
     if (new Date().getMonth() < 11 /* Change to 10 for testing if needed - this will prevent challenges from being published before december*/) return;
     let contestData = cData.getData();
     for (let i = 1; i < contestData.challenges.length; i++) {
         if (contestData.challenges[i] == undefined) continue;
-        if (!contestData.challenges[i].sent && new Date().getDay() >= i) {
+        if (!contestData.challenges[i].sent && new Date().getDate() >= i) {
             let embed = new Discord.MessageEmbed()
             .setTitle(contestData.challenges[i].title)
             .addField("Challenge : ", contestData.challenges[i].description);

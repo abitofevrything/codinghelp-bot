@@ -1,4 +1,5 @@
 const cData = require('../contestData');
+const Discord = require("discord.js");
 
 module.exports = {
     name: 'addchallenge',
@@ -8,11 +9,11 @@ module.exports = {
     inHelp: 'yes',
     execute(message, args) {
   
-        if (!message.member.hasPermission("MANAGE_GUILD")) {
+        if (!message.member.roles.cache.has("782276070850035752")) {
             message.channel.send(":x: You can't do that!");
         } else {
-            let contestData = cData.getData();
             let titleDesc = args.splice(1).join(" ").split("|");
+            let contestData = cData.getData();
             contestData.challenges[args[0]] = {
                 title : titleDesc[0],
                 description : titleDesc[1],

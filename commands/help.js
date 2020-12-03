@@ -1,13 +1,15 @@
 const { prefix, config } = require('../config.json');
 const Discord = require("discord.js");
 
-const helpEmbed = new Discord.MessageEmbed()
+const helpEmbed1 = new Discord.MessageEmbed()
     .setColor('#0099ff')
-    .setTitle('Help Menu')
+    .setTitle('Help Menu pg 1')
     .setDescription('Use `++help <command>` for more information.')
     .addFields(
-        { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nhire\npatience\nwrong-channel\nformat\n```', inline: true },
-        { name: 'Utilities', value: '```css\nhelp\nping\nprune\nrules\nbin\n```', inline: true },
+        { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nrequests\npatience\nwrong-channel\nformat\nbin\nmods\nwiki\ndocs\nrules\n```', inline: true },
+		{ name: 'Utilities', value: '```css\navatar\nhelp\nping\nprune\ninvites\nchk-invites\nmute\nunmute\nban\nunban\n```', inline: true },
+		{ name: 'Contests/Challenges', value: '```css\ncontest-leaderboard\naddpoints\naddchallenge\nsubmitchallenge\nsubmit\n```', inline: true },
+		{ name: 'Leveling System', value: '```css\nthanks\nleaderboard\npoints\n\n**NOTE:**This is conflicting with the Christmas Challenge currently. Erin has to recode it so it stops so this is only partially working.\n```', inline: true },
     );
 
 	module.exports = {
@@ -37,7 +39,7 @@ const helpEmbed = new Discord.MessageEmbed()
 				message.channel.send(emb);
 			}
 		}else{
-			message.channel.send(helpEmbed);
+			message.channel.send(helpEmbed1);
 		}
 		message.channel.bulkDelete(1);
 		},

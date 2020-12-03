@@ -1,7 +1,7 @@
 module.exports = {
-    name: 'hire', // name the command something
-    description: 'Refers people to the hire-programmers channel to hire someone.', // Describe your command; shows this with the help command
-    aliases: ['requests'], // Include if you have other names you want to use for this command as well.
+    name: 'requests', // name the command something
+    description: 'Refers people to the request-coders channel to hire someone.', // Describe your command; shows this with the help command
+    aliases: ['hire', ''], // Include if you have other names you want to use for this command as well.
     usage: '++hire @username or user ID',
     inHelp: 'yes',
     execute(message, args) {
