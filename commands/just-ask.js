@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { prefix, config } = require('F:/LIVE_BOTS/codinghelp-bot/config.json');
+const { prefix, config } = require('../config.json');
 
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
 		}
 		else { 
 			let usr = message.mentions.members.first();
-			message.channel.send(`Hey, ${usr}!` +  ' Please just ask your question according to our rules. Rule 2 explains that you should just ask instead of asking any of the following questions. Click the link below as your quesiton could have been answered there as well.\n**Do not ask the following quesitons:**\n```css\nIs anyone available?\nCan someone please help me?\nWhenever someone gets online, can you help me?\n```\nOur Website: https://codinghelp.site');
+			message.channel.send(`Hey, ${usr}!` +  ' Please just ask your question according to our rules. Rule 2 explains that you should just ask instead of asking any of the following questions. Click the link below as your question could have been answered there as well.\n**Do not ask the following quesitons:**\n```css\nIs anyone available?\nCan someone please help me?\nWhenever someone gets online, can you help me?\n```\nOur Website: https://codinghelp.site');
 		}
 		message.channel.bulkDelete(1);
 	},
