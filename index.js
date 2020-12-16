@@ -32,8 +32,8 @@ for (const file of commandFiles) {
  * 1 (CHALLENGE_ANNOUNCEMENTS_CHANNEL) :  the channel id for the channel where the challenge will be posted
  * 2 (CHALLENGE_SUBMISSIONS_DUMP_CHANNEL) : the channel (should be mod/helper-only) where user's subissions will be put for review. These can be submitted with the !submit command
 */
-const CHALLENGE_ANNOUNCEMENTS_CHANNEL = 782275132013543434;
-const CHALLENGE_SUBMISSIONS_DUMP_CHANNEL = 782617080935088179;
+const CHALLENGE_ANNOUNCEMENTS_CHANNEL = 775155475129171968;
+const CHALLENGE_SUBMISSIONS_DUMP_CHANNEL = 775155475129171968;
 
 let contestData = {
     challenges : [],
@@ -46,8 +46,8 @@ client.once('ready', () => {
 	 // Sends embed when bot is reloaded
 	 const onEmbed = new Discord.MessageEmbed() // WORKS!
 	 .setColor('#000000')
-	 .setFooter(`The bot is now online. :) If you have issues please ping cute.as.ducks#5567 (Erin).`);
-   let channel = client.channels.cache.find(c => c.id === '757041736047656980');
+	 .setFooter(`The bot is now online. :) If you have issues please ping cute.as.ducks#8061 (Erin).`);
+   let channel = client.channels.cache.find(c => c.id === '775155475129171968');
  
    channel.send(onEmbed);
 

@@ -1,7 +1,7 @@
 module.exports = {
-    name: 'bin', // name the command something
-    description: 'Tells people a few places they could go to share long pieces of code.', // Describe your command; shows this with the help command
-    aliases: ['long-code', 'external-share'], // Include if you have other names you want to use for this command as well.
+    name: 'bin',
+    description: 'Tells people a few places they could go to share long pieces of code.',
+    aliases: ['long-code', 'external-share'],
     usage: '++bin',
     inHelp: 'yes',
     execute(message, args) {

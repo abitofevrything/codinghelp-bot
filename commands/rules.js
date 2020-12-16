@@ -32,12 +32,19 @@ const rule4 = new Discord.MessageEmbed()
 .setThumbnail('https://imgur.com/U6cwQxj.png')
 .setDescription(`Do not message the mods directly for any reason. If you are wanting to message the mods, please use the Modmail bot. If you are messaging the mods directly, your messages will be ignored. If you are continually messaging the mods, you will be warned or banned.`);
 
+const rule5 = new Discord.MessageEmbed()
+.setColor("#1a1a1a")
+.setTitle('Rule 5')
+.setURL('https://codinghelp.site/wiki/rules/discord-server-rules/')
+.setThumbnail('https://imgur.com/U6cwQxj.png')
+.setDescription(`Do not ask our members personal questions like gender, age, sexual preference, etc. This is not a dating server, nor is it a place where those questions matter. They mean nothing when it comes to whether or not someone can code. If someone decides to share anything, they can do so using their own free will. Explicitly asking these questions will get you warned, muted, or banned depending on the circumstances. **NO EXCEPTIONS.**`);
+
 // Actual Rule Command
 module.exports = {
     name: "rules",
     description: "Asks users to make sure they are following the rules. This deletes your message pinging the bot and the one right under that.",
     aliases: ['follow', 'pls'],
-    usage: '++rules @username or user ID rule number[1-4]',
+    usage: '++rules @username or user ID rule number[1-5]',
     inHelp: 'yes',
     execute(message, args) {
         const rules = []; // Keeps all of the rules inside an array.
@@ -45,6 +52,7 @@ module.exports = {
         rules.push(rule2);
         rules.push(rule3);
         rules.push(rule4);
+        rules.push(rule5);
  
         const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
         if(!user) return message.channel.send('You need to specify a user via mention or the ID.'); // if a user isn't mentioned.

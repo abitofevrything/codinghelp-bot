@@ -44,7 +44,7 @@ module.exports = {
             );
         }
         else {
-            message.reply("Sorry! You don't have the correct permissions to prune messages. You need the `MANAGE_MESSAGES` permission.");
+            message.reply("❌ You don't have the correct permissions to prune messages. You need the `MANAGE_MESSAGES` permission.");
         }
     }
 };

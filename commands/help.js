@@ -7,9 +7,9 @@ const helpEmbed1 = new Discord.MessageEmbed()
     .setDescription('Use `++help <command>` for more information.')
     .addFields(
         { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nrequests\npatience\nwrong-channel\nformat\nbin\nmods\nwiki\ndocs\nrules\n```', inline: true },
-		{ name: 'Utilities', value: '```css\navatar\nhelp\nping\nprune\ninvites\nchk-invites\nmute\nunmute\nban\nunban\n```', inline: true },
+		{ name: 'Utilities', value: '```css\navatar\nhelp\ninvites\nchk-invites\nchannels\n```', inline: true },
 		{ name: 'Contests/Challenges', value: '```css\ncontest-leaderboard\naddpoints\naddchallenge\nsubmitchallenge\nsubmit\n```', inline: true },
-		{ name: 'Leveling System', value: '```css\nthanks\nleaderboard\npoints\n\n**NOTE:**This is conflicting with the Christmas Challenge currently. Erin has to recode it so it stops so this is only partially working.\n```', inline: true },
+		{ name: 'Moderator Only Commands', value: '```css\nserver\npartners\nban\nunban\nmute\nunmute\nprune\nping\n```' },
     );
 
 	module.exports = {
