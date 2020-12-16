@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 const helpEmbed1 = new Discord.MessageEmbed()
     .setColor('#0099ff')
-    .setTitle('Help Menu pg 1')
+    .setTitle('Help Menu')
     .setDescription('Use `++help <command>` for more information.')
     .addFields(
         { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nrequests\npatience\nwrong-channel\nformat\nbin\nmods\nwiki\ndocs\nrules\n```', inline: true },
