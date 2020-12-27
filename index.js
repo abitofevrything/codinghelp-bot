@@ -28,12 +28,17 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+/* slash commands */
+client('', () => {
+	function
+});
+
 /*Channel ids for:
  * 1 (CHALLENGE_ANNOUNCEMENTS_CHANNEL) :  the channel id for the channel where the challenge will be posted
  * 2 (CHALLENGE_SUBMISSIONS_DUMP_CHANNEL) : the channel (should be mod/helper-only) where user's subissions will be put for review. These can be submitted with the !submit command
 */
-const CHALLENGE_ANNOUNCEMENTS_CHANNEL = 775155475129171968;
-const CHALLENGE_SUBMISSIONS_DUMP_CHANNEL = 775155475129171968;
+const CHALLENGE_ANNOUNCEMENTS_CHANNEL = 782275132013543434;
+const CHALLENGE_SUBMISSIONS_DUMP_CHANNEL = 782617080935088179;
 
 let contestData = {
     challenges : [],

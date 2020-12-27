@@ -17,7 +17,7 @@ module.exports = {
         message.channel.send(":x: Please enter a valid date!");
         return;
     }
-    if (args[0] > new Date().getDay() || 11/* change to 10 for testing if needed - this will prevent users from submitting answers before december*/ > new Date().getMonth()) {
+    if (args[0] > new Date().getDate() || 11/* change to 10 for testing if needed - this will prevent users from submitting answers before december*/ > new Date().getMonth()) {
         message.channel.send(":x: That challenge isn't out yet!");
         return;
     }
