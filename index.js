@@ -29,8 +29,12 @@ for (const file of commandFiles) {
 }
 
 /* slash commands */
-client('', () => {
-	function
+let server = require('server.js');
+client.on('', () => {
+  if(commands) {
+    let commands = [];
+    server.registerCommands(commands);
+  }
 });
 
 /*Channel ids for:
