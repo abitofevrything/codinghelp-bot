@@ -19,7 +19,7 @@ module.exports = {
                 return message.reply('Please enter a valid number between 2 and 99.');
             } 
 
-            if( message.channel.bulkDelete(amount, true).then(deletedMessages => {
+            if( message.channel.bulkDelete(amount, true)/*.then(deletedMessages => {
                 //filter the deleted messages with .filter()
                 var botMessages = deletedMessages.filter(m => m.author.bot);
                 var userPins = deletedMessages.filter(m => m.pinned);
@@ -40,7 +40,7 @@ module.exports = {
                 .catch(err => {
                     console.error(err);
                     message.channel.send('Whoops! There was an error trying to prune messages in this channel! Check the command and try again.');
-                })
+                })*/
             );
         }
         else {
