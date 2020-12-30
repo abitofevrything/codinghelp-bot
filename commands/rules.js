@@ -60,7 +60,7 @@ module.exports = {
         if (args[0] === 'all') { // Displays all of the rules when ++rules all is run.
             let text = '';
             for (let i = 0; i < rules.length; i++) {
-                text += JSON.stringify(rules[i]) + '\n';
+                message.channel.send(rules[i]);
             }
             message.author.send("These are all of our server rules.\n" + text);
         }
@@ -83,8 +83,10 @@ module.exports = {
                 return;
             };
             let usr = message.mentions.members.first();
-            message.channel.bulkDelete(1);
+            
             message.channel.send(`${usr}, Please follow the rules: \n`, rules[nb-1]); // Pings the user and deletes the message and asks them to follow the rules.
             }
-        
+
+            //message.channel.bulkDelete(1); //Happens To Every Command
+    }
 }
