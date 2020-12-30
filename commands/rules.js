@@ -59,8 +59,8 @@ module.exports = {
 
         if (args[0] === 'all') { // Displays all of the rules when ++rules all is run.
             let text = '';
-            for (let i = 0; i < rules.length ; i++) {
-                text += rules[i] + '\n';
+            for (let i = 0; i < rules.length; i++) {
+                text += JSON.stringify(rules[i]) + '\n';
             }
             message.author.send("These are all of our server rules.\n" + text);
         }
