@@ -44,7 +44,7 @@ module.exports = {
     name: "rules",
     description: "Asks users to make sure they are following the rules. This deletes your message pinging the bot and the one right under that.",
     aliases: ['follow', 'pls'],
-    usage: '++rules @username or user ID rule number[1-5]',
+    usage: '++rules @username or user ID rule number[1-5] or ++rules all @username or ID',
     inHelp: 'yes',
     execute(message, args) {
         const rules = []; // Keeps all of the rules inside an array.
@@ -62,7 +62,7 @@ module.exports = {
             for (let i = 0; i < rules.length; i++) {
                 message.channel.send(rules[i]);
             }
-            message.author.send("These are all of our server rules.\n" + text);
+            message.channel.send("These are all of our server rules.\n" + text);
         }
  
         else {
