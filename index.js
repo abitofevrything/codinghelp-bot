@@ -5,196 +5,102 @@ const fs = require('fs');
 const Discord = require('discord.js');
 
 // require config file
-const { prefix, token, config } = require('./config.json');
+const config = require('./config.json');
 
 // create a new Discord client
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-// SQLite Includes
-const SQLite = require("better-sqlite3");
-const sql = new SQLite('./scores.sqlite');
+// Register the commands and the events for the bot. New way for the bot to know what commands we are going to use and how to use them.
+const { registerCommands, registerEvents } = require('./register.js');
 
-// login to Discord with your app's token
-client.login(token);
+// MySQL2 Includes
+let connection;
+const guildCommandPrefixes = new Map();
 
-// Read the Commands folder
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-// Include the other files we have
-for (const file of commandFiles) {
-	console.log(file.slice(0,-3));
-	const command = require(`./commands/${file.slice(0,-3)}`)
-	client.commands.set(command.name, command);
-}
-
-/* slash commands */
-let server = require('server.js');
-client.on('', () => {
-  if(commands) {
-    let commands = [];
-    server.registerCommands(commands);
-  }
-});
-
-/*Channel ids for:
- * 1 (CHALLENGE_ANNOUNCEMENTS_CHANNEL) :  the channel id for the channel where the challenge will be posted
- * 2 (CHALLENGE_SUBMISSIONS_DUMP_CHANNEL) : the channel (should be mod/helper-only) where user's subissions will be put for review. These can be submitted with the !submit command
-*/
-const CHALLENGE_ANNOUNCEMENTS_CHANNEL = 782275132013543434;
-const CHALLENGE_SUBMISSIONS_DUMP_CHANNEL = 782617080935088179;
-
-let contestData = {
-    challenges : [],
-    participants : {},
-};
 
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
-client.once('ready', () => {
-	 // Sends embed when bot is reloaded
-	 const onEmbed = new Discord.MessageEmbed() // WORKS!
-	 .setColor('#000000')
-	 .setFooter(`The bot is now online. :) If you have issues please ping cute.as.ducks#8061 (Erin).`);
-   let channel = client.channels.cache.find(c => c.id === '775155475129171968');
- 
-   channel.send(onEmbed);
+client.on('ready', () => {
+	console.log(`${client.user.tag} is ready, ready, ready-edy-edy!`); //Spongebob reference! heh.
+
+	// Grabs the prefix from the database
+	client.guilds.cache.forEach(guild => {
+		connection.query(
+			`SELECT cmdPrefix FROM GuildSetup WHERE guildId = '${guild.id}'`
+		).then(result => {
+			guildCommandPrefixes.set(guild.id, result[0][0].cmdPrefix);
+		}).catch(err => console.log(err));
+	});
+	
 
   // Sets Bot's Status
   client.user.setPresence({
     status: "dnd", 
     activity: {
-        name: "++help",  
+        name: `${config.client.prefix}help`,  
         type: "PLAYING" 
     }
   });
-
-      //Read contest data from file. If using files is unavailible (hosting restrictions), switch to code that will load the data from a cloud server instead
-	  fs.readFile("contestdata.txt", (err, data) => {
-        if (err) {
-            console.error("Unable to load data from file : " + err);
-            return;
-        }
-        contestData = JSON.parse(data.toString());
-		console.log("Loaded contest data from file");
-	  });
 });
 
-client.on('message', message => { // Looking for a message
+// Adds guild to GuildSetup MySQL Database.
+client.on('guildCreate', async (guild) => {
+	try {
+		await connection.query(
+			`INSERT INTO GuildSetup VALUES('${guild.id}', '${guild.ownerID}')`
+		);
+	} catch(err) {
+		console.log(err);
+	}
+});
+
+client.on('message', async (message) => { // Looking for a message
 
 /* ----------------------------------------------------------
 NECESSARY PARTS OF THE FILE
 -------------------------------------------------------------- */
-if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-const args = message.content.slice(prefix.length).trim().split(/ +/);
-const commandName = args.shift().toLowerCase();
-
-const command = client.commands.get(commandName)
-	|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
-if (!command) return;
-
-if (!message.guild) return;
-
-if (command.guildOnly && message.channel.type !== 'text') {
-	return message.reply('I can\'t execute that command inside DMs!');
+if (message.author.bot) return;
+const prefix = guildCommandPrefixes.get(message.guild.id);
+if(message.content.toLowerCase().startsWith(prefix + 'test')) {
+	message.channel.send(`You triggered this comamnd with prefix: ${prefix}`);
 }
-
-if (command.args && !args.length) {
-	let reply = `You didn't provide any arguments, ${message.author}!`;
-
-	if (command.usage) {
-		reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+else if(message.content.toLowerCase().startsWith(prefix + 'changeprefix')) {
+	if(message.member.id === message.guild.ownerID) {
+		const [cmdName, newPrefix] = message.content.split(" ");
+		if(newPrefix) {
+			try {
+				await connection.query(
+					`UPDATE GuildSetup SET cmdPrefix = '${newPrefix}' WHERE guildId = '${message.guild.id}'`
+				);
+				guildCommandPrefixes.set(message.guild.id, newPrefix);
+				message.channel.send(`Updated guild prefix to ${newPrefix}`);
+			} catch(err) {
+				console.log(err);
+				message.channel.send(`Failed to update guild prefix to ${newPrefix}`);
+			}
+		} else {
+			message.channel.send(`Incorrect amount of arguments.`);
+		}
+	} else {
+		message.channel.send(`❌ You do not have permission to use this command. You must be the guild owner to use this command.`);
 	}
-
-	return message.channel.send(reply);
-}
-
-try {
-	command.execute(message, args);
-} catch (error) {
-	console.error(error);
-	message.reply('there was an error trying to execute that command!');
 }
 
 }); // end of looking
 
-// Points System
-client.on("ready", () => {
-	// Check if the table "points" exists.
-	const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'scores';").get();
-	if (!table['count(*)']) {
-	  // If the table isn't there, create it and setup the database correctly.
-	  sql.prepare("CREATE TABLE scores (id TEXT PRIMARY KEY, user TEXT, guild TEXT, points INTEGER, level INTEGER);").run();
-	  // Ensure that the "id" row is always unique and indexed.
-	  sql.prepare("CREATE UNIQUE INDEX idx_scores_id ON scores (id);").run();
-	  sql.pragma("synchronous = 1");
-	  sql.pragma("journal_mode = wal");
-	}
-  
-	// And then we have two prepared statements to get and set the score data.
-	client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
-	client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
-  });
-  
-  client.on("message", message => {
-	if (message.author.bot) return;
-	let score;
-	if (message.guild) {
-	  score = client.getScore.get(message.author.id, message.guild.id);
-	  if (!score) {
-		score = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, points: 0, level: 1 }
-	  }
-	  score.points++;
-	  const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
-	  if(score.level < curLevel) {
-		score.level++;
-		message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
-	  }
-	  let assistant = message.guild.roles.cache.get(r => r.id === "780472757313601566");
-	  let experienced = message.guild.roles.cache.get(r => r.id === "780851563031691286");
-	  let rookie = message.guild.roles.cache.get(r => r.id === "780851658447912972");
-
-	  if (curLevel >= 10) {
-		member.roles.add(rookie);
-		message.reply('Congratulations! You now have the <@780851658447912972> role! This gives you access to a special channel as well as a cool new username color! WOO HOO!');
-		return;
-	  }
-	  if (curLevel >= 20) {
-		member.roles.add(assistant);
-		message.reply('Congratulations! You now have the <@780472757313601566> role! This gives you access to a special channel as well as a cool new username color! WOO HOO!');
-		return;
-	  }
-	  if (curLevel >= 50) {
-		member.roles.add(experienced);
-		message.reply('Congratulations! You now have the <@780851563031691286> role! This gives you access to a special channel as well as a cool new username color! WOO HOO!');
-		return;
-	  }
-	  client.setScore.run(score);
-	}
-  
-	// Command-specific code here!
-  });
-
-  // Challenge Code
-  //Whenever a message is sent, update the sent challenges (ideally we would want an event that triggers at midnight on the day, but this works fine too)
-  const cData = require('./contestData');
-  client.on('message', message => {
-    if (message.author.bot) return;
-    if (new Date().getMonth() < 11 /* Change to 10 for testing if needed - this will prevent challenges from being published before december*/) return;
-    let contestData = cData.getData();
-    for (let i = 1; i < contestData.challenges.length; i++) {
-        if (contestData.challenges[i] == undefined) continue;
-        if (!contestData.challenges[i].sent && new Date().getDate() >= i) {
-            let embed = new Discord.MessageEmbed()
-            .setTitle(contestData.challenges[i].title)
-            .addField("Challenge : ", contestData.challenges[i].description);
-
-            message.guild.channels.cache.find(channel => channel.id == CHALLENGE_ANNOUNCEMENTS_CHANNEL).send(embed).then(msg => {
-                contestData.challenges[i].sent = true;
-                cData.setData(contestData);
-            });
-        }
-    }
+// if there is an error
+client.on('error', function(err) {
+	console.log('Global error handler called:\n');
+	if(err) {console.log(err);}
 });
+
+// async function that runs the bot and grabs all the necessary database, file and events stuff.
+(async () => {
+	connection = await require('./db.js');
+	await client.login(config.client.token);
+	client.commands = new Map();
+	client.events = new Map();
+	await registerCommands(client, './commands');
+	await registerEvents(client, './events');
+  })();
