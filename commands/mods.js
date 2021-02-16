@@ -14,7 +14,7 @@ module.exports = {
       }
       else { 
         let usr = message.mentions.members.first();
-             message.channel.send(`Hey, ${usr}!` + ' Rule 4 states: Please do not ping or message the mods directly. If you would like to contact the mods, please message <@754368625216978965> and we will get back to you shortly.');
+             message.channel.send(`Hey, ${usr}!` + ' Rule 4 states: Please do not ping or message the mods directly. If you would like to contact the mods, please message <@575252669443211264> and we will get back to you shortly.');
       }
       message.channel.bulkDelete(2);
     },

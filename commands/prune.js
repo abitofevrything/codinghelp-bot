@@ -11,7 +11,7 @@ module.exports = {
 
         const amount = parseInt(args[0]);
         const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-        if (!user === message.member.hasPermission("MANAGE_MESSAGES")) {
+        if (!user === message.member.hasPermission("MANAGE_MESSAGES") || !message.member.roles.cache.has('718253309101867008')) {
             if (isNaN(amount)) {
                 return message.reply('Oops! That doesn\'t seem to be a valid number.');
             }

@@ -48,13 +48,13 @@ module.exports = {
             .setTitle('Get Access to Our Server!')
             .setDescription('Please check <#703989632110690324> and react to the correct message to get access to our server!');
             
-            if(message.member.roles.cache.has('780941276602302523')) {
+            if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
                 message.channel.bulkDelete(1);
-                //message.channel.send(welcomeEmbed);
+                message.channel.send(welcomeEmbed);
                 //message.channel.send(rulesEmbed1);
                 //message.channel.send(rulesEmbed2);
                 //message.channel.send(formatEmbed);
-                message.channel.send(accessEmbed);
+                //message.channel.send(accessEmbed);
             } else {
                 message.reply('❌ You do not have permissions to use this command. You must be part of the staff team.');
                 return;
