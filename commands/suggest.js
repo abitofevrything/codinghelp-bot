@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const connection = require('../database.js');
 
 module.exports = {
     name: 'suggestions',
@@ -6,12 +7,21 @@ module.exports = {
     inHelp: 'yes',
     description: 'Creates a suggestion!',
     usage: '++suggestions [suggestion here]',
-    execute(message, args){
+    async execute(message, args){
 
     const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');
     if(!channel) return message.channel.send('suggestions channel does not exist!');
     
     let messageArgs = args.join(' ');
+    let currentDate = message.createdAt;
+    let newStatus = 'Needs votes!';
+    try {
+        await connection.query(
+            `INSERT INTO Suggs (Author, Message, LAST_EDITED, STATUS) VALUES('${message.author.tag}', '${messageArgs}', '${currentDate}', '${newStatus}')`
+        );
+    } catch(err) {
+        console.log(err);
+    }
 
     const initial = new Discord.MessageEmbed()
     .setColor('FADF2E')
