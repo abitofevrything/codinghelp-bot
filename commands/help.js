@@ -8,7 +8,7 @@ const helpEmbed1 = new Discord.MessageEmbed()
     .addFields(
         { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nrequests\npatience\nwrong-channel\nformat\nbin\nmods\nwiki\ndocs\nrules\nsuggestions```', inline: true },
 		{ name: 'Utilities', value: '```css\navatar\nhelp\ninvites\nchk-invites\nchannels\n```', inline: true },
-		{ name: 'Contests/Challenges', value: '```css\ncontest-leaderboard\naddpoints\naddchallenge\nsubmitchallenge\nsubmit\n```', inline: true },
+		/*{ name: 'Contests/Challenges', value: '```css\ncontest-leaderboard\naddpoints\naddchallenge\nsubmitchallenge\nsubmit\n```', inline: true },*/
 		{ name: 'Moderator Only Commands', value: '```css\nserver\npartners\nban\nunban\nmute\nunmute\nprune\nping\n```' },
     );
 
@@ -36,12 +36,15 @@ const helpEmbed1 = new Discord.MessageEmbed()
 				if(cmd.aliases){
 					emb.addField("Aliases", cmd.aliases.join(", "), false);
 				}
-				message.channel.send(emb);
+				message.author.send(emb);
 			}
 		}else{
-			message.channel.send(helpEmbed1);
+			message.author.send(helpEmbed1);
 		}
-		message.channel.bulkDelete(1);
+		if(message.channel.type !== "dm") {
+			message.channel.send('📨 Please check your DMs! I sent you a message with our help command!')
+		} else {
+		}
 		},
 		
 	};
