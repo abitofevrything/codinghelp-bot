@@ -13,11 +13,17 @@ module.exports = {
     if(!channel) return message.channel.send('suggestions channel does not exist!');
     
     let messageArgs = args.join(' ');
-    let currentDate = message.createdAt;
+    let d = new Date,
+    dformat = [d.getMonth()+1,
+        d.getDate(),
+        d.getFullYear()].join('/')+' '+
+        [d.getHours(),
+        d.getMinutes(),
+        d.getSeconds()].join(':');;
     let newStatus = 'Needs votes!';
     try {
-        await connection.query(
-            `INSERT INTO Suggs (Author, Message, LAST_EDITED, STATUS) VALUES('${message.author.tag}', '${messageArgs}', '${currentDate}', '${newStatus}')`
+        (await connection).query(
+            `INSERT INTO Suggs (Author, Message, LAST_EDITED, STATUS) VALUES('${message.author.tag}', '${messageArgs}', '${d}', '${newStatus}')`
         );
     } catch(err) {
         console.log(err);
