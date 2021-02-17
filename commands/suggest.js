@@ -13,13 +13,6 @@ module.exports = {
     if(!channel) return message.channel.send('suggestions channel does not exist!');
     
     let messageArgs = args.join(' ');
-    let d = new Date,
-    dformat = [d.getMonth()+1,
-        d.getDate(),
-        d.getFullYear()].join('/')+' '+
-        [d.getHours(),
-        d.getMinutes(),
-        d.getSeconds()].join(':');;
     let newStatus = 'Needs votes!';
     try {
         (await connection).query(
