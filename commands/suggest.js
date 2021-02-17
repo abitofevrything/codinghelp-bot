@@ -23,7 +23,7 @@ module.exports = {
     let newStatus = 'Needs votes!';
     try {
         (await connection).query(
-            `INSERT INTO Suggs (Author, Message, LAST_EDITED, STATUS) VALUES('${message.author.tag}', '${messageArgs}', '${d}', '${newStatus}')`
+            `INSERT INTO Suggs (Author, Message, LAST_EDITED, STATUS) VALUES('${message.author.tag}', '${messageArgs}', CURRENT_TIMESTAMP(), '${newStatus}')`
         );
     } catch(err) {
         console.log(err);
