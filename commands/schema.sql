@@ -24,3 +24,12 @@ CREATE TABLE Points (
     currentPoints INT(255) NOT NULL DEFAULT '0',
     remainingPoints INT(255) NOT NULL DEFAULT '100'
 );
+
+CREATE TABLE help (
+    guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+    commandName VARCHAR(255) NOT NULL,
+    aliases VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    cmdUsage VARCHAR(255) NOT NULL,
+    LAST_EDITED TIMESTAMP NOT NULL
+);
