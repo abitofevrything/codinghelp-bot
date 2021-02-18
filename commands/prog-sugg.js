@@ -6,20 +6,19 @@ module.exports = {
     inHelp: 'yes',
     description: 'Marks a specific suggestion as in progress with the current status. **Note:** This can only be ran by moderators.',
     usage: '++progresssugg messageID [status message]',
-    execute(message, args) {
+    async execute(message, args) {
 
         try {
             (await connection).query(
-                `SELECT Author, Message from Suggs;`
+                `SELECT noSugg, Author, Message from Suggs;`
             );
         } catch(err) {
             console.log(err);
         }
         let progStat = 'In progress. This suggestion is currently being either worked on or deliberated by our Moderation team.';
-
         try {
             (await connection).query(
-                `UPDATE Suggs Set STATUS = '${progStat}' WHERE STATUS = ${createdDate};'`
+                `UPDATE Suggs Set STATUS = '${progStat}' WHERE STATUS = noSugg'`
             );
         } catch(err) {
             console.log(err);
