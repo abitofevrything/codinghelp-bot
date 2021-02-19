@@ -7,47 +7,48 @@ module.exports = {
     inHelp: 'yes',
     description: 'Marks a specific suggestion as in progress with the current status. **Note:** This can only be ran by moderators.',
     usage: '++progresssugg messageID [status message]',
+    category: 'Messages',
     async execute(message, args) {
 
         const mId = (await connection).query(
-            `SELECT noSugg from Suggs;`
+            `SELECT noSugg from Suggs WHERE noSugg = ${message.id};`
         ); /* Is this going to work? I don't think so... I feel like I need a WHERE */
 
         if(!mId) return message.channel.send('You need to specificy a suggestion with the message ID!');
 
         const author = (await connection).query(
-            `SELECT Author from Suggs WHERE mId = noSugg;`
+            `SELECT Author from Suggs WHERE noSugg = ${message.id};`
         );
         const suggestion = (await connection).query(
-            `SELECT Message from Suggs WHERE mId = noSugg;`
+            `SELECT Message from Suggs WHERE noSugg = ${message.id};`
         );
-
         const avatar = (await connection).query(
-            `SELECT Avatar from Suggs WHERE mId = noSugg;`
+            `SELECT Avatar from Suggs WHERE noSugg = ${message.id};`
         );
 
         const status = args.join(' ');
         if(!status) return message.channel.send('You need to include the status of the suggestion as well as the message ID.');
+        console.log(`${mId}, ${message.id}, ${author}, ${suggestion}, ${avatar}, ${status}`);
 
         try {
             (await connection).query(
-                `UPDATE Suggs Set STATUS = '${status}' WHERE mId = noSugg;`
+                `UPDATE Suggs Set STATUS = '${status}' WHERE noSugg = ${message.id};`
             );
         } catch(err) {
             console.log(err);
         }
         const inprogress = new Discord.MessageEmbed()
-        .setColor('004d4d')
-        .setAuthor(`${author}`, `${avatar}`)
-        .setDescription(`${suggestion}`)
-        .addFields(
-            { name: 'This suggestion is being implemented.', value: `${status}`},
-        )
-        .setFooter('If you would like to suggest something, use \`++suggestions\`');
+            .setColor('004d4d')
+            .setAuthor(`${author}`, `${avatar}`)
+            .setDescription(`${suggestion}`)
+            .addFields(
+                { name: 'This suggestion is being implemented.', value: `${status}`},
+            )
+            .setFooter('If you would like to suggest something, use \`++suggestions\`');
 
         if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
-        const newMessage = await message.channel.send(inprogress);
-        message.delete();
+            const newMessage = await message.channel.send(inprogress);
+            message.delete();
         } else {
             message.channel.send('You do not have the permissions to use this command. You must be a moderator of our server. If this is in error, please report it.')
         }

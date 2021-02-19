@@ -7,6 +7,7 @@ module.exports = {
     inHelp: 'yes',
     description: 'Creates a suggestion!',
     usage: '++suggestions [suggestion here]',
+    category: 'Messages',
     async execute(message, args){
 
     const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');
