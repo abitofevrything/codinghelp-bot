@@ -31,7 +31,7 @@ module.exports = {
         console.log(`ID: ${mId}, ID: ${message.id}, Author: ${author}, Sugg: ${suggestion}, Avatar: ${avatar}, Status: ${status}`);
 
         try {
-            (await connection).query(
+            await connection.query(
                 `UPDATE Suggs Set STATUS = '${status}' WHERE noSugg = ${message.id};`
             );
         } catch(err) {
