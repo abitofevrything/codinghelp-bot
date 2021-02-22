@@ -10,25 +10,25 @@ module.exports = {
     category: 'Messages',
     async execute(message, args) {
 
-        const mId = (await connection).query(
+        const mId = await connection.query(
             `SELECT noSugg from Suggs WHERE noSugg = ${message.id};`
-        ); /* Is this going to work? I don't think so... I feel like I need a WHERE */
+        );
 
         if(!mId) return message.channel.send('You need to specificy a suggestion with the message ID!');
 
-        const author = (await connection).query(
+        const author = await connection.query(
             `SELECT Author from Suggs WHERE noSugg = ${message.id};`
         );
-        const suggestion = (await connection).query(
+        const suggestion = await connection.query(
             `SELECT Message from Suggs WHERE noSugg = ${message.id};`
         );
-        const avatar = (await connection).query(
+        const avatar = await connection.query(
             `SELECT Avatar from Suggs WHERE noSugg = ${message.id};`
         );
 
         const status = args.join(' ');
         if(!status) return message.channel.send('You need to include the status of the suggestion as well as the message ID.');
-        console.log(`${mId}, ${message.id}, ${author}, ${suggestion}, ${avatar}, ${status}`);
+        console.log(`ID: ${mId}, ID: ${message.id}, Author: ${author}, Sugg: ${suggestion}, Avatar: ${avatar}, Status: ${status}`);
 
         try {
             (await connection).query(
