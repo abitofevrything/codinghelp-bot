@@ -11,19 +11,19 @@ module.exports = {
     async execute(message, args) {
 
         const mId = await connection.query(
-            `SELECT noSugg from Suggs WHERE noSugg = ${message.id};`
+            `SELECT noSugg from Suggs WHERE noSugg = ${message.id};`, function (error, results, fields) { if(error) throw error; console.log(result);}
         );
 
         if(!mId) return message.channel.send('You need to specificy a suggestion with the message ID!');
 
         const author = await connection.query(
-            `SELECT Author from Suggs WHERE noSugg = ${message.id};`
+            `SELECT Author from Suggs WHERE noSugg = ${message.id};`, function (error, results, fields) { if(error) throw error; console.log(result);}
         );
         const suggestion = await connection.query(
-            `SELECT Message from Suggs WHERE noSugg = ${message.id};`
+            `SELECT Message from Suggs WHERE noSugg = ${message.id};`, function (error, results, fields) { if(error) throw error; console.log(result);}
         );
         const avatar = await connection.query(
-            `SELECT Avatar from Suggs WHERE noSugg = ${message.id};`
+            `SELECT Avatar from Suggs WHERE noSugg = ${message.id};`, function (error, results, fields) { if(error) throw error; console.log(result);}
         );
 
         const status = args.join(' ');
@@ -32,7 +32,8 @@ module.exports = {
 
         try {
             await connection.query(
-                `UPDATE Suggs Set STATUS = '${status}' WHERE noSugg = ${message.id};`
+                `UPDATE Suggs Set STATUS = '?' WHERE noSugg = ${message.id};`,
+                [status]
             );
         } catch(err) {
             console.log(err);
