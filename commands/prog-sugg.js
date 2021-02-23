@@ -10,20 +10,19 @@ module.exports = {
     category: 'Messages',
     async execute(message, args) {
 
-        const mId = (await connection).query(
+        const mId = await connection.query(
             `SELECT noSugg from Suggs WHERE noSugg = ${message.id};`
         )
-        console.log(await connection);
 
         if(!mId) return message.channel.send('You need to specificy a suggestion with the message ID!');
 
-        const author = (await connection).query(
+        const author = await connection.query(
             `SELECT Author from Suggs WHERE noSugg = ${message.id};`
         );
-        const suggestion = (await connection).query(
+        const suggestion = await connection.query(
             `SELECT Message from Suggs WHERE noSugg = ${message.id};`
         );
-        const avatar = (await connection).query(
+        const avatar = await connection.query(
             `SELECT Avatar from Suggs WHERE noSugg = ${message.id};`
         );
 
@@ -32,7 +31,7 @@ module.exports = {
         console.log(`ID: ${mId}, ID: ${message.id}, Author: ${author}, Sugg: ${suggestion}, Avatar: ${avatar}, Status: ${status}`);
 
         try {
-            (await connection).query(
+            await connection.query(
                 `UPDATE Suggs Set STATUS = '?' WHERE noSugg = ${message.id};`,
                 [status]
             );
