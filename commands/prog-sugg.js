@@ -10,9 +10,11 @@ module.exports = {
     category: 'Messages',
     async execute(message, args) {
 
-        const mId = await connection.query(
+        console.log(connection);
+
+        const mId = await connection().execute(
             `SELECT noSugg from Suggs WHERE noSugg = ${message.id};`
-        )
+        );
 
         if(!mId) return message.channel.send('You need to specificy a suggestion with the message ID!');
 
