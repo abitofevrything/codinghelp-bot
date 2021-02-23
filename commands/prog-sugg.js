@@ -11,19 +11,20 @@ module.exports = {
     async execute(message, args) {
 
         const mId = (await connection).query(
-            `SELECT noSugg from Suggs WHERE noSugg = ${message.id};`, function (error, results, fields) { if(error) throw error; console.log(result);}
-        );
+            `SELECT noSugg from Suggs WHERE noSugg = ${message.id};`
+        )
+        console.log(await connection);
 
         if(!mId) return message.channel.send('You need to specificy a suggestion with the message ID!');
 
         const author = (await connection).query(
-            `SELECT Author from Suggs WHERE noSugg = ${message.id};`, function (error, results, fields) { if(error) throw error; console.log(result);}
+            `SELECT Author from Suggs WHERE noSugg = ${message.id};`
         );
         const suggestion = (await connection).query(
-            `SELECT Message from Suggs WHERE noSugg = ${message.id};`, function (error, results, fields) { if(error) throw error; console.log(result);}
+            `SELECT Message from Suggs WHERE noSugg = ${message.id};`
         );
         const avatar = (await connection).query(
-            `SELECT Avatar from Suggs WHERE noSugg = ${message.id};`, function (error, results, fields) { if(error) throw error; console.log(result);}
+            `SELECT Avatar from Suggs WHERE noSugg = ${message.id};`
         );
 
         const status = args.join(' ');
