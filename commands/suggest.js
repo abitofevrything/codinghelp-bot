@@ -24,6 +24,8 @@ module.exports = {
     .setDescription(messageArgs)
     .setFooter('📈 This suggestion currently needs votes and feedback. If you would like to discuss it, please visit <#799835436783763467> and discuss it there.');
 
+    message.author.send(`Hey, ${message.author.username}! Thanks for submitting a suggestion! Our server needs to have time to vote on this. Once some time has passed, you can check the suggestion channel to check the updated status of your suggestion! We appreciate your feedback! Happy chatting!`);
+
     const msg = await channel.send(initial);
         msg.react('👍');
         msg.react('👎');

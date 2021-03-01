@@ -14,9 +14,10 @@ module.exports = {
       }
       else { 
         let usr = message.mentions.members.first();
-             message.channel.send(`Hey, ${usr}!` + ' We aren\'t sure if you knew this, but we have a wiki! It answers a lot of the questions we get asked here! Check it out here: https://codinghelp.site/');
+        usr.send(`Hey, ${usr}!` + ' We aren\'t sure if you knew this, but we have a wiki! It answers a lot of the questions we get asked here! Check it out here: https://codinghelp.site/');
       }
       message.channel.bulkDelete(1);
+      message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`);
     },
     
   };

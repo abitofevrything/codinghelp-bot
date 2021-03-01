@@ -9,7 +9,7 @@ const helpEmbed1 = new Discord.MessageEmbed()
         { name: 'Messages', value: '```css\nelaborate\njustask\nshare-code\nfaq\nrequests\npatience\nwrong-channel\nformat\nbin\nmods\nwiki\ndocs\nrules\nsuggestions```', inline: true },
 		{ name: 'Utilities', value: '```css\navatar\nhelp\ninvites\nchk-invites\nchannels\n```', inline: true },
 		/*{ name: 'Contests/Challenges', value: '```css\ncontest-leaderboard\naddpoints\naddchallenge\nsubmitchallenge\nsubmit\n```', inline: true },*/
-		{ name: 'Moderator Only Commands', value: '```css\nserver\npartners\nban\nunban\nmute\nunmute\nprune\nping\n```' },
+		{ name: 'Moderator Only Commands', value: '```css\nserver\npartners\nban\nunban\nmute\nunmute\nprune\nping\nprog-sugg\ncomplete-sugg\ndenied-sugg\n```', inline: true },
     );
 
 	module.exports = {
@@ -19,14 +19,6 @@ const helpEmbed1 = new Discord.MessageEmbed()
 		usage: '++help or ++help [command name]',
 		inHelp: 'yes',
 		execute(message, args) {
-
-		client.guilds.cache.forEach(guild => {
-			connection.query(
-				`SELECT cmdPrefix FROM GuildConfigurable WHERE guildId = '${guild.id}'`
-			).then(result => {
-				guildCommandPrefixes.set(guild.id, result[0][0].cmdPrefix);
-			}).catch(err => console.log(err));
-		});
 
 		if(args.length > 0) {
 
@@ -49,13 +41,22 @@ const helpEmbed1 = new Discord.MessageEmbed()
 				if(cmd.aliases){
 					emb.addField("Aliases", cmd.aliases.join(", "), false);
 				}
-				message.author.send(emb);
+				message.author.send(emb).catch(async err => {
+					message.channel.send(`Hey ${message.user.username}, it looks like you have your DMs closed. So I am displaying the command here.`);
+					message.channel.send(emb);
+				});;
 			}
 		}else{
-			message.author.send(helpEmbed1);
+			message.author.send(helpEmbed1).catch(async err => {
+				message.channel.send(`Hey ${user}, it looks like you have your DMs closed. So I am displaying the command here.`);
+				message.channel.send(helpEmbed1);
+			});;
 		}
 		if(message.channel.type !== "dm") {
-			message.channel.send('📨 Please check your DMs! I sent you a message with our help command!')
+			message.channel.send('📨 Please check your DMs! I sent you a message with our help command!').catch(async err => {
+				message.channel.send(`Hey ${user}, it looks like you have your DMs closed. So I am displaying the command here.`);
+				message.channel.send(helpEmbed1);
+			});
 		} else {
 		}
 		},

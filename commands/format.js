@@ -26,9 +26,10 @@ module.exports = {
                 { name: 'Why do I have to format my code?', value: 'You need to format it because it is easy to read regardless of what device you are using to view Discord. So, to make it easier for all our members to be able to help you, we ask that you format your code as shown above.' }
             )
 		  
-			   message.channel.send(`Hey, ${usr}!`, formatEmbed);
+			usr.send(`Hey, ${usr}!`, formatEmbed);
 		}
 		message.channel.bulkDelete(1);
+		message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`);
 
 	},
 	

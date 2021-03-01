@@ -14,9 +14,10 @@ module.exports = {
       }
       else { 
         let usr = message.mentions.members.first();
-             message.channel.send(`Hey, ${usr}!` + ' It looks like you are requesting for someone to help you individually. This question is better answered at <#756992144170024991>. Please repost it there.');
+        usr.send(`Hey, ${usr}!` + ' It looks like you are requesting for someone to help you individually. This question is better answered at <#756992144170024991>. Please repost it there.');
       }
       message.channel.bulkDelete(1);
+      message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`);
     },
     
   };

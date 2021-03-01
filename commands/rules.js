@@ -60,9 +60,9 @@ module.exports = {
         if (args[0] === 'all') { // Displays all of the rules when ++rules all is run.
             let text = '';
             for (let i = 0; i < rules.length; i++) {
-                message.channel.send(rules[i]);
+                user.send(rules[i]);
             }
-            message.channel.send("These are all of our server rules.\n" + text);
+            user.send("These are all of our server rules.\n" + text);
         }
  
         else {
@@ -84,9 +84,10 @@ module.exports = {
             };
             let usr = message.mentions.members.first();
             
-            message.channel.send(`${usr}, Please follow the rules: \n`, rules[nb-1]); // Pings the user and deletes the message and asks them to follow the rules.
+            usr.send(`${usr}, Please follow the rules: \n`, rules[nb-1]); // DMs the user.
             }
 
             //message.channel.bulkDelete(1); //Happens To Every Command
+            message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`);
     }
 }

@@ -3,12 +3,19 @@ const Discord = require('discord.js');
  
 module.exports = {
     name: 'channel',
-    description: 'Displays a list of all of our channels.',
+    description: 'DMs a user a list of all of our channels.',
     aliases: ['channels', 'list-channels', 'listchannels', 'lc', 'chnnl', 'chnnls', 'lcs'],
     usage: '++channel',
     inHelp: 'yes',
     execute(message, args) {   
         
+        const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
+      if(!user) {
+        message.channel.send('You need to specificy a user via mention or the ID.');
+        message.delete();
+        return;
+      }
+      else { 
              const channels = new Discord.MessageEmbed()
             .setColor('GREY')
             .setTitle('Do you need help navigating the server?')
@@ -25,7 +32,12 @@ module.exports = {
             .setTimestamp();
             
                 message.channel.bulkDelete(1);
-                message.channel.send(channels);
+            user.send(channels);
+            }
+            message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`).catch(async err => {
+				message.channel.send(`Hey ${user}, it looks like you have your DMs closed. So I am displaying the command here.`);
+				message.channel.send(helpEmbed1);
+			});;
     },
     
   };
