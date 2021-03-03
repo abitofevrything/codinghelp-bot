@@ -34,7 +34,7 @@ module.exports = {
 
     try {
         (await connection).query(
-            `INSERT INTO Suggs (noSugg, Author, Avatar, Message, LAST_EDITED, STATUS) VALUES(?, ?, ?, ?, CURRENT_TIMESTAMP(), ?)`,
+            `INSERT INTO Suggs (noSugg, Author, Avatar, Message, LAST_EDITED, test) VALUES(?, ?, ?, ?, CURRENT_TIMESTAMP(), ?)`,
             [suggNo, author, avatar, messageArgs, newStatus]
         );
 

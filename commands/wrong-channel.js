@@ -18,7 +18,7 @@ module.exports = {
         usr.send(`Hey, ${usr}!` + ' This isn\'t the correct channel for your question. Please check our channel list on the left and ask repost in a different channel. Thank you!');
       }
       message.channel.bulkDelete(2);
-      message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`).catch(async err => {
+      message.channel.send(`📨 Hey, ${user} I just sent you a DM as your post is in the wrong channel! Please check it!`).catch(async err => {
 				message.channel.send(`Hey ${user}, it looks like you have your DMs closed. So I am displaying the command here.`);
 				message.channel.send(`Hey, ${user}!` + ' This isn\'t the correct channel for your question. Please check our channel list on the left and ask repost in a different channel. Thank you!');
 			});;

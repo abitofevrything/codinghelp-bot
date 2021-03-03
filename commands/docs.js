@@ -6,18 +6,8 @@ module.exports = {
     inHelp: 'yes',
     execute(message, args) {
   
-      const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-      if(!user) {
-        message.channel.send('You need to specificy a user via mention or the ID.');
-        message.delete();
-        return;
-      }
-      else { 
-        let usr = message.mentions.members.first();
-        usr.send(`Hey, ${usr}!` + ' It looks like we have already answered this on our website. Please check it out here: https://codinghelp.site/');
-      }
+      usr.send(`Hey, ${usr}!` + ' It looks like we have already answered this on our website. Please check it out here: https://codinghelp.site/');
       message.channel.bulkDelete(2);
-      message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`);
 
     },
     

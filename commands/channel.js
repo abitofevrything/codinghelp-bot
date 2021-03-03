@@ -34,7 +34,7 @@ module.exports = {
                 message.channel.bulkDelete(1);
             user.send(channels);
             }
-            message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`).catch(async err => {
+            message.channel.send(`📨 Hey, ${user} I just sent you a DM as you posted in the wrong channel! Please check it!`).catch(async err => {
 				message.channel.send(`Hey ${user}, it looks like you have your DMs closed. So I am displaying the command here.`);
 				message.channel.send(helpEmbed1);
 			});;

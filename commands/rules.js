@@ -88,6 +88,6 @@ module.exports = {
             }
 
             //message.channel.bulkDelete(1); //Happens To Every Command
-            message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`);
+            message.channel.send(`📨 Hey, ${user} I just sent you a DM about our rules! Please check it!`);
     }
 }

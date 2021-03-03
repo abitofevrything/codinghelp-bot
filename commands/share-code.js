@@ -17,7 +17,7 @@ module.exports = {
        		usr.send(`Hey, ${usr}!` + ' Please share your code as shown in our wiki. If it is too long for Discord, please upload it to a place like CodeShare.io and share the link to the code here so we can take a look at it. Thank you!\nSee here: https://codinghelp.site/wiki/faq/share-code/');
 		}
 		message.channel.bulkDelete(1);
-		message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`);
+		message.channel.send(`📨 Hey, ${user} I just sent you a DM about sharing your code! Please check it!`);
 	},
 	
 };

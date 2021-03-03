@@ -29,7 +29,7 @@ module.exports = {
 			usr.send(`Hey, ${usr}!`, formatEmbed);
 		}
 		message.channel.bulkDelete(1);
-		message.channel.send(`📨 Hey, ${user} I just sent you a DM! Please check it!`);
+		message.channel.send(`📨 Hey, ${user} I just sent you a DM about formatting your code! Please check it!`);
 
 	},
 	
