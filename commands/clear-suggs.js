@@ -2,7 +2,7 @@ const connection = require('../database.js');
 
 module.exports = {
     name: 'clearsuggs',
-    aliases: ['cs', 'clearsuggestions', 'cleardb', 'cdb', 'emptydb', 'emptysuggestions'],
+    aliases: ['cs', 'clearsuggestions', 'cleardb', 'cdb', 'emptydb', 'emptysuggestions', 'clear-suggs'],
     description: 'Emptys the Suggestion Database. \n **Note:** Only DudeThatsErin#8061 can run this command.',
     usage: '++clearsuggs',
     async execute(message, args) {

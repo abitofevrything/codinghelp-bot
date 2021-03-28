@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['inprogsugg', 'workingsugg', 'workingsuggestion', 'inprogresssuggestion', 'inprogresssuggestions', 'workingsuggestion', 'worksugg', 'ps', 'ws'],
     inHelp: 'yes',
     description: 'Marks a specific suggestion as in progress with the current status. **Note:** This can only be ran by moderators.',
-    usage: '++progresssugg messageID [status message]',
+    usage: '++prog-sugg messageID [status message]',
     category: 'Messages',
     async execute(message, args) {
 

@@ -5,8 +5,8 @@ module.exports = {
     name: 'statussugg',
     aliases: ['statuss', 'ss', 'ssugg', 'supsugg', 'hmsug'],
     inHelp: 'yes',
-    description: 'Marks a specific suggestion as in progress with the current status. **Note:** This can only be ran by moderators.',
-    usage: '++progresssugg messageID [status message]',
+    description: 'Allows a user to check the current status of their suggestion',
+    usage: '++statussugg messageID',
     category: 'Messages',
     async execute(message, args) {
 

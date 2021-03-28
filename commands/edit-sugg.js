@@ -1,10 +1,9 @@
 const Discord = require('discord.js');
-const connection = require('/root/sakura/database.js');
+const connection = require('../database.js');
 
 module.exports = {
     name: 'editsugg',
-    aliases: ['edits', 'es', 'editsuggestion', 'editsuggestions', 'editsuggs', 'us', 'updatesuggestion', 'updatesugg', 'updates'],
-    inHelp: 'yes',
+    aliases: ['edits', 'es', 'editsuggestion', 'editsuggestions', 'editsuggs', 'us', 'updatesuggestion', 'updatesugg', 'updates', 'edit-suggestions', 'edit-suggestion', 'update-suggestion', 'update-suggestions'],
     description: 'Users can update their suggestion with this command.\n**Note:** Only the original poster\'s of the suggestion can edit the message. Meaning someone posts a suggestion and only that person can edit the suggestion, no one else.',
     usage: '++editsugg messageID [updated message]',
     async execute(message, args) {

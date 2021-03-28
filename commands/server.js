@@ -3,8 +3,8 @@ const Discord = require('discord.js');
  
 module.exports = {
     name: 'about',
-    description: 'Displays all the information on the #announcements channel.\n**Note:** Only the Mod Team can run this command.',
-    aliases: ['codinghelp', 'server'],
+    description: 'Displays all the information on the #welcome channel.\n**Note:** Only the Mod Team can run this command.',
+    aliases: ['codinghelp', 'server', 'welcome'],
     usage: '++about',
     inHelp: 'yes',
     execute(message, args) {   
@@ -51,10 +51,10 @@ module.exports = {
             if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
                 message.channel.bulkDelete(1);
                 message.channel.send(welcomeEmbed);
-                //message.channel.send(rulesEmbed1);
-                //message.channel.send(rulesEmbed2);
-                //message.channel.send(formatEmbed);
-                //message.channel.send(accessEmbed);
+                message.channel.send(rulesEmbed1);
+                message.channel.send(rulesEmbed2);
+                message.channel.send(formatEmbed);
+                message.channel.send(accessEmbed);
             } else {
                 message.reply('❌ You do not have permissions to use this command. You must be part of the staff team.');
                 return;

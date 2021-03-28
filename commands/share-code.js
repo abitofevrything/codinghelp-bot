@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'share-code',
 	description: 'Tells people to share their code as shown in the <#383032186317832202> channel.',
-	aliases: ['welcome', 'code', 'share-your-code', 'seecode'],
+	aliases: ['code', 'share-your-code', 'seecode'],
 	usage: '++share-code @username or user ID',
 	inHelp: 'yes',
 	execute(message, args) {

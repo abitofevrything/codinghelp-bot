@@ -1,7 +1,7 @@
 module.exports = {
     name: 'bin',
     description: 'Tells people a few places they could go to share long pieces of code.',
-    aliases: ['long-code', 'external-share'],
+    aliases: ['long-code', 'external-share', 'codeshare'],
     usage: '++bin',
     inHelp: 'yes',
     execute(message) {

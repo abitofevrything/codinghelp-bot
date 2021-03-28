@@ -1,9 +1,8 @@
 module.exports = {
-	name: 'patience', // name the command something
-	description: 'Tells people to be patient when waiting for advice.', // Describe your command; shows this with the help command
-	aliases: ['wait', 'bepatient', 'justwait'], // Include if you have other names you want to use for this command as well.
-	usage: '++[command]',
-	inHelp: 'yes',
+	name: 'patience',
+	description: 'Tells people to be patient when waiting for advice.',
+	aliases: ['wait', 'bepatient', 'justwait'],
+	usage: '++patience',
 	execute(message, args) {
 		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 		if(!user) {

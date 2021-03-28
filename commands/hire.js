@@ -1,8 +1,8 @@
 module.exports = {
-    name: 'requests', // name the command something
-    description: 'Refers people to the request-coders channel to hire someone.', // Describe your command; shows this with the help command
-    aliases: ['hire', ''], // Include if you have other names you want to use for this command as well.
-    usage: '++hire @username or user ID',
+    name: 'requests',
+    description: 'Refers people to the request-coders channel to hire someone.',
+    aliases: ['hire', 'request-coders', 'rc'],
+    usage: '++requests @username or user ID',
     execute(message, args) {
   
       const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);

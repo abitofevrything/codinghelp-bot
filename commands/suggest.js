@@ -3,7 +3,7 @@ const connection = require('/root/codinghelp-bot/database.js');
 
 module.exports = {
     name: 'suggestions',
-    aliases: ['suggest', 'suggestion', 'sugg'],
+    aliases: ['suggest', 'suggestion', 'sugg', 's'],
     inHelp: 'yes',
     description: 'Creates a suggestion!',
     usage: '++suggestions [suggestion here]',

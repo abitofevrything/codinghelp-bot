@@ -3,7 +3,7 @@ const connection = require('../database.js');
 
 module.exports = {
     name: 'completedsugg',
-    aliases: ['dones', 'donesugg', 'completedsuggestion', 'completedsuggestions', 'acceptedsugg', 'acceptedsuggestions', 'acceptedsuggestions', 'oksugg', 'oks'],
+    aliases: ['dones', 'donesugg', 'completedsuggestion', 'completedsuggestions', 'acceptedsugg', 'acceptedsuggestions', 'acceptedsuggestion', 'oksugg', 'oks'],
     inHelp: 'yes',
     description: 'Marks a specific suggestion as completed. **Note:** This can only be ran by moderators.',
     usage: '++completedsugg messageID [reason]',
