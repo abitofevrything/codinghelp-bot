@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-let connection = require('../database.js');
+const connection = require('../database.js');
 
 module.exports = {
     name: 'completedsugg',
@@ -20,7 +20,8 @@ module.exports = {
             `SELECT Author from Suggs WHERE noSugg = ?;`,
             [msgId],
         );
-        const author = result2[0][0].Author;
+        const OGauthor = result2[0][0].Author;
+        const aut = author.tag;
 
         const result3 = await connection.query(
             `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -34,39 +35,40 @@ module.exports = {
         );
         const avatar = result4[0][0].Avatar;
 
-        const mod = message.author.tag;
+        const mod = message.author.id;
 
         const stats = args.slice(1).join(' ');
         if(!stats) return message.channel.send('You need to include the status of the suggestion as well as the message ID.');
 
         connection.query(
-            `UPDATE Suggs SET test = ?, Moderator = ? WHERE noSugg = ?;`,
+            `UPDATE Suggs SET stat = ?, Moderator = ? WHERE noSugg = ?;`,
             [stats, mod, msgId],
         );
 
         const result8 = await connection.query(
-            `SELECT test FROM Suggs WHERE noSugg = ?;`,
+            `SELECT stat FROM Suggs WHERE noSugg = ?;`,
             [msgId]
         );
-        const upStatus = result8[0][0].test;
+        const upStatus = result8[0][0].stat;
 
         const moderator = await connection.query(
             `SELECT Moderator FROM Suggs WHERE noSugg = ?;`,
             [msgId]
         );
         const moder = moderator[0][0].Moderator;
+        const moderate = moder.tag;
         
         const denied = new Discord.MessageEmbed()
             .setColor('1C3D77')
-            .setAuthor(`${author}`, `${avatar}`)
+            .setAuthor(`${aut}`, `${avatar}`)
             .setDescription(`${suggestion}`)
             .addFields(
                 { name: 'Your suggestion was completed! This is the decision:', value: `${upStatus}`},
-                { name: 'Moderator that completed your suggestion:', value: `${moder}`},
+                { name: 'Moderator that completed your suggestion:', value: `${moderate}`},
             )
             .setTimestamp()
             .setFooter('If you do\'t understand this decision, please contact the moderator that updated your suggestion. Thank you!');
-            message.author.send(denied);
+            OGauthor.send(denied);
             message.delete()
 
         if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {

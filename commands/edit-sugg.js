@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-let connection = require('../database.js');
+const connection = require('/root/sakura/database.js');
 
 module.exports = {
     name: 'editsugg',
@@ -40,7 +40,7 @@ module.exports = {
         const update = 'OP Updated their own suggestion.';
 
         connection.query(
-            `UPDATE Suggs SET Message = ?, test = ? WHERE noSugg = ?;`,
+            `UPDATE Suggs SET Message = ?, stat = ? WHERE noSugg = ?;`,
             [stats, update, msgId],
         );
 

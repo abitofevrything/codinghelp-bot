@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-let connection = require('../database.js');
+const connection = require('/root/codinghelp-bot/database.js');
 
 module.exports = {
     name: 'statussugg',
@@ -21,7 +21,8 @@ module.exports = {
             `SELECT Author from Suggs WHERE noSugg = ?;`,
             [msgId],
         );
-        const author = result2[0][0].Author;
+        const OGauthor = result2[0][0].Author;
+        const aut = OGauthor.tag;
 
         const result3 = await connection.query(
             `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -48,21 +49,22 @@ module.exports = {
         let mod = 'No one has updated this suggestion yet.';
         if (result6[0][0].Moderator) {
             mod = result6[0][0].Moderator;
+            modd = mod.tag;
         }
 
         const result7 = await connection.query(
-            `SELECT test from Suggs WHERE noSugg = ?`,
+            `SELECT stat from Suggs WHERE noSugg = ?`,
             [msgId],
         );
-        const status = result7[0][0].test;
+        const status = result7[0][0].stat;
 
         const initial = new Discord.MessageEmbed()
         .setColor('771C73')
-        .setAuthor(`${author}`, `${avatar}`)
+        .setAuthor(`${aut}`, `${avatar}`)
         .setDescription(`${suggestion}`)
         .addFields(
             {name: 'Last Edited on', value: `${date}\nYou can convert the time by using [this time converter](https://greenwichmeantime.com/time-gadgets/time-zone-converter/).`},
-            {name: 'Moderator that edited your message last?', value: `${mod}`},
+            {name: 'Moderator that edited your message last?', value: `${modd}`},
             {name: 'Status Message', value: `${status}`}
         )
         .setTimestamp()

@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
-let connection = require('../database.js');
+const connection = require('../database.js');
 
 module.exports = {
-    name: 'deniedsugg',
-    aliases: ['denys', 'nosugg', 'deniedsuggestion', 'deniedsuggestions', 'denysugg'],
+    name: 'denied-sugg',
+    aliases: ['deniedsugg', 'denys', 'nosugg', 'deniedsuggestion', 'deniedsuggestions', 'denysugg'],
     inHelp: 'yes',
     description: 'Denies a specific suggestion. **Note:** This can only be ran by moderators.',
     usage: '++deniedsugg messageID [reason]',
@@ -20,7 +20,8 @@ module.exports = {
             `SELECT Author from Suggs WHERE noSugg = ?;`,
             [msgId],
         );
-        const author = result2[0][0].Author;
+        const OGauthor = result2[0][0].Author;
+        const aut = OGauthor.tag;
 
         const result3 = await connection.query(
             `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -40,33 +41,34 @@ module.exports = {
         if(!stats) return message.channel.send('You need to include the status of the suggestion as well as the message ID.');
 
         connection.query(
-            `UPDATE Suggs SET test = ?, Moderator = ? WHERE noSugg = ?;`,
+            `UPDATE Suggs SET stat = ?, Moderator = ? WHERE noSugg = ?;`,
             [stats, mod, msgId],
         );
 
         const result8 = await connection.query(
-            `SELECT test FROM Suggs WHERE noSugg = ?;`,
+            `SELECT stat FROM Suggs WHERE noSugg = ?;`,
             [msgId]
         );
-        const upStatus = result8[0][0].test;
+        const upStatus = result8[0][0].stat;
 
         const moderator = await connection.query(
             `SELECT Moderator FROM Suggs WHERE noSugg = ?;`,
             [msgId]
         );
         const moder = moderator[0][0].Moderator;
+        const moderate = moder.tag;
         
         const denied = new Discord.MessageEmbed()
             .setColor('1C3D77')
-            .setAuthor(`${author}`, `${avatar}`)
+            .setAuthor(`${aut}`, `${avatar}`)
             .setDescription(`${suggestion}`)
             .addFields(
                 { name: 'Unfortunately, your suggestion was denied. This is the reason:', value: `${upStatus}`},
-                { name: 'Moderator that denied your suggestion:', value: `${moder}`},
+                { name: 'Moderator that denied your suggestion:', value: `${moderate}`},
             )
             .setTimestamp()
             .setFooter('If you do\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!');
-            message.author.send(denied);
+            message.client.users.cache.get(`${OGauthor}`).send(updated);
                 message.delete()
         if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
             const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');
