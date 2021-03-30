@@ -8,13 +8,19 @@ module.exports = {
     description: 'Denies a specific suggestion. **Note:** This can only be ran by moderators.',
     usage: '++deniedsugg messageID [reason]',
     async execute(message, args) {
-
+        if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
         const msgId = args[0];
-        const result = await connection.query(
-            `SELECT noSugg from Suggs WHERE noSugg = ?;`,
-            [msgId]
-        );
-        const mId = result[0][0].noSugg;
+        if(msgId > 0 ) {
+            try {
+                const result = await connection.query(
+                    `SELECT noSugg from Suggs WHERE noSugg = ?;`,
+                    [msgId]
+                );
+                const mId = result[0][0].noSugg;
+            } catch(error) {
+                message.reply('There was an error grabbing the ID from the database. Please report this!');
+                console.log(error);
+            }
 
         const result2 = await connection.query(
             `SELECT Author from Suggs WHERE noSugg = ?;`,
@@ -35,7 +41,7 @@ module.exports = {
         );
         const avatar = result4[0][0].Avatar;
 
-        const mod = message.author.tag;
+        const mod = message.author.id;
 
         const stats = args.slice(1).join(' ');
         if(!stats) return message.channel.send('You need to include the status of the suggestion as well as the message ID.');
@@ -56,10 +62,10 @@ module.exports = {
             [msgId]
         );
         const moder = moderator[0][0].Moderator;
-        const moderate = moder.tag;
+        const moderate = moder.tag || message.author.tag;
         
         const denied = new Discord.MessageEmbed()
-            .setColor('1C3D77')
+            .setColor('A4503E')
             .setAuthor(`${aut}`, `${avatar}`)
             .setDescription(`${suggestion}`)
             .addFields(
@@ -67,16 +73,17 @@ module.exports = {
                 { name: 'Moderator that denied your suggestion:', value: `${moderate}`},
             )
             .setTimestamp()
-            .setFooter('If you do\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!');
-            message.client.users.cache.get(`${OGauthor}`).send(updated);
+            .setFooter('If you don\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!');
+            message.client.users.cache.get(`${OGauthor}`).send(denied);
+            message.channel.send(`I have denied the suggestion you told me to, <@${moder}>. I also sent a message to <@${OGauthor}> about this denial and the reason as well as deleted the message in the Suggestions channel.`)
                 message.delete()
-        if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
-            const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');
-            channel.messages.fetch(mId).then(message => {
+            const chnnel = await message.guild.channels.cache.find(c => c.name === 'suggestions');
+            chnnel.messages.fetch(msgId).then(message => {
                     message.delete();
                 }
             )
-        } else {
+        }
+     } else {
             message.channel.send('You do not have the permissions to use this command. You must be a moderator of our server. If this is in error, please report it.')
         }
 

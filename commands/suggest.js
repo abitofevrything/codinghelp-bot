@@ -21,7 +21,12 @@ module.exports = {
         }).catch(console.error);
     }
     let messageArgs = '';
-    if (args.length > 0) messageArgs = args.join(' ');
+    if (args.length > 0) {
+        messageArgs = args.join(' ');
+    } else {
+        message.reply('You need to specify a suggestion to use this command. How will we know what you want to suggest unless you tell us?! If you would like to check the status of your suggestion then you can use \`++statussug [your status message ID]\`.');
+        return;
+    }
     let newStatus = 'New Suggestion';
     let author = message.author.id || 'default value';
     let name = message.author.tag;

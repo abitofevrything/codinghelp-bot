@@ -96,6 +96,14 @@ client.on('message', async message => { // Looking for a message
   
   }); // end of looking
 
+ /* REACTION ROLES STUFFS
+  client.on("messageReactionAdd", (reaction, user) => {
+    if (user.bot == true) return;
+    if (reaction.message.channel.name != "suggestions") return;
+    let emojis = ["👍", "👎"];
+    if (!emojis.includes(reaction.emoji.name)) return reaction.remove();
+  });
+*/
   (async () => {
     connection = await require('./database.js');
     await client.login(config.client.token);
