@@ -4,14 +4,12 @@ const connection = require('/root/codinghelp-bot/database.js');
 module.exports = {
     name: 'suggestions',
     aliases: ['suggest', 'suggestion', 'sugg', 's'],
-    inHelp: 'yes',
     description: 'Creates a suggestion!',
     usage: '++suggestions [suggestion here]',
-    category: 'Messages',
     async execute(message, args){
 
     const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');
-    if(!channel) {
+    /*if(!channel) {
         message.guild.channels.create('suggestions', {
             type: 'text',
             reason: 'CodingHelp Bot needed a suggestions channel for the suggestions handler.'
@@ -19,7 +17,7 @@ module.exports = {
             console.log(channel);
             message.channel.send('The suggestions channel did not exist so I created one!')
         }).catch(console.error);
-    }
+    }*/
     let messageArgs = '';
     if (args.length > 0) {
         messageArgs = args.join(' ');
