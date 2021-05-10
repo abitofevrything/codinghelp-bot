@@ -5,7 +5,8 @@ module.exports = {
     name: 'channel',
     description: 'DMs a user a list of all of our channels.',
     aliases: ['channels', 'list-channels', 'listchannels', 'lc', 'chnnl', 'chnnls', 'lcs'],
-    usage: '++channel',
+    usage: '++channel <@username or ID>',
+    example: '++channel @DudeThatsErin',
     inHelp: 'yes',
     execute(message, args) {   
         

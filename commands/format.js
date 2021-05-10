@@ -6,6 +6,7 @@ module.exports = {
 	description: 'Asks people to format their code with backticks or by sharing their code on places like pastebin.com',
 	aliases: ['highlight'],
 	usage: '++format @username or user ID',
+	example: '++format @DudeThatsErin',
 	inHelp: 'yes',
 	execute(message, args) {
 		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);

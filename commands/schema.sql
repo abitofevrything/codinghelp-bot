@@ -69,3 +69,10 @@ CREATE TABLE Submissions (
     dayNo INT(255) NOT NULL,
     UNIQUE KEY(guildId,msgId)
 );
+
+CREATE TABLE Thanks (
+    guildId VARCHAR(255) NOT NULL PRIMARY KEY,
+    userId VARCHAR(255) NOT NULL,
+    thanks int NOT NULL,
+    last_thanks TIMESTAMP NOT NULL
+);

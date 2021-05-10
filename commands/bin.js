@@ -3,6 +3,7 @@ module.exports = {
     description: 'Tells people a few places they could go to share long pieces of code.',
     aliases: ['long-code', 'external-share', 'codeshare'],
     usage: '++bin',
+    example: '++bin or ++codeshare',
     inHelp: 'yes',
     execute(message) {
   

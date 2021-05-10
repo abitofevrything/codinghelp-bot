@@ -2,7 +2,9 @@ module.exports = {
 	name: 'patience',
 	description: 'Tells people to be patient when waiting for advice.',
 	aliases: ['wait', 'bepatient', 'justwait'],
-	usage: '++patience',
+	usage: '++patience <@username or ID>',
+	example: '++patience @DudeThatsErin',
+	inHelp: 'yes',
 	execute(message, args) {
 		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 		if(!user) {

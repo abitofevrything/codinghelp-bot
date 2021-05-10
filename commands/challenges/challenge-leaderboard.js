@@ -1,0 +1,73 @@
+const Discord = require('discord.js');
+const connection = require('/root/codinghelp-bot/database.js');
+
+
+module.exports = {
+    name: 'leaderboard',
+    description: 'This gives users the ability to see the top 10 users on the leaderboard and also their position on the leaderboard.',
+    aliases: ['ldbd', 'challenge-leaderboard', 'cleaderboard', 'cldbd', 'lbd', 'ldb'],
+    usage: '++leaderboard',
+    example: '++leaderboard or ++ldb or ++lbd',
+    inHelp: 'yes',
+    async execute (message, args) {
+        let guild = message.guild.id;
+        let author = message.author.id;
+        let aUsername = message.author.username;
+
+        let userNames = '';
+        let points = '';
+
+        const top10 = await connection.query(
+            `SELECT * FROM Points WHERE guildId = ? ORDER BY cast(points as UNSIGNED) DESC LIMIT 10;`, 
+            [guild]
+        );
+
+
+        const results = await connection.query(
+            `SELECT * FROM Points WHERE user = ? AND guildId = ?;`,
+            [author, guild]
+        );
+        
+        
+        if(top10 === undefined || top10[0] === undefined || top10[0][0] === undefined) {
+            message.channel.send('No one is on the leaderboard yet.');
+        } else if(results === undefined || results[0] === undefined || results[0][0] === undefined) {
+            for (let i = 0; i < top10[0].length; i++) {
+                const data = top10[0];
+                const user = top10[0][i].user;
+                let membr = await message.client.users.fetch(user).catch(err => {console.log(err);});
+                let username = membr.username;
+
+                userNames += `${i + 1}. ${username}\n`;
+                points += `${data[i].points.toLocaleString('en')}\n`;
+
+            }
+        
+            let embed2 = new Discord.MessageEmbed()
+            .setTitle('This is the current challenge leaderboard.')
+            .setColor('#c9ca66')
+            .addFields(
+                {name: `Top 10`, value: userNames, inline: true},
+                {name: 'Points', value: points, inline: true},
+                {name: 'How many points do you have?', value: `${aUsername}, you currently have \`0\` point(s).`}
+            )
+            .setFooter('If there is an error here, please report this!');
+
+    message.channel.send(embed2);
+
+         } else {
+            const ponts = results[0][0].points;
+            let embed2 = new Discord.MessageEmbed()
+                .setTitle('This is the current challenge leaderboard.')
+                .setColor('#c9ca66')
+                .addFields(
+                    {name: `Top 10`, value: userNames, inline: true},
+                    {name: 'Points', value: points, inline: true},
+                    {name: 'How many points do you have?', value: `${aUsername}, you currently have \`${ponts}\` point(s).`}
+                )
+                .setFooter('If there is an error here, please report this!');
+
+        message.channel.send(embed2);
+                }
+    }
+}

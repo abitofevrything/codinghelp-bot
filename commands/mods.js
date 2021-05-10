@@ -3,6 +3,7 @@ module.exports = {
     description: 'Refers people to Modmail bot.',
     aliases: ['modmail', 'mod'],
     usage: '++mods @username or user ID',
+    example: '++mods @DudeThatsErin',
     inHelp: 'yes',
     execute(message, args) {
   

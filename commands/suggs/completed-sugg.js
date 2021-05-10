@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
-const connection = require('../database.js');
+const connection = require('/root/codinghelp-bot/database.js');
+
 
 module.exports = {
     name: 'completedsugg',

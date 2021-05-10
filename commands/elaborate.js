@@ -3,6 +3,8 @@ module.exports = {
 	description: 'Asks people to elaborate by including code or by including more information.',
 	aliases: ['explain', 'more-info', 'moreinfo'],
 	usage: '++elaborate @username or user ID',
+	example: '++elaborate @DudeThatsErin',
+	inHelp: 'yes',
 	execute(message) {
 		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 		if(!user) {

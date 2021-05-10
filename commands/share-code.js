@@ -3,6 +3,7 @@ module.exports = {
 	description: 'Tells people to share their code as shown in the <#383032186317832202> channel.',
 	aliases: ['code', 'share-your-code', 'seecode'],
 	usage: '++share-code @username or user ID',
+	example: '++share-code @DudeThatsErin',
 	inHelp: 'yes',
 	execute(message, args) {
 

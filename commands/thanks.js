@@ -1,4 +1,6 @@
-const economy = require('./economy.js');
+const connection = require('../database.js');
+const db = require('quick.db');
+const talkedRecently = new Set();
 
 module.exports = {
     name: 'thanks',
@@ -12,15 +14,31 @@ module.exports = {
           return
         }
     
-        const points = 20;
+        let thank;
+        const guildId = message.guild.id;
+        const userId = mention.id;
     
-        const guildId = message.guild.id
-        const userId = mention.id
-    
-        const newPoints = await economy.addPoints(guildId, userId, points)
-    
-        message.reply(
-          `Thanks for thanking ${mention}! They have been given ${newPoints} more points! You can only do this once every 2 hours.`
-        );
+        const Hour = 60 * 60 * 1000;
+        const currentDate = new Date();
+        let cooldown = 7200000; // 2 hours in ms
+
+        let lastDaily = await db.fetch(`daily_${message.author.id}`);
+      
+        if (lastDaily !== null && cooldown - (Date.now() - lastDaily) > 0) {
+          // If user still has a cooldown
+          let timeObj = ms(cooldown - (Date.now() - lastDaily)); // timeObj.hours = 2
+          message.reply('You already thanked someone within the last 2 hours. Please wait more time before you thank someone again.')
+      } else {
+          // Otherwise they'll get their daily
+          await connection.query(
+            `UPDATE Thanks
+            SET thanks = thanks + 1
+            WHERE userId = ?;`,
+            [userId]
+          );
+          message.reply(
+            `Thanks for thanking ${mention}! They have been given 1 thank! You can only do this once every 2 hours.`
+          );
+        }
     }
 }
