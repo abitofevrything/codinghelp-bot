@@ -6,11 +6,13 @@ module.exports = {
     name: 'add-user',
     description: 'This allows **mods** to manually add users to the participants database.',
     aliases: ['add-people', 'adduser'],
-    usage: '!add-user',
+    usage: '++add-user',
+    inHelp:'yes',
+    example: '++add-user 839863262026924083',
     execute (message, args) {
- 
-        if(!message.member.roles.cache.has('839863262026924083') ){ 
-            message.channel.send('You can\'t use this command, only mods can use this command. If you are a mod and you are seeing this, it is because only users with the \`MANAGE_MESSAGES\` permission can use this command.');
+        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
+        if(!role){ 
+            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
         } else {
             const mmbr = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
             const tag = mmbr.user.tag;

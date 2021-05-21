@@ -12,38 +12,13 @@ module.exports = {
     async execute (message, args) {
         let userNames = '';
         let points = '';
-        if(!message.member.hasPermission("MANAGE_MESSAGES") ){ 
-            message.channel.send('You can\'t use this command, only mods can use this command. If you are a mod and you are seeing this, it is because only users with the \`MANAGE_MESSAGES\` permission can use this command.');
+        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
+        if(role){ 
+            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
             return;
         } else {
 
-            const result = await connection.query(
-                `SELECT * FROM Challenge WHERE guildId = ?;`,
-                [message.guild.id]
-            );
-            const announcementsChannel = result[0][0].channelD;
 
-            const embed = new Discord.MessageEmbed()
-            .setColor('BLACK')
-            .setTitle('This challenge has ended!')
-            .setDescription('Thank you for all of your submissions! Winners will get their prizes soon! Congratulations!')
-            .addFields(
-                {name: 'Top 10', value: userNames, inline: true},
-                {name: 'Points', value: points, inline: true},
-            )
-            .setFooter('If this is wrong, please report this!');
-
-            const leaderboard = new Discord.MessageEmbed()
-                .setColor('GREEN')
-                .setTitle('These are the top 10 people in our challenge.')
-                .setDescription('Please issue their winnings ASAP.')
-                .addFields(
-                    {name: 'Top 10', value: userNames, inline: true},
-                    {name: 'Points', value: points, inline: true},
-                )
-                .setFooter('If this is wrong, please report this!');
-
-            message.guild.channels.cache.get(announcementsChannel).send(embed);
             
             connection.query(
                 `DELETE FROM Challenge WHERE guildId = ?;`,
@@ -68,16 +43,7 @@ module.exports = {
                 [message.guild.id]
             );    
     
-                for (let i = 0; i < top10.length; i++) {
-                    const data = top10[0];
-                    const user = data[i].user;
-                    let membr = await message.client.users.fetch(user).catch(err => {console.log(err);});
-                    let username = membr.username;
-    
-                    userNames += `${i + 1}. ${username}\n`;
-                    points += `${data[i].points.toLocaleString('en')}\n`;
-                }
-            message.channel.send(leaderboard);
+
             message.reply('I have deleted everything from the databases and ended the challenge for you!')
 
         }

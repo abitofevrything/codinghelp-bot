@@ -23,7 +23,8 @@ module.exports = {
             [msgId],
         );
         const OGauthor = result2[0][0].Author;
-        const aut = OGauthor.tag;
+        const aut = await message.guild.members.fetch(`${OGauthor}`);
+        const name = aut.user.username;
 
         const result3 = await connection.query(
             `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -50,7 +51,7 @@ module.exports = {
         let mod = 'No one has updated this suggestion yet.';
         if (result6[0][0].Moderator) {
             mod = result6[0][0].Moderator;
-            modd = mod.tag;
+            modd = mod.user.username;
         }
 
         const result7 = await connection.query(
@@ -61,7 +62,7 @@ module.exports = {
 
         const initial = new Discord.MessageEmbed()
         .setColor('771C73')
-        .setAuthor(`${aut}`, `${avatar}`)
+        .setAuthor(`${name}`, `${avatar}`)
         .setDescription(`${suggestion}`)
         .addFields(
             {name: 'Last Edited on', value: `${date}\nYou can convert the time by using [this time converter](https://greenwichmeantime.com/time-gadgets/time-zone-converter/).`},

@@ -28,7 +28,7 @@ module.exports = {
                         [msgId],
                     );
                     const OGauthor = result2[0][0].Author;
-                const aut = (await message.client.users.cache.get(`${OGauthor}`)).tag;
+                const aut = (await message.client.users.cache.get(`${OGauthor}`)).username;
 
                     const result3 = await connection.query(
                         `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -70,7 +70,7 @@ module.exports = {
                         [msgId]
                     );
                     const moder = moderator[0][0].Moderator;
-                    const moderate = moder.tag || message.author.tag;
+                    const moderate = moder.username || message.author.username;
 
             
                 const denied = new Discord.MessageEmbed()

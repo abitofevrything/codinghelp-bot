@@ -43,7 +43,7 @@ module.exports = {
                             let user = result[0][0].Author;
                             const Author = message.client.users.cache.get(user);
                             connection.query(
-                                `INSERT IGNORE INTO Points (guildId, user, points, dayNo) VALUES (?, ?, ?, ?);`,
+                                `INSERT INTO Points (guildId, user, points, dayNo) VALUES (?, ?, ?, ?);`,
                                 [message.guild.id, user, points, challengeNo]
                             );
 

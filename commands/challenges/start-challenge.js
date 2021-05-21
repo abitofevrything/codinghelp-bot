@@ -15,7 +15,8 @@ module.exports = {
         let mod = message.author.id;
         let prize = [];
         let prizes = args.slice(1).join(' ').split("|");
-        if(!message.member.roles.cache.has('839863262026924083')) {
+        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
+        if(role) {
             message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
             return;
         } else {

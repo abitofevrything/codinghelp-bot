@@ -17,31 +17,35 @@ module.exports = {
         let userNames = '';
         let points = '';
 
-        const top10 = await connection.query(
-            `SELECT * FROM Points WHERE guildId = ? ORDER BY cast(points as UNSIGNED) DESC LIMIT 10;`, 
-            [guild]
-        );
+
 
 
         const results = await connection.query(
             `SELECT * FROM Points WHERE user = ? AND guildId = ?;`,
             [author, guild]
         );
+
+        const top10 = await connection.query(
+            `SELECT user, SUM(CAST(points AS UNSIGNED)) AS total FROM Points WHERE guildId = ? GROUP BY user ORDER BY total DESC LIMIT 10;`,
+            [guild]
+        );
+
+        for (let i = 0; i < top10[0].length; i++) {
+            const data = top10[0];
+            const user = top10[0][i].user;
+            let membr = await message.client.users.fetch(user).catch(err => {console.log(err);});
+            let username = membr.username;
+
+            userNames += `${i + 1}. ${username}\n`;
+            points += `${data[i].total}\n`;
+
+        }
         
         
         if(top10 === undefined || top10[0] === undefined || top10[0][0] === undefined) {
             message.channel.send('No one is on the leaderboard yet.');
         } else if(results === undefined || results[0] === undefined || results[0][0] === undefined) {
-            for (let i = 0; i < top10[0].length; i++) {
-                const data = top10[0];
-                const user = top10[0][i].user;
-                let membr = await message.client.users.fetch(user).catch(err => {console.log(err);});
-                let username = membr.username;
 
-                userNames += `${i + 1}. ${username}\n`;
-                points += `${data[i].points.toLocaleString('en')}\n`;
-
-            }
         
             let embed2 = new Discord.MessageEmbed()
             .setTitle('This is the current challenge leaderboard.')

@@ -4,13 +4,15 @@ const connection = require('/root/codinghelp-bot/database.js');
 
 module.exports = {
     name: 'add-members',
-    description: 'This adds Challenge Participants to the Database. **Note:** Only mods can run this command!',
+    description: 'This allows **mods** to automatically add participants to the Challenges database.',
     aliases: ['addppl', 'addparticipants', 'addchallengers', 'ap', 'add-participants'],
-    usage: '!add-members',
+    usage: '++add-members',
+    inHelp: 'yes',
+    example: '++add-members',
     async execute (message, args) {
-
-        if(!message.member.roles.cache.has('839863262026924083') ){ 
-            message.channel.send('You can\'t use this command, only mods can use this command. If you are a mod and you are seeing this, it is because only users with the \`MANAGE_MESSAGES\` permission can use this command.');
+        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
+        if(!role){ 
+            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
             return;
         } else {
             let joinersRole = message.guild.roles.cache.find(r => r.name === "Participants") || "none";
