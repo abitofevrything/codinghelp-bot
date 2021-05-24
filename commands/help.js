@@ -16,7 +16,7 @@ module.exports = {
 			.setTitle('Help Menu page 1 - General Commands')
 			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
 			.addFields(
-				{ name: 'These are commands any user can use.', value: '```css\nping\navatar\nuser-info\nserver-info\nbot-info\nhelp\nerror\nreddit\ntech\nformat\nchannel\nbin\ndocs\nshare-code\nmods\njust-ask\npatience\nthanks - **NOT SET UP YET**\nwiki\nwrong-channel\n```' },
+				{ name: 'These are commands any user can use.', value: '```css\nping\navatar\nuser-info\nserver-info\nbot-info\nrules\nhelp\nerror\nreddit\ntech\nformat\nchannel\nbin\ndocs\nshare-code\nmods\njust-ask\npatience\nthanks - **NOT SET UP YET**\nwiki\nwrong-channel\n```' },
 			)
 			.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 		
@@ -45,7 +45,7 @@ module.exports = {
 			.setTitle('Help Menu page 4 - Moderator Only Commands')
 			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
 			.addFields(
-				{ name: 'These are general **moderator** only commands. Meaning only **moderators** can use these commands.', value: '```css\npruneserver\npartners\n**THE FOLLOWING ARE NOT SET UP YET**\nmute\nunmute\nwarn\nkick\nban\nunban\naudit-log\nlogs-off\n```' }
+				{ name: 'These are general **moderator** only commands. Meaning only **moderators** can use these commands.', value: '```css\nprune\nserver\npartners\n```' }
 			)
 			.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 
