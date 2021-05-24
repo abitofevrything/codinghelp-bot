@@ -61,13 +61,13 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 client.on('message', async message => {
   if (message.author.bot) return;
-const thnks = ['thanks', 'thnx', 'thank you', 'thank', 'tnx', 'ty', 'fixed', 'thanks a lot'];
+const thnks = ['thanks', 'thnx', 'thank you', 'thank', 'tnx', 'ty', 'fixed'];
 for(let x = 0; x < thnks.length; x++){
     if (message.content.includes(thnks[x])){
-      //message.reply('It seems like someone\'s problem was resolved! I\'m glad we were able to help you! Please use the `++thanks <@username or ID>` command to show your appreciation!');
+      message.reply('It seems like someone\'s problem was resolved! I\'m glad we were able to help you! Please use the `++thanks <@username or ID>` command to show your appreciation!');
       console.log('resolved! this works!'); //temporary until I get ++thanks working.
+      break;
     }
-    break;
   }
 if(!message.content.startsWith(config.client.prefix)) return
   const args = message.content.slice(config.client.prefix.length).trim().split(/ +/);
