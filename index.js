@@ -60,22 +60,23 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 });
 
 client.on('message', async message => {
-  if (!message.content.startsWith(config.client.prefix) || message.author.bot) return;
-
-
-  
+  if (message.author.bot) return;  
   const args = message.content.slice(config.client.prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
-  const command = client.commands.get(commandName)
-    || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-  if (!command) return; 
-
+  const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+  const thnks = ['thanks', 'thnx', 'thank you', 'thank', 'tnx', 'ty', 'fixed', 'thanks a lot']
+  if (message.content.includes(`${thnks}`)){
+      message.reply('It seems like someone\'s problem was resolved! I\'m glad we were able to help you! Please use the `++thanks <@username or ID>` command to show your appreciation!');
+  }
+if(!command) return;
   try {
     command.execute(message, args);
   } catch (error) {
     console.error(error);
     message.reply('there was an error trying to execute that command!');
   }
+
+
 });
 
   (async () => {
