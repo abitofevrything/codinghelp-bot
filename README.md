@@ -1,35 +1,13 @@
 # r/CodingHelp Discord Bot
 
-[![Discord](https://discordapp.com/api/guilds/258167954913361930/embed.png)](https://discord.gg/REjFpZ9) [![Twitter Follow](https://img.shields.io/twitter/follow/DudeThatsErin.svg?style=social)](https://twitter.com/DudeThatsErin)
+[![Discord](https://discordapp.com/api/guilds/258167954913361930/embed.png)](https://codinghelp.site/discord) [![Twitter Follow](https://img.shields.io/twitter/follow/DudeThatsErin.svg?style=social)](https://twitter.com/DudeThatsErin)
 
-This is a bot that I created and decided to make it open-source.
-
-## Table of Contents
-=> [Setup Bot](#setup-bot)
-
-=> [Current To Do List](#current-todo-list)
-
-=> [Contributions](#contributions)
-
-### Setup Bot
-1. Go to Discord's [Developer Portal](https://discordapp.com/developers/applications).
-
-2. Create a new application.
-
-> Take note of your bot's client ID. You will need this to invite your bot to a server.
-
-3. Go to the bot tab and add a bot user to your application.
-
-> Take note of your bot's token. You will need this in the next section.
-
-4. Invite your bot to a server using: [https://discordapp.com/oauth2/authorize?scope=bot&client_id=DISCORD_BOT_CLIENT_ID_PLACEHOLDER](https://discordapp.com/oauth2/authorize?scope=bot&client_id=DISCORD_BOT_CLIENT_ID_PLACEHOLDER)
-
-
-> A Discord bot's client ID is not the same as its token. Keep your token and any file containing it **private**. If your token ever leaks or you suspect it may have leaked, simply `regenerate` a new token to invalidate your compromised token.
+This is a bot that I created and decided to make it open-source. I get assistance from my awesome discord server when it comes to updates and fixing bugs.
 
 ## Current To Do List
-I use Notion for our To Do List. You can check out the current list [here!](https://www.notion.so/r-CodingHelp-Bot-485d3cd9b0d54f93aa4445ffd7ebc2fd)
+- Get ++thanks system working (gives 10 points for each thanks and has a leaderboard to show who has the most thanks... shows who is the most helpful)
+- Get ModMail System working. This is a lot more than just one command so it will take a while.
+- Make sure all commands show `++` as the prefix and not `s.` for my Sakura Moon bot.
 
 ## Contributions
-I love getting contributions. All you have to do is join the [r/CodingHelp Discord Server](https://discord.gg/REjFpZ9) and you can make suggestions and help contribute to the bots success!
-
+I love getting contributions. All you have to do is join the [r/CodingHelp Discord Server](https://codinghelp.site/discord) and you can make suggestions and help contribute to the bots success!
