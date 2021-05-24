@@ -60,14 +60,18 @@ module.exports = {
     message.channel.send(embed2);
 
          } else {
-            const ponts = results[0][0].points;
+            const ponts = await connection.query(
+                `SELECT points, SUM(CAST(points AS UNSIGNED)) AS total FROM Points WHERE guildId = ? AND user = ?;`,
+                [guild, author]
+            );
+            const p = ponts[0][0].total;
             let embed2 = new Discord.MessageEmbed()
                 .setTitle('This is the current challenge leaderboard.')
                 .setColor('#c9ca66')
                 .addFields(
                     {name: `Top 10`, value: userNames, inline: true},
                     {name: 'Points', value: points, inline: true},
-                    {name: 'How many points do you have?', value: `${aUsername}, you currently have \`${ponts}\` point(s).`}
+                    {name: 'How many points do you have?', value: `${aUsername}, you currently have \`${p}\` point(s).`}
                 )
                 .setFooter('If there is an error here, please report this!');
 

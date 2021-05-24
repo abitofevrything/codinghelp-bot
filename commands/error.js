@@ -4,7 +4,7 @@ module.exports = {
     name: 'error',
     description: 'Tells users how to read error messages.',
     aliases: ['uhh', 'issue', 'err'],
-    usage: '++error',
+    usage: '++error <@username or ID>',
     example: '++error or ++issue or ++err',
     inHelp: 'yes',
     execute(message, args) {

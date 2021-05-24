@@ -42,7 +42,7 @@ module.exports = {
 		
 		const embed4 = new MessageEmbed()
 			.setColor('#6683AD')
-			.setTitle('Help Menu page 3 - Moderator Only Commands')
+			.setTitle('Help Menu page 4 - Moderator Only Commands')
 			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
 			.addFields(
 				{ name: 'These are general **moderator** only commands. Meaning only **moderators** can use these commands.', value: '```css\npruneserver\npartners\n**THE FOLLOWING ARE NOT SET UP YET**\nmute\nunmute\nwarn\nkick\nban\nunban\naudit-log\nlogs-off\n```' }

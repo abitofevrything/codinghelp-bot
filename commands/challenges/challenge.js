@@ -10,8 +10,8 @@ module.exports = {
     inHelp: 'yes',
     example: '++challenge 1 What is my favorite color?',
     async execute (message, args) {
-        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
-        if(role){ 
+        let role = message.member.roles.cache.has('839863262026924083') || message.member.roles.cache.has('718253309101867008') || message.member.roles.cache.has('846074806788685836');
+        if(!role){ 
             message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
             return;
         } else {
@@ -49,7 +49,7 @@ module.exports = {
                     .setFooter('Run the ++submit command to submit answers to this challenge.');
 
 
-                message.guild.channels.cache.get(announcementsChannel).send(embeD).then(message => {
+                message.guild.channels.cache.get(announcementsChannel).send(`Hey, <@&846076430294974484> A new challenge is up!`, embeD).then(message => {
                     const msg = message.id;
                     connection.query(
                         `INSERT INTO Challenge (guildId, msgId, moderator, title, dayNo) VALUES (?, ?, ?, ?, ?)`,
