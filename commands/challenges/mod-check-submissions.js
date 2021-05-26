@@ -5,7 +5,7 @@ const connection = require('/root/codinghelp-bot/database.js');
 module.exports = {
     name: 'mods-check-submissions',
     description: 'This allows **mods** to check who has submitted a response.',
-    aliases: ['cs', 'cksubs', 'ck-subs', 'checksubmissions'],
+    aliases: ['mcs', 'mcksubs', 'mck-subs', 'modchecksubmissions'],
     usage: '++mods-check-submissions [challenge number]',
     example: '++mods-check-submissions 1',
     inHelp: 'yes',
