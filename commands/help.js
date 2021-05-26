@@ -35,8 +35,8 @@ module.exports = {
 			.setTitle('Help Menu page 3 - Challenge System Commands')
 			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
 			.addFields(
-				{ name: 'These are commands any user can use for our Challenge System.', value: '```css\nsubmit\nedit-submission\nchallenge-leaderboard\n```' },
-				{ name: 'These are our **moderator** only commands for our Challenge System.', value: '```css\nadd-members\nadd-users\ncheck-participants\nremove-participant\nstart-challenge\nchallenge\nedit-challenge\ncheck-submissions\nreviewed\npurge-submissions\nend-challenge\n```' }
+				{ name: 'These are commands any user can use for our Challenge System.', value: '```css\nsubmit\nedit-submission\nchallenge-leaderboard\nuser-check-submissions\n```' },
+				{ name: 'These are our **moderator** only commands for our Challenge System.', value: '```css\nadd-members\nadd-users\ncheck-participants\nremove-participant\nstart-challenge\nchallenge\nedit-challenge\nmods-check-submissions\nreviewed\npurge-submissions\nend-challenge\n```' }
 			)
 			.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 		

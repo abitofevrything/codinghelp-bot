@@ -3,11 +3,11 @@ const connection = require('/root/codinghelp-bot/database.js');
 
 
 module.exports = {
-    name: 'check-submissions',
+    name: 'mods-check-submissions',
     description: 'This allows **mods** to check who has submitted a response.',
     aliases: ['cs', 'cksubs', 'ck-subs', 'checksubmissions'],
-    usage: '++check-submissions [challenge number]',
-    example: '++check-submissions 1',
+    usage: '++mods-check-submissions [challenge number]',
+    example: '++mods-check-submissions 1',
     inHelp: 'yes',
     async execute (message, args) {
         let name = message.author.id;
