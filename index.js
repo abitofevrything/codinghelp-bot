@@ -55,7 +55,7 @@ client.on('messageDelete', message => {
     footer: `Don't Ghost Ping, smh`,
     picture: `https://i.imgur.com/k6pLhtU.png`,
     channel: `450906618234929152`,
-    ingorePerms: ['ADMINISTRATOR', 'MANAGE_MESSAGES']
+    ignorePerms: ['ADMINISTRATOR', 'MANAGE_MESSAGES']
   })
 });
 
