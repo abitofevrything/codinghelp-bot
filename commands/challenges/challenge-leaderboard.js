@@ -23,7 +23,7 @@ module.exports = {
         );
 
         const top10 = await connection.query(
-            `SELECT user, SUM(CAST(points AS UNSIGNED)) AS total FROM Submissions WHERE guildId = ? GROUP BY author ORDER BY total DESC LIMIT 10;`,
+            `SELECT author, SUM(CAST(points AS UNSIGNED)) AS total FROM Submissions WHERE guildId = ? GROUP BY author ORDER BY total DESC LIMIT 10;`,
             [guild]
         );
 

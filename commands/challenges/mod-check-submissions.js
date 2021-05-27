@@ -24,10 +24,10 @@ module.exports = {
                 return;
             } else {
                 const result2 = await connection.query(
-                    `SELECT * FROM Challenge WHERE guildId = ? AND dayNo = ?;`,
+                    `SELECT * FROM Challenge WHERE guildId = ? AND challengeNo = ?;`,
                     [message.guild.id, challengeNo]
                 );
-                const number = result2[0][0].dayNo;
+                const number = result2[0][0].challengeNo;
                 const question = result2[0][0].title;
                 let embed = new Discord.MessageEmbed()
                     .setColor('#3fa066')
@@ -38,16 +38,16 @@ module.exports = {
                     message.client.users.cache.get(`${name}`).send(embed);
 
                 const result = await connection.query(
-                    `SELECT * FROM Submissions WHERE guildId = ? AND dayNo = ?;`,
+                    `SELECT * FROM Submissions WHERE guildId = ? AND challengeNo = ?;`,
                     [message.guild.id, challengeNo]
                 );
 
                 for (const row of result[0]){
-                    const Members = row.Author;
+                    const Members = row.author;
                     const Author = await message.client.users.fetch(Members).catch(err => {console.log(err);});
                     const username = Author.username;
-                    const Submissions = row.Message;
-                    const dayNo = row.dayNo;
+                    const Submissions = row.message;
+                    const dayNo = row.challengeNo;
                     const moderator = row.moderator;
                     const msgId = row.msgId;
                     const modname = await message.client.users.fetch(moderator).catch(err => {console.log(err);});

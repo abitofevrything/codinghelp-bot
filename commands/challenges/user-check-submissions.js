@@ -13,13 +13,13 @@ module.exports = {
         let name = message.author.id;
 
         const result = await connection.query(
-            `SELECT * FROM Submissions WHERE guildId = ? AND Author = ?;`,
+            `SELECT * FROM Submissions WHERE guildId = ? AND author = ?;`,
             [message.guild.id, name]
         );
 
         for (const row of result[0]){
-            const Submissions = row.Message;
-            const dayNo = row.dayNo;
+            const Submissions = row.message;
+            const dayNo = row.challengeNo;
             const moderator = row.moderator;
             const msgId = row.msgId;
             const modname = await message.client.users.fetch(moderator).catch(err => {console.log(err);});
