@@ -38,7 +38,7 @@ module.exports = {
                 } else {
     
                     connection.query(
-                        `INSERT INTO Submissions (guildId, msgId, Author, Message, dayNo) VALUES (?, ?, ?, ?, ?);`,
+                        `INSERT INTO Submissions (guildId, msgId, author, message, challengeNo) VALUES (?, ?, ?, ?, ?);`,
                         [guildId, msgId, author, answer, dayNo]
                     );
     

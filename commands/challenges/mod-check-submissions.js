@@ -13,10 +13,9 @@ module.exports = {
         let name = message.author.id;
 
         let challengeNo = args[0];
-        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
+        let role = message.member.roles.cache.has('839863262026924083') || message.member.roles.cache.has('718253309101867008') || message.member.roles.cache.has('846074806788685836');
         if(!role){ 
-            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
-            message.channel.send('You can\'t use this command, only mods can use this command. If you are a mod and you are seeing this, it is because only users with the \`MANAGE_MESSAGES\` permission can use this command.');
+            message.channel.send('You don\'t have the `Challenge Mods` role so you can\'t use this command.');
             return;
         } else {
             if(!challengeNo) {

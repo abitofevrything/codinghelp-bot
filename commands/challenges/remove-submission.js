@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('/root/codinghelp-bot/database.js');
 
-
 module.exports = {
     name: 'remove-submissions',
     description: 'This allows **mods** to remove responses to challenges.',
@@ -12,10 +11,10 @@ module.exports = {
     async execute (message, args) {
         let name = message.author.id;
         const modname = await message.client.users.fetch(name).catch(err => {console.log(err);});
-
         let submission = args[0];
-        if(!message.member.roles.cache.has('839863262026924083') ){ 
-            message.channel.send('You can\'t use this command, only mods can use this command. If you are a mod and you are seeing this, it is because only users with the <@839863262026924083> role can use this command.').cleanContent;
+        let role = message.member.roles.cache.has('839863262026924083') || message.member.roles.cache.has('718253309101867008') || message.member.roles.cache.has('846074806788685836');
+        if(!role){ 
+            message.channel.send('You don\'t have the `Challenge Mods` role so you can\'t use this command.');
             return;
         } else {
             if(!submission) {
@@ -26,11 +25,11 @@ module.exports = {
                     `SELECT * FROM Submissions WHERE msgId = ? AND guildId = ?;`,
                     [submission, message.guild.id]
                 )
-                    const player = results[0][0].Author;
+                    const player = results[0][0].author;
                     const user = await message.client.users.fetch(player).catch(err => {console.log(err);});
                     const username = user.username;
-                    const Submissions = results[0][0].Message;
-                    const dayNo = results[0][0].dayNo;
+                    const Submissions = results[0][0].message;
+                    const dayNo = results[0][0].challengeNo;
 
                     const embed = new Discord.MessageEmbed()
                         .setColor('#d4a066')

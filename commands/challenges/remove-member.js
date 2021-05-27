@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('/root/codinghelp-bot/database.js');
 
-
 module.exports = {
     name: 'remove-user',
     description: 'This allows **mods** to manually remove users to the participants database.',
@@ -11,8 +10,10 @@ module.exports = {
     inHelp: 'yes',
     execute (message, args) {
  
-        if(!message.member.roles.cache.has('839863262026924083') ){ 
-            message.channel.send('You can\'t use this command, only mods can use this command. If you are a mod and you are seeing this, it is because only users with the \`MANAGE_MESSAGES\` permission can use this command.');
+        let role = message.member.roles.cache.has('839863262026924083') || message.member.roles.cache.has('718253309101867008') || message.member.roles.cache.has('846074806788685836');
+        if(!role){ 
+            message.channel.send('You don\'t have the `Challenge Mods` role so you can\'t use this command.');
+            return;
         } else {
             const mmbr = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
             const id = mmbr.user.id;

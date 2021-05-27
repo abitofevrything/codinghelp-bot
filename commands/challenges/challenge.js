@@ -12,7 +12,7 @@ module.exports = {
     async execute (message, args) {
         let role = message.member.roles.cache.has('839863262026924083') || message.member.roles.cache.has('718253309101867008') || message.member.roles.cache.has('846074806788685836');
         if(!role){ 
-            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
+            message.channel.send('You don\'t have the `Challenge Mods` role so you can\'t use this command.');
             return;
         } else {
         let msgId = message.id;

@@ -40,10 +40,10 @@ module.exports = {
                                 `SELECT Author FROM Submissions WHERE msgId = ? AND guildId = ?;`,
                                 [msgId, message.guild.id]
                             );
-                            let user = result[0][0].Author;
+                            let user = result[0][0].author;
                             const Author = message.client.users.cache.get(user);
                             connection.query(
-                                `INSERT INTO Points (guildId, user, points, dayNo) VALUES (?, ?, ?, ?);`,
+                                `INSERT INTO Submissions (guildId, author, points, challengeNo) VALUES (?, ?, ?, ?);`,
                                 [message.guild.id, user, points, challengeNo]
                             );
 
