@@ -17,7 +17,7 @@ module.exports = {
         } else {
         let msgId = message.id;
         let guildId = message.guild.id;
-        let dayNo = args[0];
+        let challengeNo = args[0];
         let answer = args.slice(1).join(' ');
         let moderator = message.author.id;
 
@@ -28,12 +28,12 @@ module.exports = {
         const announcementsChannel = result[0][0].channelD;
 
 
-        if (!dayNo) {
+        if (!challengeNo) {
                 const challenge = await connection.query(
-                    `SELECT * FROM Challenge WHERE guildId = ? ORDER BY dayNo DESC LIMIT 1;`,
+                    `SELECT * FROM Challenge WHERE guildId = ? ORDER BY challengeNo DESC LIMIT 1;`,
                     [guildId]
                 );
-                const challengeNo = challenge[0][0].dayNo;
+                const challengeNo = challenge[0][0].challengeNo;
                 message.reply(`What challenge number are you trying to add to the database? The last challenge number in the database is ${challengeNo}.`);
                 return;
         } else {
@@ -44,7 +44,7 @@ module.exports = {
 
                 let embeD = new Discord.MessageEmbed()
                     .setColor('BLUE')
-                    .setTitle(`Challenge ${dayNo}`)
+                    .setTitle(`Challenge ${challengeNo}`)
                     .setDescription(`${answer}`)
                     .setFooter('Run the ++submit command to submit answers to this challenge.');
 
@@ -52,21 +52,21 @@ module.exports = {
                 message.guild.channels.cache.get(announcementsChannel).send(`Hey, <@&846076430294974484> A new challenge is up!`, embeD).then(message => {
                     const msg = message.id;
                     connection.query(
-                        `INSERT INTO Challenge (guildId, msgId, moderator, title, dayNo) VALUES (?, ?, ?, ?, ?)`,
-                        [guildId, msg, moderator, answer, dayNo]
+                        `INSERT INTO Challenge (guildId, msgId, moderator, title, challengeNo) VALUES (?, ?, ?, ?, ?)`,
+                        [guildId, msg, moderator, answer, challengeNo]
                     );
                 });
                 const results = await connection.query(
-                    `SELECT * FROM Challenge WHERE guildId = ? AND dayNo = ?;`,
-                    [guildId, dayNo]
+                    `SELECT * FROM Challenge WHERE guildId = ? AND challengeNo = ?;`,
+                    [guildId, challengeNo]
                 );
                 const res = results[0][0];
                 const mes = res.msgId;
                 let embed = new Discord.MessageEmbed()
-                .setColor('#92caa0')
-                .setTitle(`I have added Challenge number ${dayNo} to the \`Challenge\` Database.`)                        
-                .setDescription(`The submission is as follows: ${answer} You can see it here: <#${announcementsChannel}>.\n\nThe message ID for the challenge is: \`${mes}\``)
-                .setFooter('If this is in error, please report this!');
+                    .setColor('#92caa0')
+                    .setTitle(`I have added Challenge number ${challengeNo} to the \`Challenge\` Database.`)                        
+                    .setDescription(`The submission is as follows: ${answer} You can see it here: <#${announcementsChannel}>.\n\nThe message ID for the challenge is: \`${mes}\``)
+                    .setFooter('If this is in error, please report this!');
 
             message.channel.send(embed)
                 message.delete();

@@ -42,16 +42,11 @@ module.exports = {
                                 )
                                 .setFooter('Thanks for participating in our challenge! Good luck!');
                         message.guild.channels.cache.get(announcementsChannel).send(rules);
-
-                        connection.query(
-                            `INSERT INTO prizes (guildId, user, prize1, prize2, prize3) VALUES(?, ?, ?, ?, ?);`,
-                            [guild, mod, prizes[0], prizes[1], prizes[2]]
-                        );
                         
                         const msg = message.id;
                             connection.query(
-                                `INSERT INTO Challenge (guildId, msgId, channelD, moderator) VALUES (?, ?, ?, ?)`,
-                                [guild, msg, announcementsChannel, mod]
+                                `INSERT INTO Challenge (guildId, msgId, channelD, moderator, prize1, prize2, prize3) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                                [guild, msg, announcementsChannel, mod, prizes[0], prizes[1], prizes[2]]
                             );
                       
                         message.reply(`Thanks for that! I have sent the messages to the channel! Check it out! <#${announcementsChannel}>`)
