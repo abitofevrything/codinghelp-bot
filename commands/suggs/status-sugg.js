@@ -1,14 +1,13 @@
 const Discord = require('discord.js');
 const connection = require('/root/codinghelp-bot/database.js');
 
-
 module.exports = {
     name: 'statussugg',
     aliases: ['statuss', 'ss', 'ssugg', 'supsugg', 'hmsug'],
     inHelp: 'yes',
     description: 'Allows a user to check the current status of their suggestion',
     usage: '++statussugg messageID',
-    category: 'Messages',
+    example: '++statussug 847816007330431007',
     async execute(message, args) {
 
         const msgId = args[0];

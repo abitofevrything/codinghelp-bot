@@ -1,12 +1,13 @@
 const Discord = require('discord.js');
 const connection = require('/root/codinghelp-bot/database.js');
 
-
 module.exports = {
     name: 'suggestions',
     aliases: ['suggest', 'suggestion', 'sugg', 's'],
     description: 'Creates a suggestion!',
     usage: '++suggestions [suggestion here]',
+    inHelp: 'yes',
+    example: '++suggestions Can I have some pudding?',
     async execute(message, args){
 
     const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');

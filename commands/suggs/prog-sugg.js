@@ -1,14 +1,13 @@
 const Discord = require('discord.js');
 const connection = require('/root/codinghelp-bot/database.js');
 
-
 module.exports = {
     name: 'prog-sugg',
     aliases: ['inprogsugg', 'workingsugg', 'workingsuggestion', 'inprogresssuggestion', 'inprogresssuggestions', 'workingsuggestion', 'worksugg', 'ps', 'ws'],
     inHelp: 'yes',
     description: 'Marks a specific suggestion as in progress with the current status. **Note:** This can only be ran by moderators.',
     usage: '++prog-sugg messageID [status message]',
-    category: 'Messages',
+    example: '++prog-sugg 847816007330431007 We are working on this!',
     async execute(message, args) {
 
         if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {

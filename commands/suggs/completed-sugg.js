@@ -6,8 +6,9 @@ module.exports = {
     name: 'completedsugg',
     aliases: ['cs', 'dones', 'donesugg', 'completedsuggestion', 'completedsuggestions', 'acceptedsugg', 'acceptedsuggestions', 'acceptedsuggestion', 'oksugg', 'oks'],
     inHelp: 'yes',
-    description: 'Marks a specific suggestion as completed. **Note:** This can only be ran by moderators.',
+    description: 'Allows **mods** to mark suggestions as completed.',
     usage: '++completedsugg messageID [reason]',
+    example: '++completedsugg 436043273069658112 I like pudding, too.',
     async execute(message, args) {
         if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
             const msgId = args[0];

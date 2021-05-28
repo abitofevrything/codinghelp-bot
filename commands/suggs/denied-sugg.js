@@ -1,13 +1,13 @@
 const Discord = require('discord.js');
 const connection = require('/root/codinghelp-bot/database.js');
 
-
 module.exports = {
     name: 'denied-sugg',
     aliases: ['deniedsugg', 'denys', 'nosugg', 'deniedsuggestion', 'deniedsuggestions', 'denysugg'],
     inHelp: 'yes',
-    description: 'Denies a specific suggestion. **Note:** This can only be ran by moderators.',
+    description: 'Allows **mods** to deny certain suggestions.',
     usage: '++deniedsugg messageID [reason]',
+    example: '++deniedsugg 436043273069658112 I hate pudding!',
     async execute(message, args) {
         if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
         const msgId = args[0];

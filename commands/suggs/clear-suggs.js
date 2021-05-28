@@ -5,6 +5,8 @@ module.exports = {
     aliases: ['clearsuggestions', 'cleardb', 'cdb', 'emptydb', 'emptysuggestions', 'clear-suggs'],
     description: 'Emptys the Suggestion Database. \n **Note:** Only DudeThatsErin#8061 can run this command.',
     usage: '++clearsuggs',
+    inHelp: 'yes',
+    example: '++clearsuggs or ++cdb',
     async execute(message, args) {
 
         connection.query(`TRUNCATE TABLE Suggs;`);

@@ -1,12 +1,13 @@
 const Discord = require('discord.js');
 const connection = require('/root/codinghelp-bot/database.js');
 
-
 module.exports = {
     name: 'editsugg',
     aliases: ['edits', 'es', 'editsuggestion', 'editsuggestions', 'editsuggs', 'us', 'updatesuggestion', 'updatesugg', 'updates', 'edit-suggestions', 'edit-suggestion', 'update-suggestion', 'update-suggestions'],
     description: 'Users can update their suggestion with this command.\n**Note:** Only the original poster\'s of the suggestion can edit the message. Meaning someone posts a suggestion and only that person can edit the suggestion, no one else.',
     usage: '++editsugg messageID [updated message]',
+    inHelp: 'yes',
+    example: '++editsugg 847814072044093440 I meant I like pudding.',
     async execute(message, args) {
 
         const msgId = args[0];
