@@ -1,13 +1,13 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 module.exports = {
     name: 'statussugg',
     aliases: ['statuss', 'ss', 'ssugg', 'supsugg', 'hmsug'],
     inHelp: 'yes',
-    description: 'Allows a user to check the current status of their suggestion',
+    description: 'Allows a user to check the current status of their suggestion.',
     usage: '++statussugg messageID',
-    example: '++statussug 847816007330431007',
+    example: '++statussugg 847580954306543616',
     async execute(message, args) {
 
         const msgId = args[0];
@@ -47,10 +47,13 @@ module.exports = {
             `SELECT Moderator from Suggs WHERE noSugg = ?`,
             [msgId],
         );
-        let mod = 'No one has updated this suggestion yet.';
-        if (result6[0][0].Moderator) {
-            mod = result6[0][0].Moderator;
-            modd = mod.user.username;
+        let modd = 'No one has updated this suggestion yet.';
+        if (result6[0][0].Moderator != 'New Suggestion, No Mod.') {
+            mdd = result6[0][0].Moderator;
+            md = await message.guild.members.fetch(`${mdd}`);
+            modd = md.user.username;
+        } else {
+            mdd = result6[0][0].Moderator;
         }
 
         const result7 = await connection.query(

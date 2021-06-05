@@ -77,9 +77,6 @@ module.exports = {
 			if(cmd.aliases){
 				emb.addField("Aliases", cmd.aliases.join(", "), false);
 			}
-			if(cmd.cooldown){
-				emb.addField("You have to wait how many seconds between commands?", cmd.cooldown, false)
-			}
 			if(cmd.usage){
 				emb.addField("Usage", cmd.usage, false);
 			}

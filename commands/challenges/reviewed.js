@@ -37,14 +37,14 @@ module.exports = {
                                 [moderator, msgId, message.guild.id]
                             );
                             const result = await connection.query(
-                                `SELECT Author FROM Submissions WHERE msgId = ? AND guildId = ?;`,
+                                `SELECT author FROM Submissions WHERE msgId = ? AND guildId = ?;`,
                                 [msgId, message.guild.id]
                             );
                             let user = result[0][0].author;
                             const Author = message.client.users.cache.get(user);
                             connection.query(
-                                `INSERT INTO Submissions (guildId, author, points, challengeNo) VALUES (?, ?, ?, ?);`,
-                                [message.guild.id, user, points, challengeNo]
+                                `UPDATE Submissions SET points = ? AND moderator = ? WHERE msgId = ?;`,
+                                [points, moderator, msgId]
                             );
 
                             message.channel.send(`I have given ${Author} ${points} point(s) and marked that submission as reviewed! Thank you!`);

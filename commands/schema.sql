@@ -39,35 +39,23 @@ CREATE TABLE Challenges (
     UNIQUE KEY(guildId, player)
 );
 
-CREATE TABLE Points (
-    guildId VARCHAR(100) NOT NULL,
-    user VARCHAR(300) NOT NULL,
-    xpLogId VARCHAR(100) NOT NULL,
-    nextLevel INT(255) NOT NULL DEFAULT '0',
-    currentPoints INT(255) NOT NULL DEFAULT '0',
-    remainingPoints INT(255) NOT NULL DEFAULT '100',
-    UNIQUE KEY(guildId, user)
-);
-
 CREATE TABLE Challenge (
     guildId VARCHAR(100) NOT NULL,
     msgId BIGINT(255) NOT NULL,
     moderator VARCHAR(300) NOT NULL,
     title VARCHAR(500) NOT NULL,
     description VARCHAR(50000) NOT NULL,
-    dayNo INT(255) NOT NULL,
-    LAST_EDITED TIMESTAMP NOT NULL,
-    UNIQUE KEY(guildId,msgId)
+    challengeNo VARCHAR(255) NOT NULL,
 );
 
 CREATE TABLE Submissions (
-    guildId VARCHAR(100) NOT NULL,
+    guildId VARCHAR(100) NOT NULL PRIMARY KEY,
     msgId BIGINT(255) NOT NULL,
-    Author VARCHAR(300) NOT NULL,
-    Message VARCHAR(50000) NOT NULL,
-    LAST_EDITED TIMESTAMP NOT NULL,
-    dayNo INT(255) NOT NULL,
-    UNIQUE KEY(guildId,msgId)
+    author VARCHAR(300) NOT NULL,
+    message VARCHAR(50000) NOT NULL,
+    challengeNo VARCHAR(255) NOT NULL,
+    moderator VARCHAR(255) NOT NULL,
+    points VARCHAR(1000)
 );
 
 CREATE TABLE Thanks (

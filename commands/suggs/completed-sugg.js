@@ -1,16 +1,19 @@
 const Discord = require('discord.js')
-const connection = require('/root/codinghelp-bot/database.js');
-
+const connection = require('../../database.js');
 
 module.exports = {
     name: 'completedsugg',
     aliases: ['cs', 'dones', 'donesugg', 'completedsuggestion', 'completedsuggestions', 'acceptedsugg', 'acceptedsuggestions', 'acceptedsuggestion', 'oksugg', 'oks'],
     inHelp: 'yes',
-    description: 'Allows **mods** to mark suggestions as completed.',
+    description: 'Marks a specific suggestion as completed. **Note:** This can only be ran by moderators.',
     usage: '++completedsugg messageID [reason]',
-    example: '++completedsugg 436043273069658112 I like pudding, too.',
+    example: '++completedsugg 847580954306543616 I have completed your suggestion!',
     async execute(message, args) {
-        if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
+        let role = ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'];
+        if(!message.member.hasPermission([`${role}`])){ 
+            message.channel.send('You do not have permission to run this command. Only users with one of the following permissions can run this command:\n\`ADMINISTRATOR, MANAGE_CHANNELS, MANAGE_ROLES, MANAGE_MESSAGES, KICK_MEMBERS, BAN_MEMBERS\`');
+            return;
+        } else {
             const msgId = args[0];
             if(msgId > 0 ) {
                 try {
@@ -29,7 +32,7 @@ module.exports = {
                         [msgId],
                     );
                     const OGauthor = result2[0][0].Author;
-                const aut = (await message.client.users.cache.get(`${OGauthor}`)).username;
+                const aut = (await message.client.users.cache.get(`${OGauthor}`)).tag;
 
                     const result3 = await connection.query(
                         `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -71,7 +74,7 @@ module.exports = {
                         [msgId]
                     );
                     const moder = moderator[0][0].Moderator;
-                    const moderate = moder.username || message.author.username;
+                    const moderate = moder.tag || message.author.tag;
 
             
                 const denied = new Discord.MessageEmbed()
@@ -108,9 +111,6 @@ module.exports = {
             } else {
                 message.reply('You need to include the ID of the message you want to mark as completed.')
             }
-        } else {
-            message.reply('You do not have the permissions to use this command. You must be a moderator of our server. If this is in error, please report it.')
-        }
-
+        } 
     }
 };

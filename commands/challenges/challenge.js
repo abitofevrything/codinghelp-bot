@@ -49,7 +49,7 @@ module.exports = {
                     .setFooter('Run the ++submit command to submit answers to this challenge.');
 
 
-                message.guild.channels.cache.get(announcementsChannel).send(`Hey, <@&846076430294974484> A new challenge is up!`, embeD).then(message => {
+                message.guild.channels.cache.get(announcementsChannel).send(`Hey, <@&850732454770901002> A new challenge is up!`, embeD).then(message => {
                     const msg = message.id;
                     connection.query(
                         `INSERT INTO Challenge (guildId, msgId, moderator, title, challengeNo) VALUES (?, ?, ?, ?, ?)`,

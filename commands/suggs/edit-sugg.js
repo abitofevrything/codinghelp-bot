@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
+
 
 module.exports = {
     name: 'editsugg',
@@ -7,7 +8,7 @@ module.exports = {
     description: 'Users can update their suggestion with this command.\n**Note:** Only the original poster\'s of the suggestion can edit the message. Meaning someone posts a suggestion and only that person can edit the suggestion, no one else.',
     usage: '++editsugg messageID [updated message]',
     inHelp: 'yes',
-    example: '++editsugg 847814072044093440 I meant I like pudding.',
+    example: '++editsugg 847580954306543616 I need to update my suggestion!',
     async execute(message, args) {
 
         const msgId = args[0];

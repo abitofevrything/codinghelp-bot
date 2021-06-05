@@ -1,15 +1,19 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 module.exports = {
     name: 'denied-sugg',
     aliases: ['deniedsugg', 'denys', 'nosugg', 'deniedsuggestion', 'deniedsuggestions', 'denysugg'],
     inHelp: 'yes',
-    description: 'Allows **mods** to deny certain suggestions.',
+    description: 'Allows **mods** to deny a particular suggestion.',
     usage: '++deniedsugg messageID [reason]',
-    example: '++deniedsugg 436043273069658112 I hate pudding!',
+    example: '++deniedsugg 847580954306543616 I don\'t want to do what you suggested! GO AWAY!',
     async execute(message, args) {
-        if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
+        let role = ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'];
+        if(!message.member.hasPermission([`${role}`])){ 
+            message.channel.send('You do not have permission to run this command. Only users with one of the following permissions can run this command:\n\`ADMINISTRATOR, MANAGE_CHANNELS, MANAGE_ROLES, MANAGE_MESSAGES, KICK_MEMBERS, BAN_MEMBERS\`');
+            return;
+        } else {
         const msgId = args[0];
         if(msgId > 0 ) {
             try {
@@ -28,8 +32,7 @@ module.exports = {
             [msgId],
         );
         const OGauthor = result2[0][0].Author;
-        const aut = await message.guild.members.fetch(`${OGauthor}`);
-        const name = aut.user.username;
+        const aut = OGauthor.tag;
 
         const result3 = await connection.query(
             `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -64,11 +67,11 @@ module.exports = {
             [msgId]
         );
         const moder = moderator[0][0].Moderator;
-        const moderate = moder.username || message.author.username;
+        const moderate = moder.tag || message.author.tag;
         
         const denied = new Discord.MessageEmbed()
             .setColor('A4503E')
-            .setAuthor(`${name}`, `${avatar}`)
+            .setAuthor(`${aut}`, `${avatar}`)
             .setDescription(`${suggestion}`)
             .addFields(
                 { name: 'Unfortunately, your suggestion was denied. This is the reason:', value: `${upStatus}`},
@@ -94,10 +97,6 @@ module.exports = {
                 }
             )
         }
-     } else {
-            message.channel.send('You do not have the permissions to use this command. You must be a moderator of our server. If this is in error, please report it.')
-        }
-
+     }
     }
-
 };

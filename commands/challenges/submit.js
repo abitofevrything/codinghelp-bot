@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('/root/codinghelp-bot/database.js');
 
-
 module.exports = {
     name: 'submit',
     description: 'This is how users can submit answers to the challenge questions.',
@@ -40,7 +39,7 @@ module.exports = {
                     connection.query(
                         `INSERT INTO Submissions (guildId, msgId, author, message, challengeNo) VALUES (?, ?, ?, ?, ?);`,
                         [guildId, msgId, author, answer, dayNo]
-                    );
+                    ).catch(err => {console.log(err)})
     
                 let embed = new Discord.MessageEmbed()
                     .setColor('#616169')

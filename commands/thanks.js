@@ -1,44 +1,39 @@
 const connection = require('../database.js');
-const db = require('quick.db');
-const talkedRecently = new Set();
+const Discord = require('discord.js');
+const cooldowns = new Map();
 
 module.exports = {
     name: 'thanks',
     aliases: ['thnks', 'tks', 'tx', 'thank'],
-    usage: '++thanks [ping user]',
+    usage: '++thanks <@username or ID>',
+    inHelp: 'yes',
+    cooldown: 600,
+    example: '++thanks @DudeThatsErin#8061 or ++thanks 455926927371534346',
     async execute(message, args) {
-        const mention = message.mentions.users.first()
+        const mention = message.mentions.users.first();
+        const user = mention.id;
 
-        if (!mention) {
-          message.reply('Please tag a user to thank.')
-          return
-        }
-    
-        let thank;
-        const guildId = message.guild.id;
-        const userId = mention.id;
-    
-        const Hour = 60 * 60 * 1000;
-        const currentDate = new Date();
-        let cooldown = 7200000; // 2 hours in ms
-
-        let lastDaily = await db.fetch(`daily_${message.author.id}`);
-      
-        if (lastDaily !== null && cooldown - (Date.now() - lastDaily) > 0) {
-          // If user still has a cooldown
-          let timeObj = ms(cooldown - (Date.now() - lastDaily)); // timeObj.hours = 2
-          message.reply('You already thanked someone within the last 2 hours. Please wait more time before you thank someone again.')
+      if (!mention) {
+        message.reply('Please tag a user to thank.');
+        return;
+      }
+      if(user === message.author.id) {
+        message.reply('You can\'t thank yourself. That is cheating.')
       } else {
-          // Otherwise they'll get their daily
-          await connection.query(
-            `UPDATE Thanks
-            SET thanks = thanks + 1
-            WHERE userId = ?;`,
-            [userId]
-          );
-          message.reply(
-            `Thanks for thanking ${mention}! They have been given 1 thank! You can only do this once every 2 hours.`
-          );
-        }
+        
+        await connection.query(
+          `INSERT INTO Thanks (guildId, user, thanks) VALUES (?, ?, ?);`,
+          [message.guild.id, user, 1]
+        );
+
+        const results = await connection.query(
+          `SELECT thanks, SUM(CAST(thanks AS UNSIGNED)) AS total FROM Thanks WHERE guildId = ? AND user = ?;`,
+          [message.guild.id, user]
+        );
+        const no = results[0][0].total;
+        message.reply(`You thanked ${mention.username}! They now have ${no} thanks. Use the \`++thanks-leaderboard\` command to see where you stand.`)
+        
+      }
+
     }
 }

@@ -1,16 +1,20 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 module.exports = {
     name: 'prog-sugg',
     aliases: ['inprogsugg', 'workingsugg', 'workingsuggestion', 'inprogresssuggestion', 'inprogresssuggestions', 'workingsuggestion', 'worksugg', 'ps', 'ws'],
     inHelp: 'yes',
-    description: 'Marks a specific suggestion as in progress with the current status. **Note:** This can only be ran by moderators.',
+    description: 'Allows **mods** to mark a particular suggestion as *in progress*.',
     usage: '++prog-sugg messageID [status message]',
-    example: '++prog-sugg 847816007330431007 We are working on this!',
+    example: '++prog-sugg 847580954306543616 This is the in-progress status for this suggestion.',
     async execute(message, args) {
 
-        if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
+        let role = ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'];
+        if(!message.member.hasPermission([`${role}`])){ 
+            message.channel.send('You do not have permission to run this command. Only users with one of the following permissions can run this command:\n\`ADMINISTRATOR, MANAGE_CHANNELS, MANAGE_ROLES, MANAGE_MESSAGES, KICK_MEMBERS, BAN_MEMBERS\`');
+            return;
+        } else {
             const msgId = args[0];
             if(msgId > 0 ) {
                 try {
@@ -103,9 +107,6 @@ module.exports = {
                 }
             ).catch(console.error);
             }
-        } else {
-            message.channel.send('You do not have the permissions to use this command. You must be a moderator of our server. If this is in error, please report it.')
         }
-
     }
 };

@@ -3,6 +3,7 @@ module.exports = {
   description: 'Makes sure the bot can hear commands.',
   aliases: ['uptime', 'beep', 'boop', 'alive'],
   usage: 's!ping',
+  cooldown: 5,
   inHelp: 'yes',
   execute(message, args) { 
     let days = Math.floor(message.client.uptime / 86400000);
