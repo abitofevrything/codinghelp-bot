@@ -10,7 +10,7 @@ module.exports = {
     cooldown: 600,
     example: '++thanks @DudeThatsErin#8061 or ++thanks 455926927371534346',
     async execute(message, args) {
-        const mention = message.mentions.users.first();
+        const mention = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(args[0]));;
         const user = mention.id;
 
       if (!mention) {
