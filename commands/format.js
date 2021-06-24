@@ -19,7 +19,7 @@ module.exports = {
             const formatEmbed = new Discord.MessageEmbed()
             .setColor('ORANGE')
             .setTitle(`Did you format your code?`)
-            .setURL('https://codinghelp.site/wiki/faq/share-code/')
+            .setURL('https://codinghelp.site/knowledgebase/faq/share-code/')
             .setThumbnail('https://imgur.com/U6cwQxj.png')
             .setDescription(`Please format your code using backticks. If you don\'t understand, we have an example below. Future code you share will be deleted until you format it.`)
             .addFields(

@@ -6,30 +6,47 @@ const config = require('./config.json');
 const GhostPing = require('discord.js-ghost-ping');
 client.cooldowns = new Discord.Collection();
 const { cooldowns } = client;
+let connection;
+const active = new Map();
+const db = require('quick.db');
+const ownerID = '455926927371534346';
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-console.log('---- GENERAL ----')
-for (const file of commandFiles) {
-	console.log(file.slice(0,-3));
-	const command = require(`./commands/${file.slice(0,-3)}`)
-	client.commands.set(command.name, command);
+client.on("error", (e) => console.error(e));
+client.on("warn", (e) => console.warn(e));
+//client.on("debug", (e) => console.info(e));
+
+
+function readFilesFromPath(pathString) {
+  const directoryEntries = fs.readdirSync(pathString, {withFileTypes: true});
+
+  return directoryEntries.reduce((filteredEntries, dirEnt) => {
+      if (dirEnt.isDirectory()) {
+          // If the entry is a directory, call this function again
+          // but now add the directory name to the path string.
+          filteredEntries.push(...readFilesFromPath(`${pathString}/${dirEnt.name}`))
+      } else if (dirEnt.isFile()) {
+          // Check if the entry is a file instead. And if so, check
+          // if the file name ends with `.js`.
+          if (dirEnt.name.endsWith('.js')) {
+              // Add the file to the command file array.
+              filteredEntries.push(`${pathString}/${dirEnt.name}`);
+          }
+      }
+
+      return filteredEntries;
+  }, []);
 }
 
-const cmmandFiles = fs.readdirSync('./commands/suggs').filter(file => file.endsWith('.js'));
-console.log('---- SUGGESTIONS SYSTEM ----')
-for (const file of cmmandFiles) {
-	console.log(file.slice(0,-3));
-	const cmmand = require(`./commands/suggs/${file.slice(0,-3)}`)
-	client.commands.set(cmmand.name, cmmand);
-}
+// Call the read files function with the root folder of the commands and
+// store all the file paths in the constant.
+const commandFilePaths = readFilesFromPath('./commands');
 
-const cmandFiles = fs.readdirSync('./commands/challenges').filter(file => file.endsWith('.js'));
-console.log('---- CHALLENGE SYSTEM ----')
-for (const file of cmandFiles) {
-	console.log(file.slice(0,-3));
-	const cmand = require(`./commands/challenges/${file.slice(0,-3)}`)
-	client.commands.set(cmand.name, cmand);
-}
+// Loop over the array of file paths and set the command on the client.
+commandFilePaths.forEach((filePath) => {
+  const command = require(filePath);
+
+  client.commands.set(command.name, command);
+});
 
 
 console.log('Are you logged in?')
@@ -50,10 +67,6 @@ client.on('ready', () => {
 /* setting up the ghost-ping detectors! */
 client.on('messageDelete', message => {
   GhostPing.detector("messageDelete", message, {
-    title: `Ghost Ping Detected`,
-    color: `C0C0C0`,
-    footer: `Don't Ghost Ping, smh`,
-    picture: `https://i.imgur.com/k6pLhtU.png`,
     channel: `450906618234929152`,
     ignorePerms: ['ADMINISTRATOR', 'MANAGE_MESSAGES']
   })
@@ -64,7 +77,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 });
 
 client.on('message', async message => {
-  if (message.author.bot) return;
+  if (message.author.bot) return; 
   const thnks = [ 'thanks', 'thnx', 'thank',  'tnx',  'ty', 'Thanks', 'Thank', 'thx'];
   const isthanks = thnks.reduce((alrdyGood, curr) => alrdyGood || message.content.toLowerCase().split(' ').includes(curr), false);
   if(isthanks && !message.content.startsWith(config.client.prefix) && message.channel.parentID === '382210817636040706') {
@@ -104,12 +117,24 @@ if(!message.content.startsWith(config.client.prefix)) return;
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 if(!command) return;
-  try {
-    command.execute(message, args);
-  } catch (error) {
-    console.error(error);
-    message.reply('there was an error trying to execute that command!');
-  }
+      try {
+        command.execute(message, args, client);
+      } catch (error) {
+        console.error(error);
+        const embed = new Discord.MessageEmbed()
+          .setColor('RED')
+          .setTitle('Oh no! An _error_ has appeared!')
+          .setDescription(`**Contact Bot Owner:** <@${message.guild.ownerID}>`)
+          .addFields(
+            {name: '**Error Name:**', value: `\`${error.name}\``},
+            {name: '**Error Message:**', value: `\`${error.message}\``},
+            {name: '**Error Location:**', value: `\`${error.stack}\``},
+            {name: '**Ways to Report:**', value: 'Ping me to report this!\nPlease include all of the information in this embed (message) as well as any additional information you can think to provide. Screenshots are also VERY helpful. Thank you!'},
+          )
+          .setTimestamp()
+          .setFooter(`Thanks for using ${client.user.tag}! I'm sorry you encountered this error!`, `${client.user.displayAvatarURL()}`)
+        message.channel.send(embed);
+      }
 
 
 });

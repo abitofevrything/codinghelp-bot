@@ -8,8 +8,8 @@ module.exports = {
     usage: '++userinfo',
     inHelp:'yes',
     example: '++userinfo',
-    execute (message, args) {
-        const member = message.mentions.users.first() || message.author || message.member;
+    execute (message, args, client) {
+        const member = message.mentions.users.first() || client.users.cache.get(args[0]) || message.author;
         let userinfo = {};
         userinfo.bot = member.bot;
         userinfo.createdat = member.createdAt;

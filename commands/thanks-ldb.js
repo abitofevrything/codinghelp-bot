@@ -65,7 +65,7 @@ module.exports = {
             );
             const p = ponts[0][0].total;
             let embed2 = new Discord.MessageEmbed()
-                .setTitle('This is the current challenge leaderboard.')
+                .setTitle('This is the current thanks leaderboard.')
                 .setColor('#c9ca66')
                 .addFields(
                     {name: `Top 10`, value: userNames, inline: true},
