@@ -35,8 +35,8 @@ module.exports = {
         .addField("Client ID",userinfo.id, true)
         .addField("Client Tag",userinfo.tag, true)
         .addField('Status', userinfo.presen, true)
-        .addField('Joined server on', `\`${moment(message.guild.members.cache.get(member.id).joinedAt).format('MMM DD YYYY')}\``, true)
-        .addField('Joined Discord on', `\`${moment(member.createdAt).format('MMM DD YYYY')}\``, true)
+        .addField('Joined server on', `\`${moment(message.guild.members.cache.get(member.id).joinedAt).format('DD MMM YYYY')}\``, true)
+        .addField('Joined Discord on', `\`${moment(member.createdAt).format('DD MMM YYYY')}\``, true)
         .addField("Roles", rolesOfTheMember, true)
         .setFooter('If anything is wrong, please report this!', `${message.guild.iconURL({ dynamic: true })}`)
 

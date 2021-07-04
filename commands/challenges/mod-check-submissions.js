@@ -45,31 +45,32 @@ module.exports = {
                     const Members = row.author;
                     const Author = await message.client.users.fetch(Members).catch(err => {console.log(err);});
                     const username = Author.username;
-                    const Submissions = row.message;
+                    const Submissions = row.message || 'no message included with this submission.';
                     const dayNo = row.challengeNo;
                     const moderator = row.moderator;
                     const msgId = row.msgId;
-                    const modname = await message.client.users.fetch(moderator).catch(err => {console.log(err);});
+                    const modname = await message.client.users.fetch(moderator).catch(err => { console.log(err); });
+                    const attachment = row.file || 'no attachment included with this submission';
                     
                     
                     // notDefined Embed
                     const notDefined = new Discord.MessageEmbed()
                         .setColor('#3e5366')
                         .setTitle(`The submission by ${username} for Challenge ${dayNo} has not been reviewed yet.`)
-                        .setDescription(`Their submission is as follows:\n${Submissions}\n\nTheir message ID is as follows: \`${msgId}\``)
+                        .setDescription(`Their submission is as follows:\n${Submissions}\n\nThey had this attachment:\n${attachment}\n\nTheir message ID is as follows: \`${msgId}\``)
                         .setFooter('If there is a problem with this, please report this!');
 
                     // Defined Embed
                     const defined = new Discord.MessageEmbed()
                         .setColor('#d4a066')
                         .setTitle(`The submission by ${username} for Challenge ${dayNo} has been reviewed.`)
-                        .setDescription(`Their submission is as follows:\n${Submissions}\n\nTheir message ID is as follows: \`${msgId}\`\n\nThe moderator that reviewed it was: ${modname}.`)
+                        .setDescription(`Their submission is as follows:\n${Submissions}\n\nThey had this attachment:\n${attachment}\n\nTheir message ID is as follows: \`${msgId}\`\n\nThe moderator that reviewed it was: ${modname}.`)
                         .setFooter('If there is a problem with this, please report this!');
 
-                    if(moderator) {
-                        message.client.users.cache.get(`${name}`).send(defined);
-                    } else {
+                    if(moderator === '0') {
                         message.client.users.cache.get(`${name}`).send(notDefined);
+                    } else {
+                        message.client.users.cache.get(`${name}`).send(defined);
                     }
                   }
                 }

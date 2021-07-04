@@ -7,12 +7,10 @@ const GhostPing = require('discord.js-ghost-ping');
 client.cooldowns = new Discord.Collection();
 const { cooldowns } = client;
 let connection;
-const active = new Map();
-const db = require('quick.db');
-const ownerID = '455926927371534346';
+const ownerID = config.bot.devId;
 
-client.on("error", (e) => console.error(e));
-client.on("warn", (e) => console.warn(e));
+//client.on("error", (e) => console.error(e));
+//client.on("warn", (e) => console.warn(e));
 //client.on("debug", (e) => console.info(e));
 
 
@@ -80,7 +78,7 @@ client.on('message', async message => {
   if (message.author.bot) return; 
   const thnks = [ 'thanks', 'thnx', 'thank',  'tnx',  'ty', 'Thanks', 'Thank', 'thx'];
   const isthanks = thnks.reduce((alrdyGood, curr) => alrdyGood || message.content.toLowerCase().split(' ').includes(curr), false);
-  if(isthanks && !message.content.startsWith(config.client.prefix) && message.channel.parentID === '382210817636040706') {
+  if(isthanks && !message.content.startsWith(config.bot.prefix) && message.channel.parentID === '382210817636040706') {
     message.reply(`It seems like someone\'s problem was resolved! I\'m glad someone was able to help you! Please use the \`++thanks <@username or ID>\` command to show your appreciation!`);
   }
 
@@ -91,10 +89,15 @@ client.on('message', async message => {
     message.reply(`Please do not ping the mods. If you need to contact them, please message <@575252669443211264> to open a ModMail ticket. Thank you!`);
   }
 
-if(!message.content.startsWith(config.client.prefix)) return;
-  const args = message.content.slice(config.client.prefix.length).trim().split(/ +/);
+if(!message.content.startsWith(config.bot.prefix)) return;
+  const args = message.content.slice(config.bot.prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+  if (command.modOnly === 'true' && !message.member.roles.cache.has(`${modRoles}`) || command.modOnly === 'yes' && !message.member.roles.cache.has(`${modRoles}`)) {
+      message.reply(`Only Moderators can use this command. Moderators have <@${modRoles[0]}> role and the <@${modRoles[1]} role. Please run \`++report [issue]\` if you are seeing this in error.`);
+      return;
+  }
 
   if (!cooldowns.has(command.name)) {
     cooldowns.set(command.name, new Discord.Collection());
@@ -124,12 +127,12 @@ if(!command) return;
         const embed = new Discord.MessageEmbed()
           .setColor('RED')
           .setTitle('Oh no! An _error_ has appeared!')
-          .setDescription(`**Contact Bot Owner:** <@${message.guild.ownerID}>`)
+          .setDescription(`**Contact Bot Owner:** <@${config.bot.devId}>`)
           .addFields(
             {name: '**Error Name:**', value: `\`${error.name}\``},
             {name: '**Error Message:**', value: `\`${error.message}\``},
             {name: '**Error Location:**', value: `\`${error.stack}\``},
-            {name: '**Ways to Report:**', value: 'Ping me to report this!\nPlease include all of the information in this embed (message) as well as any additional information you can think to provide. Screenshots are also VERY helpful. Thank you!'},
+            {name: '**Ways to Report:**', value: 'Please run \`++report [report message\` to report this!\nPlease include all of the information in this embed (message) as well as any additional information you can think to provide. Screenshots are also VERY helpful. Thank you!'},
           )
           .setTimestamp()
           .setFooter(`Thanks for using ${client.user.tag}! I'm sorry you encountered this error!`, `${client.user.displayAvatarURL()}`)
@@ -141,5 +144,5 @@ if(!command) return;
 
   (async () => {
     connection = await require('./database.js');
-    await client.login(config.client.token);
+    await client.login(config.bot.token);
   })();

@@ -1,4 +1,4 @@
-const connection = require('../database.js');
+const connection = require('../../database.js');
 
 module.exports = {
     name: 'thanks',
@@ -8,7 +8,7 @@ module.exports = {
     cooldown: 0,
     example: '++thanks @DudeThatsErin#8061 or ++thanks 455926927371534346',
     async execute(message, args, client) {
-      const mention = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(args[0]));;
+      const mention = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(args[0]));
       const user = mention.id;
 
     if (!mention) {
@@ -21,13 +21,13 @@ module.exports = {
     }
     else {
       
-      const results = await (await connection).query(
-        `SELECT thanks, SUM(CAST(thanks AS UNSIGNED)) AS total FROM Thanks WHERE guildId = ? AND user = ?;`,
-        [message.guild.id, user]
+      const results = await connection.query(
+        `select sum(cast(thanks as unsigned)) as total from Thanks where user = ?;`,
+        [user]
       );
       const no = results[0][0].total;
 
-    await (await connection).query(
+    await connection.query(
       `INSERT INTO Thanks (guildId, user, thanks) VALUES (?, ?, ?);`,
       [message.guild.id, user, 1]
     );

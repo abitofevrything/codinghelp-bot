@@ -1,19 +1,19 @@
-const { prefix, config } = require('../config.json');
+const config = require('../../config.json');
 const Discord = require("discord.js");
 
 //Rule Embeds
 const rule1 = new Discord.MessageEmbed()
 .setColor('#1a1a1a')
 .setTitle('Rule 1')
-.setURL('https://codinghelp.site/wiki/rules/discord-server-rules/')
-.setThumbnail('https://imgur.com/U6cwQxj.png')
-.setDescription('No spam, advertising, or NSFW content. Be Nice & Use common sense. If you are found to post spam or advertise you will be [warned or banned as stated here](https://codinghelp.site/wiki/rules/warnings-bannings/).');
+.setURL('https://codinghelp.site/wiki/knowledgebase/discord-server-rules/')
+.setThumbnail(config.bot.avatar)
+.setDescription('No spam, advertising, or NSFW content. Be Nice & Use common sense. If you are found to post spam or advertise you will be [warned or banned as stated here](https://codinghelp.site/knowledgebase/rules/warnings-bannings/).');
 
 const rule2 = new Discord.MessageEmbed()
 .setColor('#1a1a1a')
 .setTitle('Rule 2')
-.setURL('https://codinghelp.site/wiki/rules/discord-server-rules/')
-.setThumbnail('https://imgur.com/U6cwQxj.png')
+.setURL('https://codinghelp.site/knowledgebase/rules/discord-server-rules/')
+.setThumbnail(config.bot.avatar)
 .setDescription(`Don\’t ask if you can ask a question, just ask it! If someone knows the answer, they\’ll do their best to help.
 
 If you are found to be asking if you can ask a question or if anyone is available several times after being reminded each time, you will be warned or banned.`);
@@ -21,22 +21,22 @@ If you are found to be asking if you can ask a question or if anyone is availabl
 const rule3 = new Discord.MessageEmbed()
 .setColor('#1a1a1a')
 .setTitle('Rule 3')
-.setURL('https://codinghelp.site/wiki/rules/discord-server-rules/')
-.setThumbnail('https://imgur.com/U6cwQxj.png')
-.setDescription(`If you need help with a problem in your code, always provide the raw code in GitHub gist or a similar place. If you aren’t sure what places, you can check [this article](https://codinghelp.site/wiki/faq/share-code/).`);
+.setURL('https://codinghelp.site/knowledgebase/rules/discord-server-rules/')
+.setThumbnail(config.bot.avatar)
+.setDescription(`If you need help with a problem in your code, always provide the raw code in GitHub gist or a similar place. If you aren’t sure what places, you can check [this article](https://codinghelp.site/knowledgebase/faq/share-code/).`);
 
 const rule4 = new Discord.MessageEmbed()
 .setColor("#1a1a1a")
 .setTitle('Rule 4')
-.setURL('https://codinghelp.site/wiki/rules/discord-server-rules/')
-.setThumbnail('https://imgur.com/U6cwQxj.png')
+.setURL('https://codinghelp.site/knowledgebase/rules/discord-server-rules/')
+.setThumbnail(config.bot.avatar)
 .setDescription(`Do not message the mods directly for any reason. If you are wanting to message the mods, please use the Modmail bot. If you are messaging the mods directly, your messages will be ignored. If you are continually messaging the mods, you will be warned or banned.`);
 
 const rule5 = new Discord.MessageEmbed()
 .setColor("#1a1a1a")
 .setTitle('Rule 5')
-.setURL('https://codinghelp.site/wiki/rules/discord-server-rules/')
-.setThumbnail('https://imgur.com/U6cwQxj.png')
+.setURL('https://codinghelp.site/knowledgebase/rules/discord-server-rules/')
+.setThumbnail(config.bot.avatar)
 .setDescription(`Do not ask our members personal questions like gender, age, sexual preference, etc. This is not a dating server, nor is it a place where those questions matter. They mean nothing when it comes to whether or not someone can code. If someone decides to share anything, they can do so using their own free will. Explicitly asking these questions will get you warned, muted, or banned depending on the circumstances. **NO EXCEPTIONS.**`);
 
 // Actual Rule Command
@@ -65,12 +65,7 @@ module.exports = {
             user.send("These are all of our server rules.\n" + text);
         }
  
-        else {
-            if(!message.member.hasPermission("SEND_MESSAGES")){ // Allows any user that can send messages, use this command.
-                message.channel.send('You can\'t use that');
-                return;
-                }    
- 
+        else { 
             if(!user) { // Gives an error if the user isn't specified.
                 message.channel.send('You need to specify a user via mention or the ID.');
                 message.delete();
