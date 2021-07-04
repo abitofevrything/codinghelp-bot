@@ -82,7 +82,7 @@ client.on('message', async message => {
     message.reply(`It seems like someone\'s problem was resolved! I\'m glad someone was able to help you! Please use the \`++thanks <@username or ID>\` command to show your appreciation!`);
   }
 
-  const modRoles = ['780941276602302523', '822500305353703434'];
+  const modRoles = ['780941276602302523', '822500305353703434', '718253309101867008'];
 
   if(message.channel.parentID === '382210817636040706' && message.member.roles.cache.has(`${modRoles}`)) {
     message.delete();
@@ -94,9 +94,17 @@ if(!message.content.startsWith(config.bot.prefix)) return;
   const commandName = args.shift().toLowerCase();
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-  if (command.modOnly === 'true' && !message.member.roles.cache.has(`${modRoles}`) || command.modOnly === 'yes' && !message.member.roles.cache.has(`${modRoles}`)) {
-      message.reply(`Only Moderators can use this command. Moderators have <@${modRoles[0]}> role and the <@${modRoles[1]} role. Please run \`++report [issue]\` if you are seeing this in error.`);
+  if (command.modOnly === 'yes') {
+    let value = 0;
+    for (const ID of modRoles) {
+      if (!message.member.roles.cache.has(ID)) {
+        value++;
+      }
+    }
+    if (value == modRoles.length) {
+      message.reply(`Only Moderators can use this command. Moderators have <@&${modRoles[0]}> role and the <@&${modRoles[1]}> role. Please run \`++report [issue]\` if you are seeing this in error.`);
       return;
+    }
   }
 
   if (!cooldowns.has(command.name)) {

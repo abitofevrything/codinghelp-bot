@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const config = require('../../config.json');
 
 module.exports = {
     name: 'bot-status',
@@ -7,8 +8,9 @@ module.exports = {
     usage: '++bot-status Status Message',
     modOnly: 'yes',
     inHelp: 'yes',
-    async execute(message, args) {
+    async execute(message, args, client) {
 
+        const channel = client.channels.cache.find(channel => channel.id === config.bot.announcementsId);
         const reason = args.slice(0).join(" ");
         if (!reason) return message.reply('You forgot to include a status message. SMH');
 

@@ -27,7 +27,7 @@ module.exports = {
 			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
 			.addFields({
 				name: 'These are general **moderator** only commands. Meaning only **moderators** can use these commands.',
-				value: '```css\nprune\nserver\npartners\ncompletedreport\nbot-status\nserver-status\nsub-status\n```'
+				value: '```css\nprune\nserver\npartners\ncompletedreport\nbot-status\nserver-status\nsub-status\ndm\n```'
 			})
 			.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 

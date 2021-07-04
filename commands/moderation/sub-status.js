@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const config = require('../../config.json');
 
 module.exports = {
     name: 'sub-status',
@@ -7,7 +8,7 @@ module.exports = {
     usage: '++sub-status Status Message',
     modOnly: 'yes',
     inHelp: 'yes',
-    async execute(message, args) {
+    async execute(message, args, client) {
 
         const reason = args.slice(0).join(" ");
         if (!reason) return message.reply('You forgot to include a status message. SMH');
