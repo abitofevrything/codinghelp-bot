@@ -11,8 +11,7 @@ module.exports = {
     example: '++completedreport 852197394828230716 The bot is broken!',
     modOnly: 'yes',
     async execute(message, args, client) {
-        let mod = message.author.id;
-        let modName = message.author.username;
+
         let description = args.slice(1).join(' ');
         if (!description) {
             message.reply('Please include the status Erin, sheesh.')
@@ -22,7 +21,8 @@ module.exports = {
 
         let messageId = args[0];
         if (messageId < 0) {
-            message.reply('Please include the message ID for the report you want to update.')
+            message.react('❌')
+            message.reply('Please include the message ID for the report you want to mark as completed.')
             return;
         } else {
             const results = await (await connection).query(
@@ -36,19 +36,11 @@ module.exports = {
             const avatar = results[0][0].avatar;
 
             let report = new Discord.MessageEmbed()
-                .setColor('#5241CE')
-                .setTitle(`The bug report has been completed!`)
+                .setColor('#138D75')
+                .setTitle(`Your bug has been fixed!`)
                 .setAuthor(`${authorUsername}`, `${avatar}`)
-                .setDescription(`**This is the original report:**\n\n${original}\n\n--------------------\n\n**This is the current status:**\n\n${description}\n\n--------------------`)
-                .addFields(
-                {
-                    name: 'Original Message ID:',
-                    value: `\`${messageId}\``
-                }, {
-                    name: 'Message Author ID:',
-                    value: `\`${OG}\``
-                })
-                .setFooter('If this is incorrect please report this!', 'https://codinghelp.site/bots/sm/neon-moon.jpg')
+                .setDescription(`**This is the original report:**\n${original}\n\n**This is the current status:**\n${description}\n\n`)
+                .setFooter('If this is incorrect please report this!', config.bot.avatar)
 
             channel.messages.fetch(messageId).then(message => {
                 if (message) message.delete();
@@ -61,7 +53,6 @@ module.exports = {
                 [messageId]
             );
             message.react('✅');
-            message.reply('I have deleted the report from the database and sent a message to the author telling them of the completed status.')
         }
 
     }

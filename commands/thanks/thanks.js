@@ -20,17 +20,17 @@ module.exports = {
       message.reply('It looks like you were trying to thank yourself or a bot in your server. That is not the appropriate way to use this system.');
     }
     else {
+
+    await connection.query(
+      `INSERT INTO Thanks (guildId, user, thanks) VALUES (?, ?, ?);`,
+      [message.guild.id, user, 1]
+      );
       
       const results = await connection.query(
         `select sum(cast(thanks as unsigned)) as total from Thanks where user = ?;`,
         [user]
       );
       const no = results[0][0].total;
-
-    await connection.query(
-      `INSERT INTO Thanks (guildId, user, thanks) VALUES (?, ?, ?);`,
-      [message.guild.id, user, 1]
-    );
 
     message.reply(`You thanked ${mention.user.username}! They now have ${no} thanks. Use the \`++thanks-leaderboard\` command to see where you stand.`)
     }

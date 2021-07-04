@@ -25,27 +25,26 @@ module.exports = {
         const url = 'no' || message.attachments.first().url;
 
         let report2 = new Discord.MessageEmbed()
-            .setColor('#5241CE')
-            .setTitle(`WE HAVE A BUG!`)
+            .setColor('#D4AC0D')
+            .setTitle(`Oops! A *bug* has appeared!`)
             .setAuthor(`${authorUsername}`)
             .setThumbnail(`${avatar}`)
-            .setDescription(`**This is the report:**\n\n${description}\n\n**Any files uploaded?**\n${url}`)
-            .addFields(
-                { name: 'Message ID:', value: `\`${messageId}\`` },
-                { name: 'Message Author ID:', value: `\`${author}\`` }
-            )
+            .setDescription(`**This is the report:**\n${description}\n\n**Any files uploaded?**\n${url}`)
             .setTimestamp()
-            .setFooter('This was all of the information I could grab from the report.', 'https://codinghelp.site/bots/codinghelp.png')
+            .setFooter('This was all of the information I could grab from the report.', config.bot.avatar)
 
-        await channel.send(report2);
+        const msg = await channel.send(report2);
 
         message.react('✅');
-
-        usr.send(`I have sent your report to ${config.bot.devName}! Thank you! Please save this message ID as you can use it to check the status of this report in the future: \`${messageId}\`.\nTo check the status you can copy and paste this:\n\`++statusreport ${messageId}\``)
+        const reportNo = msg.id;
+        report2.addField('Message ID', `\`${reportNo}\``);
+        report2.addField('Please save this message ID. Use the following command to check the status of the report in the future:', `\`++statusreport ${reportNo}\``);
 
         await connection.query(
             `INSERT INTO reports (messageId, authorId, avatar, description, file) VALUES(?, ?, ?, ?, ?);`,
-            [messageId, author, avatar, description, url]
+            [reportNo, author, avatar, description, url]
         );
+
+        usr.send(`I have sent your report to ${config.bot.devName}! Thank you!`, report2)
     }
 }
