@@ -8,6 +8,8 @@ module.exports = {
     usage: '++bot-status Status Message',
     modOnly: 'yes',
     inHelp: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute(message, args, client) {
 
         const channel = client.channels.cache.find(channel => channel.id === config.bot.announcementsId);

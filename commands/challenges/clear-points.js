@@ -9,6 +9,10 @@ module.exports = {
     usage: '++clear-points [message ID]',
     example: '++clear-points 841330343641874532',
     inHelp: 'yes',
+    challengeMods: 'yes',
+    modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute (message, args) {
 
         let msgId = args[0];

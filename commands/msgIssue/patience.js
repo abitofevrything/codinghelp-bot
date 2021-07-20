@@ -5,6 +5,8 @@ module.exports = {
 	usage: '++patience <@username or ID>',
 	example: '++patience @DudeThatsErin',
 	inHelp: 'yes',
+	userPerms: [''],
+	botPerms: [''],
 	execute(message, args) {
 		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 		if(!user) {

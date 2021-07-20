@@ -7,11 +7,14 @@ module.exports = {
     usage: '++prune [number 2-99]',
     example: '++prune 49',
     inHelp: 'yes',
+    userPerms: ['MANAGE_MESSAGES'],
+    botPerms: ['MANAGE_MESSAGES'],
+    modOnly: 'yes',
     execute(message, args) {
 
         const amount = parseInt(args[0]);
         const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-        if (!user === message.member.hasPermission("MANAGE_MESSAGES") || !message.member.roles.cache.has('718253309101867008')) {
+       
             if (isNaN(amount)) {
                 return message.reply('Oops! That doesn\'t seem to be a valid number.');
             }
@@ -42,9 +45,5 @@ module.exports = {
                     message.channel.send('Whoops! There was an error trying to prune messages in this channel! Check the command and try again.');
                 })*/
             );
-        }
-        else {
-            message.reply("❌ You don't have the correct permissions to prune messages. You need the `MANAGE_MESSAGES` permission.");
-        }
     }
 };

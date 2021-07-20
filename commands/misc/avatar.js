@@ -8,6 +8,8 @@ module.exports = {
     usage: '++av',
     example: '++av or ++avatar',
     inHelp: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     execute(message, args) {
         let myEmbed = new Discord.MessageEmbed()
             .setColor('#66ADA2')

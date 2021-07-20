@@ -5,6 +5,8 @@ module.exports = {
     usage: '++docs @username or user ID',
 	example: '++docs @DudeThatsErin',
 	inHelp: 'yes',
+	userPerms: [''],
+	botPerms: [''],
     execute(message, args) {
   		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 		if(!user) {

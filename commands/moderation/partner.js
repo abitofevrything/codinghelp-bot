@@ -7,6 +7,9 @@ module.exports = {
     aliases: ['affies', 'affiliates', 'partner'],
     usage: '++about',
     inHelp: 'yes',
+    userPerms: [''],
+    botPerms: [''],
+    modOnly: 'yes',
     execute(message, args) {   
         
             const aboutPartner = new Discord.MessageEmbed()
@@ -56,17 +59,14 @@ module.exports = {
                 { name: '♾️Link', value: 'https://discord.gg/fT9V379aAc', inline: true }
             );
             
-            if(message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
+           
                 message.channel.bulkDelete(1);
                 //message.channel.send(aboutPartner);
                 //message.channel.send(smartWatch);
                 //message.channel.send(alphaBet);
                 //message.channel.send(world);
                 message.channel.send(tca);
-            } else {
-                message.reply('❌ You do not have permissions to use this command. You must be part of the <@780941276602302523>.');
-                return;
-            }
+           
  
     },
     

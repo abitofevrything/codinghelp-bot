@@ -8,13 +8,11 @@ module.exports = {
     description: 'Allows **mods** to mark a particular suggestion as *in progress*.',
     usage: '++prog-sugg messageID [status message]',
     example: '++prog-sugg 847580954306543616 This is the in-progress status for this suggestion.',
+    modOnly: 'yes',
+    userPerms: ['MANAGE_MESSAGES'],
+    botPerms: ['MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     async execute(message, args) {
 
-        let role = ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'];
-        if(!message.member.hasPermission([`${role}`])){ 
-            message.channel.send('You do not have permission to run this command. Only users with one of the following permissions can run this command:\n\`ADMINISTRATOR, MANAGE_CHANNELS, MANAGE_ROLES, MANAGE_MESSAGES, KICK_MEMBERS, BAN_MEMBERS\`');
-            return;
-        } else {
             const msgId = args[0];
             if(msgId > 0 ) {
                 try {
@@ -107,6 +105,5 @@ module.exports = {
                 }
             ).catch(console.error);
             }
-        }
     }
 };

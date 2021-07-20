@@ -6,7 +6,9 @@ module.exports = {
     aliases: ['uhh', 'issue', 'err'],
     usage: '++error <@username or ID>',
     example: '++error or ++issue or ++err',
-    inHelp: 'yes',
+  inHelp: 'yes',
+  userPerms: [''],
+  botPerms: [''],
     execute(message, args) {
 
         const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);

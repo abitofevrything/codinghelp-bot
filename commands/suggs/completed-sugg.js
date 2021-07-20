@@ -8,12 +8,11 @@ module.exports = {
     description: 'Marks a specific suggestion as completed. **Note:** This can only be ran by moderators.',
     usage: '++completedsugg messageID [reason]',
     example: '++completedsugg 847580954306543616 I have completed your suggestion!',
+    userPerms: [''],
+    modOnly: 'yes',
+    botPerms: ['MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     async execute(message, args) {
-        let role = ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'];
-        if(!message.member.hasPermission([`${role}`])){ 
-            message.channel.send('You do not have permission to run this command. Only users with one of the following permissions can run this command:\n\`ADMINISTRATOR, MANAGE_CHANNELS, MANAGE_ROLES, MANAGE_MESSAGES, KICK_MEMBERS, BAN_MEMBERS\`');
-            return;
-        } else {
+
             const msgId = args[0];
             if(msgId > 0 ) {
                 try {
@@ -111,6 +110,5 @@ module.exports = {
             } else {
                 message.reply('You need to include the ID of the message you want to mark as completed.')
             }
-        } 
     }
 };

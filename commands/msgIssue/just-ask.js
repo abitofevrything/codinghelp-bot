@@ -6,6 +6,8 @@ module.exports = {
 	aliases: ['ja', 'ask', 'just-ask'],
 	usage: '++justask @username or userID',
 	inHelp: 'yes',
+	userPerms: [''],
+	botPerms: [''],
     execute(message, args) {
 
 		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);

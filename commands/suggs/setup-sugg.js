@@ -22,6 +22,9 @@ module.exports = {
     inHelp: 'yes',
     description: 'Sets up the Suggestions system and creates a Suggestions channel amd Discussions channel if there is not one. Stores the channel IDs for the bot to use. You **must** run this first before you can use the Suggestions system.',
     usage: '++setup-suggs',
+    modOnly: 'yes',
+    userPerms: ['MANAGE_MESSAGES'],
+    botPerms: ['MANAGE_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'MANAGE_GUILD'],
     async execute(message, args) {
 
             message.reply('What name would you like to have for where people submit suggestions?');

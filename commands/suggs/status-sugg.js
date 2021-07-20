@@ -8,6 +8,8 @@ module.exports = {
     description: 'Allows a user to check the current status of their suggestion.',
     usage: '++statussugg messageID',
     example: '++statussugg 847580954306543616',
+    userPerms: [''],
+    botPerms: ['ADD_REACTIONS', 'EMBED_LINKS', 'ATTACH_FILES', 'MANAGE_MESSAGES'],
     async execute(message, args) {
 
         const msgId = args[0];

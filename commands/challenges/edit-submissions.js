@@ -9,8 +9,9 @@ module.exports = {
     usage: '++edit-submission [message ID] [new answer]',
     example: '++edit-submission 841302144727646269 I like pudding!',
     note: 'You are allowed to upload files. Just leave the `[new answer]` field blank and just upload',
-    permissions: '',
     inHelp: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute(message, args) {
 
         let msgId = args[0];

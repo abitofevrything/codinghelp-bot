@@ -6,6 +6,8 @@ module.exports = {
     aliases: ['ch-info', 'botinfo', 'bi', 'chi', 'codinghelp-info', 'robotinfo', 'robot-info', 'ri'],
     modOnly: 'no',
     description: 'This gives you all the information you could need about the r/CodingHelp bot.',
+    userPerms: [''],
+    botPerms: [''],
     execute(message, args, client) {
 
 

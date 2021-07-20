@@ -7,6 +7,9 @@ module.exports = {
     description: 'Pushes an embed to display in the channel about a certain update.',
     usage: '++server-status Status Message',
     modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
+    modOnly: 'yes',
     async execute(message, args, client) {
         const channel = client.channels.cache.find(channel => channel.id === config.bot.announcementsId);
             const reason = args.slice(0).join(" ");

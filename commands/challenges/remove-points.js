@@ -9,12 +9,12 @@ module.exports = {
     usage: '++remove-points <message ID> <number of points>',
     inHelp: 'yes',
     example: '++remove-points 850726247050903562 3',
+    challengeMods: 'yes',
+    modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute (message, args) {
-        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
-        if(!role){ 
-            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
-            return;
-        } else {
+
             let msgId = args[0];
             let author = message.author.username;
             let name = message.author.id;
@@ -44,8 +44,7 @@ module.exports = {
                     );
                     message.channel.send(embed);    
 
-            }
-        }    
+            }    
 
     }
 }

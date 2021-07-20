@@ -10,6 +10,8 @@ module.exports = {
     usage: '++progressreport <report>',
     example: '++progressreport The bot is broken!',
     modOnly: 'yes',
+    userPerms: ['MANAGE_MESSAGES'],
+    botPerms: ['ADD_REACTIONS', 'VIEW_CHANNEL'],
     async execute(message, args, client) {
 
         let description = args.slice(1).join(' ');

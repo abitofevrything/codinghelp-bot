@@ -9,11 +9,12 @@ module.exports = {
     usage: '++add-user',
     inHelp:'yes',
     example: '++add-user 839863262026924083',
+    challengeMods: 'yes',
+    modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     execute (message, args) {
-        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
-        if(!role){ 
-            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
-        } else {
+ 
             const mmbr = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
             const tag = mmbr.user.tag;
             if(!mmbr) {
@@ -31,7 +32,6 @@ module.exports = {
                     );
                     console.log('successfully added users in embed to the database!');
                 } 
-        }
 
     }
 }

@@ -9,7 +9,8 @@ module.exports = {
     inHelp: 'yes',
     usage: '++report <report>',
     example: '++report The bot is broken!',
-    permissions: '',
+    userPerms: [''],
+    botPerms: [''],
     async execute(message, args, client) {
         let author = message.author.id;
         let usr = message.guild.members.cache.get(author);

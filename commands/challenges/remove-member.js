@@ -8,13 +8,13 @@ module.exports = {
     usage: '++remove-user <tag user or ID>',
     example: '++remove-user @DudeThatsErin',
     inHelp: 'yes',
+    challengeMods: 'yes',
+    modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     execute (message, args) {
  
-        let role = message.member.roles.cache.has('839863262026924083') || message.member.roles.cache.has('718253309101867008') || message.member.roles.cache.has('846074806788685836');
-        if(!role){ 
-            message.channel.send('You don\'t have the `Challenge Mods` role so you can\'t use this command.');
-            return;
-        } else {
+
             const mmbr = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
             const id = mmbr.user.id;
             const tag = mmbr.user.tag;
@@ -33,7 +33,6 @@ module.exports = {
                     );
                     console.log('successfully added users in embed to the database!');
                 } 
-        }
 
     }
 }

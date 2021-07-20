@@ -10,6 +10,8 @@ module.exports = {
     example: '++thanks-leaderboard or ++thxldb or ++txlbd',
     cooldown: 5,
     inHelp: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute (message, args) {
         let guild = message.guild.id;
         let author = message.author.id;
@@ -20,13 +22,12 @@ module.exports = {
 
 
         const results = await connection.query(
-            `SELECT * FROM Thanks WHERE user = ? AND guildId = ?;`,
-            [author, guild]
+            `SELECT * FROM Thanks WHERE user = ?;`,
+            [author]
         );
 
         const top10 = await connection.query(
-            `SELECT user, SUM(CAST(thanks AS UNSIGNED)) AS total FROM Thanks WHERE guildId = ? GROUP BY user ORDER BY total DESC LIMIT 10;`,
-            [guild]
+            `SELECT user, SUM(CAST(thanks AS UNSIGNED)) AS total FROM Thanks GROUP BY user ORDER BY total DESC LIMIT 10;`
         );
 
         for (let i = 0; i < top10[0].length; i++) {
@@ -60,8 +61,8 @@ module.exports = {
 
          } else {
             const ponts = await connection.query(
-                `SELECT thanks, SUM(CAST(thanks AS UNSIGNED)) AS total FROM Thanks WHERE guildId = ? AND user = ?;`,
-                [guild, author]
+                `SELECT thanks, SUM(CAST(thanks AS UNSIGNED)) AS total FROM Thanks WHERE user = ?;`,
+                [author]
             );
             const p = ponts[0][0].total;
             let embed2 = new Discord.MessageEmbed()

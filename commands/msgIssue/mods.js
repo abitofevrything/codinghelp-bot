@@ -4,7 +4,9 @@ module.exports = {
     aliases: ['modmail', 'mod'],
     usage: '++mods @username or user ID',
     example: '++mods @DudeThatsErin',
-    inHelp: 'yes',
+  inHelp: 'yes',
+  userPerms: [''],
+  botPerms: [''],
     execute(message, args) {
   
       const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);

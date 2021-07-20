@@ -8,6 +8,8 @@ module.exports = {
 	usage: '++format @username or user ID',
 	example: '++format @DudeThatsErin',
 	inHelp: 'yes',
+	userPerms: [''],
+	botPerms: [''],
 	execute(message, args) {
 		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 		if(!user) {

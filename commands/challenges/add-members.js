@@ -9,12 +9,12 @@ module.exports = {
     usage: '++add-members',
     inHelp: 'yes',
     example: '++add-members',
+    challengeMods: 'yes',
+    modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute (message, args) {
-        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
-        if(!role){ 
-            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
-            return;
-        } else {
+
             let joinersRole = message.guild.roles.cache.find(r => r.name === "Participants") || "none";
             if(joinersRole === "none") {
                 message.reply('You need to create a role named \`Participants\` first and give it to users first before you run this command. If you have a role like this, make sure it is named \`Participants\` exactly like that or else this command will not work! If you still have issues, please report this to my developer!');
@@ -38,8 +38,7 @@ module.exports = {
                     .setFooter('Only users that have been online at least once since this bot was last rebooted will be shown here and only a maximum of 2,000 members will appear. Other users can be added using the s.manualadd command.');
                 message.channel.send(embed);               
 
-            }
-        }    
+            }  
 
     }
 }

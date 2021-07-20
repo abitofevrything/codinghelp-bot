@@ -4,7 +4,9 @@ module.exports = {
     aliases: ['hire', 'request-coders', 'rc'],
     usage: '++requests @username or user ID',
     example: '++requests @DudeThatsErin',
-    inHelp: 'yes',
+  inHelp: 'yes',
+  userPerms: [''],
+  botPerms: [''],
     execute(message, args) {
   
       const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);

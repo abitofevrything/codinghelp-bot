@@ -7,11 +7,12 @@ module.exports = {
     description: 'This allows **mods** to check who has the participants role in their server.',
     aliases: ['cp', 'contestants', 'challenge-users', 'check-users'],
     usage: '!check-participants',
+    challengeMods: 'yes',
+    modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute (message, args) {
-        if(!message.member.roles.cache.has('839863262026924083') ){ 
-            message.channel.send('You can\'t use this command, only mods can use this command. If you are a mod and you are seeing this, it is because only users with the \`MANAGE_MESSAGES\` permission can use this command.');
-            return;
-        } else {
+
                 const result = await connection.query(
                     `SELECT * FROM Challenges WHERE guildId = ?`,
                     [message.guild.id]
@@ -24,6 +25,6 @@ module.exports = {
                     message.channel.send(`${tag}`)
                   }
 
-                }
+                
                 }
 }

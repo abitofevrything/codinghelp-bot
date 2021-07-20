@@ -8,7 +8,8 @@ module.exports = {
     inHelp: 'yes',
     usage: '++statusreport <messageID>',
     example: '++statusreport 852197394828230716',
-    permissions: '',
+    userPerms: [''],
+    botPerms: ['ADD_REACTIONS', 'VIEW_CHANNEL'],
     async execute(message, args, client) {
 
         let messageId = args[0];
@@ -46,6 +47,7 @@ module.exports = {
                 })
                 .setFooter('If you don\'t understand this status, please ask Erin about it.', 'https://codinghelp.site/bots/codinghelp.png')
 
+            message.react('📨');
             usr.send(report)
         }
 

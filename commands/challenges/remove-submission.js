@@ -8,6 +8,10 @@ module.exports = {
     usage: '++remove-submissions [message ID]',
     example: '++remove-submissions 841301824115965952',
     inHelp: 'yes',
+    modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
+    challengeMods: 'yes',
     async execute (message, args) {
         let name = message.author.id;
         const modname = await message.client.users.fetch(name).catch(err => {console.log(err);});

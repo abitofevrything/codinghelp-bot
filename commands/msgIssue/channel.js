@@ -7,7 +7,9 @@ module.exports = {
     aliases: ['channels', 'list-channels', 'listchannels', 'lc', 'chnnl', 'chnnls', 'lcs'],
     usage: '++channel <@username or ID>',
     example: '++channel @DudeThatsErin',
-    inHelp: 'yes',
+  inHelp: 'yes',
+  userPerms: [''],
+  botPerms: [''],
     execute(message, args) {   
         
         const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
@@ -32,10 +34,10 @@ module.exports = {
             .setFooter('Last Updated by DudeThatsErin#8061')
             .setTimestamp();
             
-            message.channel.bulkDelete(1);
+            message.react('📨')
             user.send(channels);
             }
-            message.channel.send(`📨 Hey, ${user} I just sent you a DM as you posted in the wrong channel! Please check it!`).catch(async err => {
+            message.channel.send(`📨 Hey, ${user} I just sent you a DM with our channel listing! Please check it!`).catch(async err => {
 				message.channel.send(`Hey ${user}, it looks like you have your DMs closed. So I am displaying the command here.`);
 				message.channel.send(helpEmbed1);
 			});

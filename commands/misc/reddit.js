@@ -5,6 +5,8 @@ module.exports = {
     usage: '++reddit',
     inHelp: 'yes',
     example: '++reddit or ++sub',
+    userPerms: [''],
+    botPerms: [''],
     execute(message) {
 
         message.channel.send('Hey! Not sure if you knew this but you can visit our Subreddit for additional help. You can go here to visit it: https://reddit.com/r/CodingHelp');

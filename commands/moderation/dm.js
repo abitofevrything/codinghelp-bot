@@ -7,6 +7,9 @@ module.exports = {
     usage: '++dm @username or ID [message to send to memeber]',
     example: '++dm @DudeThatsErin#8061 Please stop spamming on the server. Thank you!',
     modOnly: 'yes',
+    inHelp: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute(message, args, client) {
         const user = message.mentions.users.first() || client.users.cache.get(args[0]);
         if (!user) {

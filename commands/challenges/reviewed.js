@@ -9,6 +9,9 @@ module.exports = {
     usage: '++reviewed [challenge number] <number of points> [message ID]',
     example: '++reviewed 1 1 841143871689064448',
     inHelp: 'yes',
+    userPerms: [''],
+    botPerms: [''],
+    modOnly: 'yes',
     async execute (message, args) {
         let role = message.member.roles.cache.has('839863262026924083') || message.member.roles.cache.has('718253309101867008') || message.member.roles.cache.has('846074806788685836');
         if(!role){ 

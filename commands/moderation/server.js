@@ -3,10 +3,13 @@ const Discord = require('discord.js');
  
 module.exports = {
     name: 'about',
-    description: 'Displays all the information on the #welcome channel.\n**Note:** Only the Mod Team can run this command.',
+    description: 'Displays all the information on the #welcome channel.',
     aliases: ['codinghelp', 'server', 'welcome'],
     usage: '++about',
     inHelp: 'yes',
+    userPerms: [''],
+    botPerms: [''],
+    modOnly: 'yes',
     execute(message, args) {   
         
             const welcomeEmbed = new Discord.MessageEmbed()

@@ -8,6 +8,9 @@ module.exports = {
     usage: '++sub-status Status Message',
     modOnly: 'yes',
     inHelp: 'yes',
+    userPerms: [''],
+    botPerms: [''],
+    modOnly: 'yes',
     async execute(message, args, client) {
 
         const reason = args.slice(0).join(" ");

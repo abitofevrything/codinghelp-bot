@@ -7,12 +7,12 @@ module.exports = {
     description: 'This gives **mods** the ability to edit the challenge questions that get asked.',
     aliases: ['editchal', 'editchallenge', 'modify-challenge', 'ec'],
     usage: '++edit-challenge [challenge number] <number of points> [message ID]',
+    challengeMods: 'yes',
+    modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute (message, args) {
 
-        if(!message.member.roles.cache.has('839863262026924083') ){ 
-            message.channel.send('You can\'t use this command, only mods can use this command. If you are a mod and you are seeing this, it is because only users with the \`MANAGE_MESSAGES\` permission can use this command.');
-            return;
-        } else {
             let day = args[0];
             let title = args.slice(1).join(' ');
 
@@ -43,7 +43,6 @@ module.exports = {
             message.delete();
             message.reply('Thanks! I have updated the message you gave me the ID for.');
 
-        }
 
 
     }

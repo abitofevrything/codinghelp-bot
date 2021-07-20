@@ -11,6 +11,8 @@ module.exports = {
     inHelp: 'yes',
     cooldown: 400,
     note: 'You can now include attachments! If you want to submit with an attachment just run \`++sumbit [challenge number]\` and attach any files you would like to submit with your submission.',
+    userPerms: [''],
+    botPerms: [''],
     async execute(message, args) {
 
         let msgId = message.id;
