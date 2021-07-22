@@ -24,7 +24,7 @@ module.exports = {
             .setTimestamp()
             .setFooter('Want to suggest a feature for the bot? Use ++suggest');
         message.react('👍');
-        channel.send(`Hey, <@&772154227459883019>,`, embed) // Subreddit Updates 780111997861363742 or Bot Updates 772154227459883019 or Server Updates 772153457111990282
+        channel.send({ content: `Hey, <@&772154227459883019>,`, embeds: [embed] }) // Subreddit Updates 780111997861363742 or Bot Updates 772154227459883019 or Server Updates 772153457111990282
 
 
 

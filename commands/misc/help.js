@@ -24,7 +24,7 @@ module.exports = {
 			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
 			.addFields({
 				name: 'These are commands any user can use.',
-				value: '```css\nping\navatar\nuser-info\nserver-info\nrules\nhelp\nerror\nreddit\ntech\nformat\nchannel\nbin\ndocs\nshare-code\nmods\njust-ask\npatience\nthanks\nwiki\nwrong-channel\nreport\nstatusreport\n\n```'
+				value: '```css\nping\navatar\nroll\ncoinflip\nuser-info\nserver-info\nrules\nhelp\nerror\nreddit\ntech\nformat\nchannel\nbin\ndocs\nshare-code\nmods\njust-ask\npatience\nthanks\nwiki\nwrong-channel\nreport\nstatusreport\n\n```'
 			});
 
 		const embed2 = new MessageEmbed()

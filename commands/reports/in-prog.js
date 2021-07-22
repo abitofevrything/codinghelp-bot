@@ -5,7 +5,7 @@ const config = require('../../config.json');
 module.exports = {
     name: 'progressreport',
     description: 'You can report problems with Sakura Moon to the developers so that they can fix it.**Note:** Images or Files will *not* be accepted. Please be as detailed as possible via text.',
-    aliases: ['reports', 'err', 'error', 'issue', 'issues'],
+    aliases: ['progress-report', 'pr', 'progreport', 'prgrpt'],
     inHelp: 'yes',
     usage: '++progressreport <report>',
     example: '++progressreport The bot is broken!',
