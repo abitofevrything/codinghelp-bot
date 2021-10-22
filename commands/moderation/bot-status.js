@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const config = require('../../config.json');
+const config = require('../../config/config.json');
+const ee = require('../../config/embed.json');
 
 module.exports = {
     name: 'bot-status',
@@ -9,16 +10,15 @@ module.exports = {
     modOnly: 'yes',
     inHelp: 'yes',
     userPerms: [''],
-    botPerms: [''],
     async execute(message, args, client) {
 
         const channel = client.channels.cache.find(channel => channel.id === config.bot.announcementsId);
         const reason = args.slice(0).join(" ");
-        if (!reason) return message.reply('You forgot to include a status message. SMH');
+        if (!reason) return message.reply('Mods, you forgot to include a status message. SMH');
 
 
         let embed = new Discord.MessageEmbed()
-            .setColor('#EB74EE')
+            .setColor(ee.bot_status)
             .setTitle('Hello, The Moderators have a new update for you!')
             .setDescription(`${reason}`)
             .setTimestamp()

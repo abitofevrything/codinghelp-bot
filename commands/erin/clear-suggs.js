@@ -1,4 +1,4 @@
-const connection = require('../../database.js');
+const connection = require('../../config/database.json');
 
 module.exports = {
     name: 'clearsuggs',

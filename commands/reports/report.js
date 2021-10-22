@@ -1,6 +1,6 @@
 const connection = require('../../database.js');
 const Discord = require('discord.js');
-const config = require('../../config.json');
+const config = require('../../config/config.json');
 
 module.exports = {
     name: 'report',
@@ -19,7 +19,7 @@ module.exports = {
         if (!description && !message.attachments.first()) return message.reply('Please tell me what you would like to report. You can upload a file but please use words as well. A file alone does not tell me very much at all.')
         const channel = client.channels.cache.find(channel => channel.id === config.bot.reportsChId);
         let authorUsername = message.author.username;
-        let avatar = message.author.displayAvatarURL({dynamic: true});
+        let avatar = message.author.displayAvatarURL({ dynamic: true });
 
         const url = 'no' || message.attachments.first().url;
 

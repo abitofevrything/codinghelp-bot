@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
-const config = require('../../config.json');
+const config = require('../../config/config.json');
+const ee = require('../../config/embed.json');
 
 module.exports = {
     name: 'dm',
@@ -7,9 +8,8 @@ module.exports = {
     usage: '++dm @username or ID [message to send to memeber]',
     example: '++dm @DudeThatsErin#8061 Please stop spamming on the server. Thank you!',
     modOnly: 'yes',
-    inHelp: 'yes',
-    userPerms: [''],
-    botPerms: [''],
+    userPerms: ['MANAGE_MESSAGES'],
+    ownerOnly: 'no',
     async execute(message, args, client) {
         const user = message.mentions.users.first() || client.users.cache.get(args[0]);
         if (!user) {
@@ -25,7 +25,7 @@ module.exports = {
             else {
 
                 const embed = new MessageEmbed()
-                    .setColor('RED')
+                    .setColor(ee.dm_color)
                     .setTitle('Official Message from the r/CodingHelp Moderators')
                     .setDescription(dmmessage)
                     .setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))

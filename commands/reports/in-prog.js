@@ -1,6 +1,6 @@
 const connection = require('../../database.js');
 const Discord = require('discord.js');
-const config = require('../../config.json');
+const config = require('../../config/config.json');
 
 module.exports = {
     name: 'progressreport',
@@ -44,7 +44,7 @@ module.exports = {
                 .setDescription(`**This is the original report:**\n${original}\n\n**This is the updated status:**\n${description}`)
                 .setFooter('If this is incorrect please report this!', config.bot.avatar)
 
-            
+
             chnnel.messages.fetch(msgId).then(message => {
                 report.addField('Original Message ID:', `\`${msgId}\``)
                 report.addField('Message Author ID', `\`${OG}\``);

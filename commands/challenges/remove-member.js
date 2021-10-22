@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const connection = require('../../database.js');
-
 module.exports = {
     name: 'remove-user',
     description: 'This allows **mods** to manually remove users to the participants database.',

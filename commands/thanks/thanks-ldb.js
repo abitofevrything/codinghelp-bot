@@ -11,7 +11,6 @@ module.exports = {
     cooldown: 5,
     inHelp: 'yes',
     userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
         let guild = message.guild.id;
         let author = message.author.id;
