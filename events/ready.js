@@ -1,4 +1,8 @@
+const config = require('../config/config.json');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 const bot = require('../config/bot.json');
+
 module.exports = {
     name: 'ready',
     once: true,
@@ -13,7 +17,22 @@ module.exports = {
 
         client.user.setPresence({ activities: [{ name: 'Use -- prefix' }] });
 
-        client.guilds.cache.get(bot.serverId)?.commands.set(data);
+        const rest = new REST({ version: '9' }).setToken(config.token);
+
+        (async () => {
+            try {
+                console.log('Started refreshing application (/) commands.');
+
+                await rest.put(
+                    Routes.applicationCommands(bot.id),
+                    { body: client.slashCommands },
+                );
+
+                console.log('Successfully reloaded application (/) commands.');
+            } catch (error) {
+                console.error(error);
+            }
+        })();
 
     }
 }
