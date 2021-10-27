@@ -1,5 +1,4 @@
-const config = require('../config/config.json');
-
+const bot = require('../config/bot.json');
 module.exports = {
     name: 'ready',
     once: true,
@@ -12,7 +11,9 @@ module.exports = {
         console.log('          Error Logs...             ')
         console.log('|-----------------------------------|')
 
-        client.user.setPresence({ activities: [{ name: 'slash commands! Use + prefix' }] });
+        client.user.setPresence({ activities: [{ name: 'Use -- prefix' }] });
+
+        client.guilds.cache.get(bot.serverId)?.commands.set(data);
 
     }
 }

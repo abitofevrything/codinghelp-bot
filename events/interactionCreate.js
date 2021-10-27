@@ -5,12 +5,13 @@ const ee = require('../config/embed.json');
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
+        //console.log(interaction);
         if (interaction.isMessageComponent()) return;
         if (!interaction.isCommand()) return interaction.reply({ content: 'That is not a valid slash command.', ephemeral: true });
-        if (!client.commands.has(interaction.commandName)) return;
+        if (!client.slashCommands.has(interaction.commandName)) return;
 
-        const command = client.commands.get(interaction.commandName);
-        if (!command) return interaction.reply({ content: 'This command no longer exists.', ephemeral: true }) && client.commands.delete(interaction.commandName);
+        const command = client.slashCommands.get(interaction.commandName);
+        if (!command) return interaction.reply({ content: 'This command no longer exists.', ephemeral: true });
 
         // command cooldowns
         // NEED TO GET THIS WORKING.

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('../../config/config.json');
+const bot = require('../../config/bot.json');
 const ee = require('../../config/embed.json');
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
     userPerms: [''],
     async execute(message, args, client) {
 
-        const channel = client.channels.cache.find(channel => channel.id === config.bot.announcementsId);
+        const channel = client.channels.cache.find(channel => channel.id === bot.announcementsId);
         const reason = args.slice(0).join(" ");
         if (!reason) return message.reply('Mods, you forgot to include a status message. SMH');
 

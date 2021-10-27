@@ -8,13 +8,12 @@ const wait = require('util').promisify(setTimeout);
 module.exports = {
 	name: 'help',
 	description: 'This allows users to find out more information on all of our commands.',
-	type: 'STRING',
 	options: [
 		{
 			name: 'commandname',
 			description: 'Type command name here or leave blank to see all commands.',
 			required: false,
-			type: 'STRING'
+			type: 3
 		}
 	],
 	async execute(interaction) {

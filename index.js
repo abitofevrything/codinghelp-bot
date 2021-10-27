@@ -16,7 +16,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 
 // configurations
 const config = require('./config/config.json');
-const bot = require('./config/bot.json');
+
 client.commands = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
@@ -123,5 +123,4 @@ for (const file of eventFiles) {
 (async () => {
   connection = await require('./database.js');
   await client.login(config.token);
-  await client.guilds.cache.get(bot.serverId)?.commands.set(data);
 })();

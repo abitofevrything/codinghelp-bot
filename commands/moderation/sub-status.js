@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('../../config/config.json');
+const bot = require('../../config/bot.json');
 const ee = require('../../config/embed.json');
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
         const reason = args.slice(0).join(" ");
         if (!reason) return message.reply('You forgot to include a status message. SMH');
 
-        const channel = client.channels.cache.find(channel => channel.id === config.bot.announcementsId); //
+        const channel = client.channels.cache.find(channel => channel.id === bot.announcementsId); //
         let embed = new Discord.MessageEmbed()
             .setColor(ee.sub_status)
             .setTitle('Hello, The Moderators have a new update for you!')

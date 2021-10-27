@@ -3,7 +3,6 @@ const ee = require('../../config/embed.json');
 module.exports = {
     description: 'Allows users to see other users avatars in a big form.',
     name: "avatar",
-    type: 'STRING',
     options: [
         {
             name: 'user',

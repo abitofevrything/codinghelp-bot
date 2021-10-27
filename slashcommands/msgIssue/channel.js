@@ -9,7 +9,7 @@ module.exports = {
       name: 'user',
       description: 'Who are you sending this to? ID ONLY.',
       required: true,
-      type: 'USER'
+      type: 6
     }
   ],
   execute(interaction) {
