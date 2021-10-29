@@ -31,7 +31,8 @@ module.exports = {
                         [msgId],
                     );
                     const OGauthor = result2[0][0].Author;
-                const aut = (await message.client.users.cache.get(`${OGauthor}`)).tag;
+                const aut = await message.guild.members.fetch(OGauthor);
+                const tag = aut.user.username;
 
                     const result3 = await connection.query(
                         `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -78,7 +79,7 @@ module.exports = {
             
                 const denied = new Discord.MessageEmbed()
                     .setColor('6E3EA4')
-                    .setAuthor(`${aut}`, `${avatar}`)
+                    .setAuthor(`${tag}`, `${avatar}`)
                     .setDescription(`${suggestion}`)
                     .addFields(
                         { name: 'Your suggestion was completed! This is the decision:', value: `${upStatus}`},

@@ -20,8 +20,7 @@ module.exports = {
         const channel = client.channels.cache.find(channel => channel.id === config.bot.reportsChId);
         let authorUsername = message.author.username;
         let avatar = message.author.displayAvatarURL({ dynamic: true });
-
-        const url = 'no' || message.attachments.first().url;
+        const url = (message.attachments.first()?.url || 'no');
 
         let report2 = new Discord.MessageEmbed()
             .setColor('#D4AC0D')

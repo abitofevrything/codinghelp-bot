@@ -1,5 +1,5 @@
 const ee = require('../../config/embed.json');
-
+const discord = require('discord.js')
 module.exports = {
     description: 'Allows users to see other users avatars in a big form.',
     name: "avatar",
@@ -12,9 +12,9 @@ module.exports = {
         }
     ],
     note: 'If you would like to see your own avatar, leave the \'user\' field blank.',
-    async execute(interaction) {
-        let user = intearction.options.getUser || interaction.author;
-        let avs = new MessageEmbed()
+    async execute(interaction, client) {
+        let user = interaction.options.getUser('user') || client.users.cache.get(interaction.member.user.id);
+        let avs = new discord.MessageEmbed()
             .setAuthor(
                 `Avatar from: ${user.tag}`,
                 user.displayAvatarURL({ dynamic: true }),

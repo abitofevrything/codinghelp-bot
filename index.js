@@ -10,13 +10,9 @@ const client = new Discord.Client({
     Discord.Intents.FLAGS.GUILD_MESSAGES
   ],
 });
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-const { SlashCommandBuilder } = require('@discordjs/builders');
 
 // configurations
 const config = require('./config/config.json');
-
 client.commands = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
