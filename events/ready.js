@@ -15,7 +15,7 @@ module.exports = {
         console.log('          Error Logs...             ')
         console.log('|-----------------------------------|')
 
-        client.user.setPresence({ activities: [{ name: 'Use -- prefix' }] });
+        client.user.setPresence({ activities: [{ name: 'Use ++ prefix' }] });
 
         const rest = new REST({ version: '9' }).setToken(config.token);
 
