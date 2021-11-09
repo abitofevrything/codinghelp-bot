@@ -9,6 +9,7 @@ module.exports = {
     example: '++suggestions I want pudding!',
     inHelp: 'yes',
     userPerms: [''],
+    botPerms: ['ADD_REACTIONS', 'VIEW_CHANNEL', 'EMBED_LINKS', 'MANAGE_GUILD', 'ATTACH_FILES'],
     async execute(message, args){
 
     const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');
@@ -76,14 +77,14 @@ module.exports = {
         .setDescription(messageArgs)
         .setFooter('📈 This suggestion currently needs votes and feedback. If you would like to discuss it, please visit #discussions and discuss it there.');
     
-        message.client.users.cache.get(`${author}`).send(`Hey, ${message.author.username}! Thanks for submitting a suggestion! Our server needs to have time to vote on this. Once some time has passed, you can check the suggestion channel to check the updated status of your suggestion! We appreciate your feedback! Happy chatting!`);
-    
         const msg = await channel.send({ embeds: [initial] });
             msg.react('👍');
             msg.react('👎');
             message.delete();
         const suggNo = msg.id;
-    
+        
+        message.client.users.cache.get(`${author}`).send(`Hey, ${message.author.username}! Thanks for submitting a suggestion! Our server needs to have time to vote on this. Once some time has passed, you can check the suggestion channel to check the updated status of your suggestion or use the command \`++status-sugg ${msg.id}\` to check the status of your message.!\n\nWe appreciate your feedback! Happy chatting!`);
+
         try {
             (await connection).query(
                 `INSERT INTO Suggs (noSugg, Author, Message, Avatar, stat) VALUES(?, ?, ?, ?, ?)`,

@@ -3,12 +3,11 @@ const connection = require('../../database.js');
 
 module.exports = {
     name: 'completedsugg',
-    aliases: ['cs', 'dones', 'donesugg', 'completedsuggestion', 'completedsuggestions', 'acceptedsugg', 'acceptedsuggestions', 'acceptedsuggestion', 'oksugg', 'oks'],
+    aliases: ['cs', 'dones', 'donesugg', 'completed-suggestion', 'completed-sugg', 'completedsugg', 'ok-sugg', 'ok-suggestion', 'completedsuggestion', 'completedsuggestions', 'acceptedsugg', 'acceptedsuggestions', 'acceptedsuggestion', 'oksugg', 'oks'],
     inHelp: 'yes',
     description: 'Marks a specific suggestion as completed. **Note:** This can only be ran by moderators.',
     usage: '++completedsugg messageID [reason]',
     example: '++completedsugg 847580954306543616 I have completed your suggestion!',
-    userPerms: [''],
     modOnly: 'yes',
     botPerms: ['MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     async execute(message, args) {
@@ -31,8 +30,7 @@ module.exports = {
                         [msgId],
                     );
                     const OGauthor = result2[0][0].Author;
-                const aut = await message.guild.members.fetch(OGauthor);
-                const tag = aut.user.username;
+                const aut = (await message.client.users.cache.get(`${OGauthor}`)).tag;
 
                     const result3 = await connection.query(
                         `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -79,7 +77,7 @@ module.exports = {
             
                 const denied = new Discord.MessageEmbed()
                     .setColor('6E3EA4')
-                    .setAuthor(`${tag}`, `${avatar}`)
+                    .setAuthor(`${aut}`, `${avatar}`)
                     .setDescription(`${suggestion}`)
                     .addFields(
                         { name: 'Your suggestion was completed! This is the decision:', value: `${upStatus}`},
@@ -90,8 +88,8 @@ module.exports = {
     
             
                 (await message.client.users.cache.get(`${OGauthor}`)).send({ embeds: [denied] });
-                    message.delete();
-                    message.channel.send(`I have updated the suggestion for you, <@${moder}>, and sent a message to <@${OGauthor}>. I have also deleted the message with the ID of ${msgId} from the #suggestions channel. I hope this resolves everything for you!`);
+                message.react('✅');
+                message.channel.send(`I have done that for you. The message is now deleted in the suggestions channel. 😃`);
 
                     try {
                         await connection.query(

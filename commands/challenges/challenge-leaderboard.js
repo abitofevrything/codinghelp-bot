@@ -11,8 +11,6 @@ module.exports = {
     inHelp: 'yes',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
         let guild = message.guild.id;
         let author = message.author.id;

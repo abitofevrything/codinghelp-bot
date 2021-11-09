@@ -9,8 +9,6 @@ module.exports = {
     usage: '++edit-challenge [challenge number] <number of points> [message ID]',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
 
             let day = args[0];

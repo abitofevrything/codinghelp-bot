@@ -1,206 +1,69 @@
+// at the top of your file
 const Discord = require('discord.js');
 
 module.exports = {
-    name: 'server',
-    aliases: ['server-welcome', 'welcome', 'discord', 'roles', 'faq'],
-    description: 'Pushes an embed to display in the channel about a the server.',
-    usage: '++server',
-    note: '',
-    permissions: '',
-    ownerOnly: 'yes',
-    async execute(message, args, client) {
+    name: 'about',
+    description: 'Displays all the information on the #welcome channel.',
+    aliases: ['codinghelp', 'server', 'welcome'],
+    usage: '++about',
+    userPerms: ['MANAGE_MESSAGES'],
+    modOnly: 'yes',
+    ownerOnly: 'no',
+    execute(message, args) {
 
-        /*
-        let embed1 = new Discord.MessageEmbed()
-            .setColor('#EB74EE')
-            .setTitle('Welcome to Sakura Moon\'s Development Support Server!')
-            .setThumbnail('https://codinghelp.site/bots/sm/neon-moon.jpg')
-            .setDescription(`Please read the rules thoroughly to get access to the server.`)
+        const welcomeEmbed = new Discord.MessageEmbed()
+            .setColor('#000000')
+            .setTitle('Welcome to r/CodingHelp\'s Discord Server!')
+            .setDescription('We are a Discord Server dedicated to helping people learn how to code. We have over 1.5k members and can\'t wait to welcome more! Come join the community of people that are looking to share their knowledge with new programmers!')
+            .setImage('https://images-ext-1.discordapp.net/external/r__1ELtLocROQQFz8W5GmWQzOA5wlP4Tag7XTbGqQpY/https/media.discordapp.net/attachments/586293598996135953/757414290058903712/FxSHhhK.png')
             .addFields(
-                {name: 'Rule 1', value: 'No spamming, advertising, or illegal activity.'},
-                {name: 'Rule 2', value: 'No hateful or inappropriate messages.'},
-                {name: 'Rule 3', value: 'No excessive cursing towards another member in a disrespectful way.'},
-                {name: 'Rule 4', value: 'When asking questions, please provide as much information as possible.'},
-                {name: 'Rule 5', value: `Do not ping <@455926927371534346> or any moderator or user without a good reason. You may only ping <@&850989636657610782> if you have an urgent need for help. If you are caught spamming this role, you will be muted.`},
-                {name: 'Rule 6', value: 'Do not impersonate anyone, especially mods.'}
+                { name: 'Current Staff', value: 'Owner: <@455926927371534346>\nDiscord Mods: <@541305895544422430>, <@732667572448657539> & <@198147661449134080>\nSubreddit Mods: <@444524618401841152>, <@332652477528801280>, & <@136611109007261696>' },
+                { name: 'How can I become part of the staff team?', value: 'You can apply [on our website](https://codinghelp.site/modapp/). We accept applications all year long though becoming a mod happens randomly. We will post in <#359760352470368281> when we are opening moderator positions for any of our locations.' },
+                { name: '♾️ Invite your friends!', value: 'https://discord.gg/geQEUBm' },
             )
-            .setTimestamp()
-            .setFooter('Created by DudeThatsErin#8061', 'https://codinghelp.site/bots/sm/neon-moon.jpg');
+            .setFooter('Logo by Matt aka v4#1503.');
 
-        message.delete();
-        message.channel.send(embed1);
-                */
-        /* FAQ */
-        message.delete();
-        let embed2 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('Do you have a frequently asked question? This is the best place to check!')
-            .setDescription('Please read all of the questions below before asking a question so that you are not referred here after asking your question.')
-            .setTimestamp()
-            .setFooter('Please ping @URGENT for urgent help.', 'https://codinghelp.site/bots/sm/neon-moon.jpg');
+        const rulesEmbed1 = new Discord.MessageEmbed()
+            .setColor('GREEN')
+            .setImage('https://images-ext-1.discordapp.net/external/wbHOzT7RFJ6aTebef6VLDQZ21TQI5G0bJbWxhKRkm7U/https/images-ext-1.discordapp.net/external/IDGCI4g2TYyMowvu6pgHqMgk7ASin73_3OT8n7il_FQ/https/i.imgur.com/Pr7JkVc.png');
 
-        message.channel.send(embed2);
+        const rulesEmbed2 = new Discord.MessageEmbed()
+            .setColor('GREEN')
+            .setTitle('Our Rules')
+            .setDescription('If you want to read about all of our rules in detail you can check out [our website](https://codinghelp.site/knowledgebase/rules/discord-server-rules).')
+            .addFields(
+                { name: 'Rule 1', value: 'No spam, advertising or NSFW content. Be nice. Use common sense.\n\nIf you are found to post spam or advertise, you will be warned or banned as stated [here](https://codinghelp.site/knowledgebase/rules/warnings-bannings/).' },
+                { name: 'Rule 2', value: '[Don’t ask if you can ask a question, just ask it!](https://codinghelp.site/knowledgebase/faq/just-ask/) If someone knows the answer, they’ll do their best to help.' },
+                { name: 'Rule 3', value: 'If you need help with a problem in your code, always provide the raw code in GitHub gist or a similar place. If you aren’t sure what places, you can check [this article](https://codinghelp.site/knowledgebase/faq/share-code/).' },
+                { name: 'Rule 4', value: 'Do not message the mods directly for any reason. If you are wanting to message the mods, please message <@739190110402379876> to contact the mods. If you are messaging the mods directly, your messages will be ignored. If you are continually messaging the mods, you will be [warned or banned](https://codinghelp.site/knowledgebase/rules/warnings-bannings/).' },
+                { name: 'Rule 5', value: 'Do not ask our members personal questions like gender, age, sexual preference, etc. This is not a dating server, nor is it a place where those questions matter. They mean nothing when it comes to whether or not someone can code. If someone decides to share anything, they can do so using their own free will. Explicitly asking these questions will get you warned, muted, or banned depending on the circumstances. **NO EXCEPTIONS.**' },
+                { name: 'Rule 6', value: 'We are not going to spoon feed you answers. Meaning we will not tell you exactly how to get from point A to point C without you already knowing how to do points A, B & C. Will can give you some tips on how to get from point A to point C but we will not spoon feed you the answers. [Spoon feeding will not help you learn, it will only be harmful to your learning](https://smiletutor.sg/how-spoon-feeding-is-harmful-to-learning/). If you are new to something, please learn the basics before asking for help with something more advanced. If you are not new and we are saying that we are spoon feeding you, then you may need to go back and re-learn the basics.' },
+                { name: 'Rule 7', value: 'Do not send mass DMs to users. If you are caught DMing a massive number of people (determined by our mods) at a time, you will be permanently banned (perma-banned) from our server. We will not warn you, we will not discuss it. We do not put up with that. Please only DM users that have the **DMs Open** role.' },
+            )
+            .setFooter('Please check our website (codinghelp.site) for the most up-to-date rules!');
 
-        let embed3 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('How do I become a patron?')
-            .setDescription('Great question! All you need to do is go to [My Patreon](https://www.patreon.com/SakuraMoon) and join there! If you would like to donate another way, please open a <@575252669443211264> ticket and Erin will give you an alternative way. She appreciates the donation in advance!');
-        message.channel.send(embed3);
+        const formatEmbed = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setTitle('How do I format my code according to Rule 3?')
+            .setDescription('Great question! We have that explained on [our wiki](https://codinghelp.site/knowledgebase/faq/share-code/).');
 
-        let embed4 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('A command ran but did not work. I did not get an error message either. What is going on?')
-            .setDescription('Oh no! That is not good. Please give Erin the exact command that was run, including all of the arguments with the command (username, user\'s ID, reason message, or whatever else was included with the command) as well as what you were trying to do and what happened and she can research this.');
-        message.channel.send(embed4);
+        const accessEmbed = new Discord.MessageEmbed()
+            .setColor('ORANGE')
+            .setTitle('Get Access to Our Server!')
+            .setDescription('Please check <#703989632110690324> and react to the correct message to get access to our server!');
 
-        let embed5 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('Why does Sakura Moon need administrative privileges? I don\'t like giving that out.')
-            .setDescription('While that is understandable, Sakura Moon needs administrative privileges so that the Challenge System, Thanks System, and Suggestions System all work, regardless of whether you use them currently. This also allows for future commands to work without you needing to kick and re-add the bot in the future.');
-        message.channel.send(embed5);
+        if (message.member.roles.cache.has('780941276602302523') || message.member.roles.cache.has('718253309101867008')) {
+            message.channel.bulkDelete(1);
+            message.channel.send(welcomeEmbed);
+            message.channel.send(rulesEmbed1);
+            message.channel.send(rulesEmbed2);
+            message.channel.send(formatEmbed);
+            message.channel.send(accessEmbed);
+        } else {
+            message.reply('❌ You do not have permissions to use this command. You must be part of the staff team.');
+            return;
+        }
 
-        let embed6 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('The bot isn\'t responding to any of my messages, what is going on?')
-            .setDescription('Please check <#825857406088511528> for any outages that may be reported. It could be that the bot is offline for one reason or another or it could be that the bot was just restarting at that exact moment that you tried to run your command. Try your command again in 5-10 minutes and if an outage status is not posted in <#825857406088511528> then please let Erin know what is going on with as much detail as possible.');
-        message.channel.send(embed6);
+    },
 
-        let embed7 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('What is the Thanks System?')
-            .setDescription('Great question! The thanks system gives your server the ability to track people who help out in your server. Every time someone says a variation of \`Thanks\` like \`thnx or thanks or thx etc.\` it responds telling them to use the \`thanks\` command to thank someone and it tracks users that help out on a top 10 leaderboard which then you can do whatever you\'d like with.');
-        message.channel.send(embed7);
-
-        let embed8 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('What is the Challenges System?')
-            .setDescription('Great question! The challenges system gives your server the ability to provide challenges or contests to your members in your server. Your members will need to get a \`Participants\` role to participate in the challenges but the system includes a top 10 leaderboard, the ability to add an unlimited number of challenges, the ability to start the challenges and provide a 1st, 2nd, and 3rd place prizes, as well as a way to end the challenges so no more users can participate and much more. This is a huge system which is why it requires the largest [Patreon](https://www.patreon.com/SakuraMoon) membership to use.');
-        message.channel.send(embed8);
-
-        let embed9 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('What is the Suggestions System?')
-            .setDescription('Great question! The suggestions system is a system that gives your server the ability to track suggestions as well as notify the authors of suggestions of the suggestion that they may have. A Patreon subscription is not required to use this command.');
-        message.channel.send(embed9);
-
-        let embed10 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('Are there any future commands or systems in the works?')
-            .setDescription('I am slowly working on an audit log system that will display messages or embeds for each update on a server. This will be locked behind a patreon membership because of the amount of work that goes into creating something like this. Other than that, nothing else is in the works. If you would like to suggest something run the \`s.suggestions\` command.');
-        message.channel.send(embed10)
-
-
-
-        /* ROLES FOR REACT ROLES
-        message.delete();
-
-        let roleEmbed1 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('Colorize your Username/Nickname!')
-            .setDescription('Change the color of your username/nickname by reacting to this message. The color you react to will determine the color of your username.');
-        
-        let roleEmbed2 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('What kind of notifications would you like to receive?')
-            .setDescription('React to this message to get 🖥️ Server Updates or 🤖 Bot Updates or both!'); // server 850979569515102238 bot 850979691842109470
-        
-        let roleEmbed3 = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('React with 🐎 to this message to get access to the whole server.'); // 821170554908311572
-
-        message.channel.send(roleEmbed1);
-        message.channel.send(roleEmbed2);
-        message.channel.send(roleEmbed3);
-        */
-
-        /* PATREON 
-        message.delete();
-
-        let patreon = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('You want to donate to the development of the bot? THANK YOU!')
-            .setDescription('This is NOT REQUIRED by any means *but* it does open up more commands for you to use. If you decide to donate, thank you in advance!')
-            .addFields({
-                name: 'Patrons have access to the following commands:',
-                value: 'Access to the \`Thanks System\` and \`Challenges System\` and \`Suggestions System\`. As well as any future systems I decide to create.'
-            }, {
-                name: 'How do I get the Patron role on this server and access to the Patron-only commands?',
-                value: `Open a <@575252669443211264> ticket or message Erin on Patreon and she will give it to you manually.`
-            })
-
-        message.channel.send(patreon);
-        */
-
-        /* COMMANDS 
-            message.delete();
-
-            let commands = new Discord.MessageEmbed()
-                .setColor('#EB74EE')
-                .setTitle('This is a list of every single command that is available on Sakura Moon.')
-                .setDescription('If anything is incorrect here, please report it to the dev!');
-            
-                let prefix = client.guildCommandPrefixes.get(message.guild.id);
-
-            let embed1 = new Discord.MessageEmbed()
-                .setColor('#EB74EE')
-                .setTitle('General Commands')
-                .setDescription(`These are all of the commands Sakura Moon can do. If you want to get more information you can do \`${prefix}help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.`)
-                .addFields(
-                    { name: 'These are commands any user can use.', value: '```css\nping\navatar\nuser-info\nserver-info\nbot-info\ninvite\nhelp\n```' },
-                );
-                
-            let embed2 = new Discord.MessageEmbed()
-                .setColor('#EB74EE')
-                .setTitle('Suggestion System Commands')
-                .setDescription(`These are all of the commands Sakura Moon can do. If you want to get more information you can do \`${prefix}help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.`)
-                .addFields(
-                    { name: 'These are commands any user can use for our Suggestions System.', value: '```css\nsuggestions\neditsugg\nstatussug\n```' },
-                    { name: 'These are our **moderator** only commands for our Suggestions System.', value: '```css\nprog-sugg\ndenied-sugg\ncompletedsugg\n```' }
-                );
-                
-            let embed3 = new Discord.MessageEmbed()
-                .setColor('#EB74EE')
-                .setTitle('Challenge System Commands')
-                .setDescription(`These are all of the commands Sakura Moon can do. If you want to get more information you can do \`${prefix}help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.`)
-                .addFields(
-                    { name: 'These are commands any user can use for our Challenge System.', value: '```css\nsubmit\nedit-submission\nchallenge-leaderboard\n```' },
-                    { name: 'These are our **moderator** only commands for our Challenge System.', value: '```css\nadd-members\nadd-users\ncheck-participants\nremove-participant\nstart-challenge\nchallenge\nedit-challenge\ncheck-submissions\nreviewed\npurge-submissions\nend-challenge\n```' }
-                );
-        
-            let embed4 = new Discord.MessageEmbed()
-                .setColor('#EB74EE')
-                .setTitle('Thanks System Commands')
-                .setDescription(`These are all of the commands Sakura Moon can do. If you want to get more information you can do \`${prefix}help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.`)
-                .addFields(
-                    { name: 'These are teh commands you can use for our Thanks System.', value: '```css\nthanks\nthanks-on\nthanks-off\nthanks-leaderboard\n```' }
-                );
-                
-            let embed5 = new Discord.MessageEmbed()
-                .setColor('#EB74EE')
-                .setTitle('Moderator Only Commands')
-                .setDescription(`These are all of the commands Sakura Moon can do. If you want to get more information you can do \`${prefix}help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.`)
-                .addFields(
-                    { name: 'These are general **moderator** only commands. Meaning only **moderators** can use these commands.', value: '```css\nprune\nupdate-prefix\nreset-prefix\nmute\nunmute\nwarn\nkick\nban\nunban\n```' }
-                );
-
-            message.channel.send(commands);
-            message.channel.send(embed1);
-            message.channel.send(embed2);
-            message.channel.send(embed3);
-            message.channel.send(embed4);
-            message.channel.send(embed5);
-
-            */
-
-        /* SUGGESTIONS EMBED 
-        message.delete();
-
-        let suggestions = new Discord.MessageEmbed()
-            .setColor('#415BCE')
-            .setTitle('Would you like to make a suggestion?')
-            .setDescription('I appreciate the suggestion in advance! To suggest something run the \`s.suggestions\` command like so:\n\`\`\`s.suggestions I would like to suggest something!\`\`\`If you want to discuss a suggestion in this channel, you can do so in <#825857020753739806>. This channel is locked as the bot posts in this channel automatically. You can run the command in <#825856594045829150> though!')
-        message.channel.send(suggestions);
-        */
-
-    }
 };

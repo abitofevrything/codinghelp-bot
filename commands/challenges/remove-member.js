@@ -9,8 +9,6 @@ module.exports = {
     inHelp: 'yes',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     execute (message, args) {
  
 

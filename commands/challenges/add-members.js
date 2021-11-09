@@ -11,8 +11,6 @@ module.exports = {
     example: '++add-members',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
 
             let joinersRole = message.guild.roles.cache.find(r => r.name === "Participants") || "none";

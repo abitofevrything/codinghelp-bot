@@ -9,6 +9,8 @@ module.exports = {
     usage: '++prog-sugg messageID [status message]',
     example: '++prog-sugg 847580954306543616 This is the in-progress status for this suggestion.',
     modOnly: 'yes',
+    userPerms: ['MANAGE_MESSAGES'],
+    botPerms: ['MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     async execute(message, args) {
 
             const msgId = args[0];
@@ -19,32 +21,24 @@ module.exports = {
                         [msgId]
                     );
                     const mId = result[0][0].noSugg;
-                    //console.log(mId); same as what I have supplied
                 } catch(error) {
                     message.reply('There was an error grabbing the ID from the database. Please report this!');
                     console.log(error);
                 }
 
-                // needed so we know who to send the message to.
             const result2 = await connection.query(
                 `SELECT Author from Suggs WHERE noSugg = ?;`,
                 [msgId],
             );
-                const OGauthor = result2[0][0].Author;
-                //console.log(OGauthor) //defined & does have the correct ID.... hm...
-                let name = await message.guild.members.fetch(OGauthor);
-               // console.log(name)
-                let tag = name.user.username;
-               // console.log(tag)
+            const OGauthor = result2[0][0].Author;
+            let name = (await message.client.users.cache.get(`${OGauthor}`)).tag;
     
-                // needed for embeds
             const result3 = await connection.query(
                 `SELECT Message from Suggs WHERE noSugg = ?;`,
                 [msgId],
             );
             const suggestion = result3[0][0].Message;
     
-                // needed for embeds
             const result4 = await connection.query(
                 `SELECT Avatar from Suggs WHERE noSugg = ?;`,
                 [msgId],
@@ -91,7 +85,7 @@ module.exports = {
                 
             const updated = new Discord.MessageEmbed()
                 .setColor('3EA493')
-                .setAuthor(`${tag}`, `${avatar}`)
+                .setAuthor(`${name}`, `${avatar}`)
                 .setDescription(`${suggestion}`)
                 .addFields(
                     { name: 'Your suggestion has been updated! This is the current status:', value: `${upStatus}`},
@@ -100,8 +94,9 @@ module.exports = {
                 .setTimestamp()
                 .setFooter('If you don\'t understand this status, please contact the moderator that updated your suggestion. Thank you!');
 
-                (await name.send({ embeds: [updated] }));
-            message.channel.send(`✅ I have sent the message to the user and updated the message in the channel.`);
+                (await message.client.users.cache.get(`${OGauthor}`)).send({ embeds: [updated] });
+                message.react('✅');
+            message.channel.send(`The suggestion has been updated in the channel and the message was sent. 😃`);
 
             const chnnel = await message.guild.channels.cache.find(c => c.name === 'suggestions');
             chnnel.messages.fetch(msgId).then(message => {

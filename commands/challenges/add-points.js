@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('../../database.js');
 
-
 module.exports = {
     name: 'add-points',
     description: 'This allows **mods** to automatically add points to a participant\'s challenge to the Challenges database.',
@@ -11,8 +10,6 @@ module.exports = {
     example: '++add-points 850726247050903562 3',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
             let msgId = args[0];
             let author = message.author.username;

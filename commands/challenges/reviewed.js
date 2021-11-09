@@ -9,8 +9,6 @@ module.exports = {
     usage: '++reviewed [challenge number] <number of points> [message ID]',
     example: '++reviewed 1 1 841143871689064448',
     inHelp: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     modOnly: 'yes',
     challengeMods: 'yes',
     async execute (message, args) {

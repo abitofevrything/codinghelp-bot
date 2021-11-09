@@ -9,8 +9,6 @@ module.exports = {
     usage: '++user-check-submissions',
     example: '++user-check-submissions',
     inHelp: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
         let name = message.author.id;
 

@@ -1,6 +1,5 @@
 const connection = require('../../database.js');
 
-
 module.exports = {
     name: 'purge-submissions',
     description: 'This gives **mods** the ability to purge all submissions from the submissions database. *Note:* This does *not* delete them from the channel within discord.',
@@ -10,8 +9,6 @@ module.exports = {
     inHelp: 'yes',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
             
             connection.query(

@@ -1,6 +1,4 @@
-const Discord = require('discord.js');
 const connection = require('../../database.js');
-
 
 module.exports = {
     name: 'check-participants',
@@ -9,8 +7,6 @@ module.exports = {
     usage: '!check-participants',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
 
                 const result = await connection.query(

@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('../../database.js');
 
-
 module.exports = {
     name: 'add-user',
     description: 'This allows **mods** to manually add users to the participants database.',
@@ -11,8 +10,6 @@ module.exports = {
     example: '++add-user 839863262026924083',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     execute (message, args) {
  
             const mmbr = message.mentions.members.first() || message.guild.members.cache.get(args[0]);

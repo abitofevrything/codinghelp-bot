@@ -11,8 +11,6 @@ module.exports = {
     inHelp: 'yes',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
         let name = message.author.id;
         let challengeNo = args[0];

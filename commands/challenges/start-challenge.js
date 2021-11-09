@@ -9,8 +9,6 @@ module.exports = {
     usage: '++start-challenge [announcements channel ID] [prize 1|prize 2|prize 3]',
     example: '++start-challenge 841366694948765786 Nitro|Nitro Classic|Special Role',
     inHelp: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     modOnly: 'yes',
     async execute (message, args) {
         let announcementsChannel = args[0];

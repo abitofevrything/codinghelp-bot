@@ -25,8 +25,6 @@ module.exports = {
             [msgId],
         );
         const author = result2[0][0].Author;
-        const name = await message.guild.members.fetch(author);
-        const tag = name.user.username;
 
         const result3 = await connection.query(
             `SELECT Message from Suggs WHERE noSugg = ?;`,
@@ -58,7 +56,7 @@ module.exports = {
         
         const edited = new Discord.MessageEmbed()
             .setColor('1C3D77')
-            .setAuthor(`${tag}`, `${avatar}`)
+            .setAuthor(`${author}`, `${avatar}`)
             .setDescription('Your suggestion has been updated!')
             .addFields(
                 { name: 'Your old suggestion:', value: `${suggestion}`},

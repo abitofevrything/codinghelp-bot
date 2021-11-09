@@ -1,6 +1,4 @@
-const Discord = require('discord.js');
 const connection = require('../../database.js');
-
 
 module.exports = {
     name: 'end-challenge',
@@ -11,8 +9,6 @@ module.exports = {
     inHelp: 'yes',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
         let userNames = '';
         let points = '';

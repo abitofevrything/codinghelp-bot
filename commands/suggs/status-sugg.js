@@ -24,7 +24,7 @@ module.exports = {
             [msgId],
         );
         const OGauthor = result2[0][0].Author;
-        const aut = await message.guild.members.fetch(OGauthor);
+        const aut = await message.guild.members.fetch(`${OGauthor}`);
         const name = aut.user.username;
 
         const result3 = await connection.query(

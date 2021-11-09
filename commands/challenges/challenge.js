@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('../../database.js');
 
-
 module.exports = {
     name: 'challenge',
     description: 'This command allows **mods** to add additional challenge questions to the Challenge System.',
@@ -11,8 +10,6 @@ module.exports = {
     example: '++challenge 1 What is my favorite color?',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
 
         let msgId = message.id;

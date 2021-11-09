@@ -9,8 +9,6 @@ module.exports = {
     example: '++remove-submissions 841301824115965952',
     inHelp: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     challengeMods: 'yes',
     async execute (message, args) {
         let name = message.author.id;

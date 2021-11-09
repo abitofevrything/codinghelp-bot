@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('../../database.js');
 
-
 module.exports = {
     name: 'edit-submission',
     description: 'This gives users the ability to edit the submission answers that they previously submitted. If you need your message ID, contact one of the Challenge Moderators and they can get that for you.',
@@ -10,8 +9,6 @@ module.exports = {
     example: '++edit-submission 841302144727646269 I like pudding!',
     note: 'You are allowed to upload files. Just leave the `[new answer]` field blank and just upload',
     inHelp: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute(message, args) {
 
         let msgId = args[0];
