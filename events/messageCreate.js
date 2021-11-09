@@ -56,7 +56,7 @@ module.exports = {
 
                 if (value == modRoles.length) {
                     message.react('❌');
-                    message.reply({ content: `This is a command only moderators can use. You do not have the required permissions. Moderators have the \`<@&${modRoles[0]}>\` role or \`<@&${modRoles[1]}>\` roles. Please run \`${config.prefix}report [issue]\` if you are seeing this in error.` });
+                    message.reply({ content: `This is a command only moderators can use. You do not have the required permissions. Moderators have the \`@Moderator\` role or \`@&Junior Mod\` roles. Please run \`${config.prefix}report [issue]\` if you are seeing this in error.` });
                     return;
                 }
             }
