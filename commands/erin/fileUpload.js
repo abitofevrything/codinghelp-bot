@@ -8,7 +8,6 @@ module.exports = {
     inHelp: 'yes',
     usage: 's.test NOT SURE CHANGES',
     example: 's.test NOT SURE CHANGES',
-    permissions: '',
     ownerOnly: 'yes',
     note: 'This command changes so much, just look at the code...',
     async execute(message, args, client) {

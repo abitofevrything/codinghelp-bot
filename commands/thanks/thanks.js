@@ -6,9 +6,7 @@ module.exports = {
   usage: '++thanks <@username or ID>',
   inHelp: 'yes',
   cooldown: 400,
-  mentionCooldown: 400,
   example: '++thanks @DudeThatsErin#8061 or ++thanks 455926927371534346',
-  userPerms: [''],
   async execute(message, args, client) {
     const mention = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 

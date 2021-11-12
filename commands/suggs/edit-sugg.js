@@ -9,8 +9,6 @@ module.exports = {
     usage: '++editsugg messageID [updated message]',
     inHelp: 'yes',
     example: '++editsugg 847580954306543616 I need to update my suggestion!',
-    userPerms: [''],
-    botPerms: ['MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     async execute(message, args) {
 
         const msgId = args[0];

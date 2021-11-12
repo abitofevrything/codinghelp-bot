@@ -7,7 +7,6 @@ module.exports = {
     description: 'Displays all the information on the #announcements channel.\n**Note:** Only the Mod Team can run this command.',
     aliases: ['affies', 'affiliates', 'partner'],
     usage: '++partners',
-    userPerms: ['MANAGE_MESSAGES'],
     modOnly: 'yes',
     ownerOnly: 'no',
     execute(message, args) {

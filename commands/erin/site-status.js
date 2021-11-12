@@ -8,7 +8,6 @@ module.exports = {
     description: 'Pushes an embed to display in the channel about a certain update.',
     usage: '++site-status Status Message',
     modOnly: 'yes',
-    userPerms: ['MANAGE_MESSAGES'],
     ownerOnly: 'yes',
     async execute(message, args, client) {
 

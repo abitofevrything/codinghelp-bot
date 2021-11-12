@@ -10,8 +10,6 @@ module.exports = {
     usage: '++completedreport <message ID> <description>',
     example: '++completedreport 852197394828230716 The bot is broken!',
     modOnly: 'yes',
-    userPerms: ['MANAGE_MESSAGES'],
-    botPerms: ['ADD_REACTIONS', 'VIEW_CHANNEL', 'MANAGE_MESSAGES'],
     async execute(message, args, client) {
 
         let description = args.slice(1).join(' ');

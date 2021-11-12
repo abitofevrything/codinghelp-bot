@@ -9,7 +9,6 @@ module.exports = {
     usage: '++bot-status Status Message',
     modOnly: 'yes',
     inHelp: 'yes',
-    userPerms: [''],
     async execute(message, args, client) {
 
         const channel = client.channels.cache.find(channel => channel.id === bot.announcementsId);

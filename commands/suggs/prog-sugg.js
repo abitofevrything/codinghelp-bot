@@ -9,8 +9,6 @@ module.exports = {
     usage: '++prog-sugg messageID [status message]',
     example: '++prog-sugg 847580954306543616 This is the in-progress status for this suggestion.',
     modOnly: 'yes',
-    userPerms: ['MANAGE_MESSAGES'],
-    botPerms: ['MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     async execute(message, args) {
 
             const msgId = args[0];

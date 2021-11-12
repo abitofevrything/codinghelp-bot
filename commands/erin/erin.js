@@ -13,7 +13,6 @@ module.exports = {
     inHelp: 'yes',
     cooldown: 0,
     example: '++erin or ++dev',
-    userPerms: ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     ownerOnly: 'yes',
     note: '',
     execute(message, args, client) {

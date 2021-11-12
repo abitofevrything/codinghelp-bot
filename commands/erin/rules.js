@@ -60,7 +60,6 @@ module.exports = {
     usage: '++rules @username or user ID rule number[1-5] or ++rules all @username or ID',
     note: 'You can send a DM to a user or use \`-here\` to spit the message out in the channel you are in.',
     example: '++rules @DudeThatsErin#8061 all -here or ++rules @DudeThatsErin#8061 3',
-    userPerms: ['MANAGE_MESSAGES'],
     modOnly: 'yes',
     ownerOnly: 'no',
     async execute(message, args) {

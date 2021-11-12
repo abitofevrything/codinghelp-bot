@@ -8,8 +8,6 @@ module.exports = {
     inHelp: 'yes',
     usage: '++statusreport <messageID>',
     example: '++statusreport 852197394828230716',
-    userPerms: [''],
-    botPerms: ['ADD_REACTIONS', 'VIEW_CHANNEL'],
     async execute(message, args, client) {
 
         let messageId = args[0];

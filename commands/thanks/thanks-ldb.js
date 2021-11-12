@@ -10,7 +10,6 @@ module.exports = {
     example: '++thanks-leaderboard or ++thxldb or ++txlbd',
     cooldown: 5,
     inHelp: 'yes',
-    userPerms: [''],
     async execute (message, args) {
         let guild = message.guild.id;
         let author = message.author.id;

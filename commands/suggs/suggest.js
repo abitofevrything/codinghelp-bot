@@ -8,8 +8,6 @@ module.exports = {
     usage: '++suggestions [suggestion here]',
     example: '++suggestions I want pudding!',
     inHelp: 'yes',
-    userPerms: [''],
-    botPerms: ['ADD_REACTIONS', 'VIEW_CHANNEL', 'EMBED_LINKS', 'MANAGE_GUILD', 'ATTACH_FILES'],
     async execute(message, args){
 
     const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');

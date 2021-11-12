@@ -8,8 +8,6 @@ module.exports = {
   example: '++unthanks @DudeThatsErin#8061 or ++thanks 455926927371534346',
   description: 'Allows mods to remove a thanks from a user.',
   note: 'You must have one of the following permissions to run this command: \`ADMINISTRATOR, MANAGE_CHANNELS, MANAGE_ROLES, MANAGE_MESSAGES, KICK_MEMBERS, BAN_MEMBERS\`\nIt removes one thanks at a time.',
-  userPerms: ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
-  patreonOnly: 'no',
   modOnly: 'yes',
   async execute(message, args) {
 

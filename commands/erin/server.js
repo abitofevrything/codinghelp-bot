@@ -6,7 +6,6 @@ module.exports = {
     description: 'Displays all the information on the #welcome channel.',
     aliases: ['codinghelp', 'server', 'welcome'],
     usage: '++about',
-    userPerms: ['MANAGE_MESSAGES'],
     modOnly: 'yes',
     ownerOnly: 'no',
     execute(message, args) {

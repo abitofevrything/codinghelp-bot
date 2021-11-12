@@ -9,8 +9,6 @@ module.exports = {
     usage: '++deniedsugg messageID [reason]',
     example: '++deniedsugg 847580954306543616 I don\'t want to do what you suggested! GO AWAY!',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: ['MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     async execute(message, args) {
 
         const msgId = args[0];

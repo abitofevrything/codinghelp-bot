@@ -9,7 +9,6 @@ module.exports = {
     usage: '++completedsugg messageID [reason]',
     example: '++completedsugg 847580954306543616 I have completed your suggestion!',
     modOnly: 'yes',
-    botPerms: ['MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     async execute(message, args) {
 
             const msgId = args[0];
