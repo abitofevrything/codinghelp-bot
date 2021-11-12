@@ -18,7 +18,7 @@ module.exports = {
 
         // actually running the commands.
         try {
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply();
             await client.slashCommands.get(interaction.commandName).execute(interaction, client);
         } catch (error) {
             console.error(error);
