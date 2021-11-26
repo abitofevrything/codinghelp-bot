@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('../../database.js');
 
-
 module.exports = {
     name: 'leaderboard',
     description: 'This gives users the ability to see the top 10 users on the leaderboard and also their position on the leaderboard.',

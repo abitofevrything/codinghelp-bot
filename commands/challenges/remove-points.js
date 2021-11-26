@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('../../database.js');
 
-
 module.exports = {
     name: 'remove-points',
     description: 'This allows **mods** to automatically remove points from a participant\'s challenge in the Challenges database.',
@@ -11,8 +10,6 @@ module.exports = {
     example: '++remove-points 850726247050903562 3',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: [''],
-    botPerms: [''],
     async execute (message, args) {
 
             let msgId = args[0];

@@ -5,7 +5,7 @@ module.exports = {
         const coins = ["heads", "tails"];
         const coinz = coins[Math.floor(Math.random() * coins.length)];
 
-        interaction.editReply({ content: `I got \`${coinz}\`!`, allowedMentions: { repliedUser: false } });
+        interaction.editReply({ content: `I got \`${coinz}\`!` });
 
     }
 }

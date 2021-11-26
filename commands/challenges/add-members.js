@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const connection = require('../../database.js');
 
-
 module.exports = {
     name: 'add-members',
     description: 'This allows **mods** to automatically add participants to the Challenges database.',

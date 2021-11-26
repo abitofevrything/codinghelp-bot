@@ -6,6 +6,9 @@ module.exports = {
     name: 'messageCreate',
     async execute(message, client) {
         //console.log(message)
+        // delete slash commands
+        //message.guild.commands.set([])
+        //console.log(await message.guild.commands.fetch());
         client.cooldowns = new Discord.Collection();
         const { cooldowns } = client;
 

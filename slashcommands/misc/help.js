@@ -16,6 +16,7 @@ module.exports = {
 			type: 3
 		}
 	],
+	inHelp: 'yes',
 	async execute(interaction) {
 		const pages = [];
 		const roleColor =
