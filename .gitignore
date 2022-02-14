@@ -1,3 +1,11 @@
+#djs
+node_js
+token.json
+config.json
+owner.json
+bot.json
+database.json
+
 # Logs
 logs
 *.log

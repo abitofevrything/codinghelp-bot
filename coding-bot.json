@@ -1,0 +1,8 @@
+{
+    "apps": [{
+        "name": "codinghelp-bot",
+        "cwd": "./",
+        "script": "npm",
+        "args": "index"
+    }]
+}

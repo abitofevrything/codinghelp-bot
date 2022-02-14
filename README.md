@@ -1,7 +1,26 @@
-# AC Bump Bot
+# r/CodingHelp Discord Bot
 
-This is a bot that Erin & Andrej are working on for Advertising Central's Discord Server. This bot sends advertisements to a certain number of servers. Right now we are sending it to 50 other servers.
+[![Discord](https://discordapp.com/api/guilds/258167954913361930/embed.png)](https://discord.gg/REjFpZ9) [![Twitter Follow](https://img.shields.io/twitter/follow/DudeThatsErin.svg?style=social)](https://twitter.com/DudeThatsErin)
 
-The current prefix is "ac!" and Erin created the bot in her Developer portal. She is also hosting it on her VPS so it is online 24/7. We are testing it in Erin's bot testing server.
+This is a bot that I created and decided to make it open-source.
 
-If you have any questions just ask Erin or Andrej. Thank you!
+## Table of Contents
+None yet!
+
+### Setup Bot
+1. Go to Discord's [Developer Portal](https://discordapp.com/developers/applications).
+
+2. Create a new application.
+
+> Take note of your bot's client ID. You will need this to invite your bot to a server.
+
+3. Go to the bot tab and add a bot user to your application.
+
+> Take note of your bot's token. You will need this in the next section.
+
+4. Invite your bot to a server using: [https://discordapp.com/oauth2/authorize?scope=bot&client_id=DISCORD_BOT_CLIENT_ID_PLACEHOLDER](https://discordapp.com/oauth2/authorize?scope=bot&client_id=DISCORD_BOT_CLIENT_ID_PLACEHOLDER)
+
+> Alternatively, `npx peterthehan/create-discord-bot` will generate a bot invite link for you when you create a bot project and you provide a valid bot token.
+
+> A Discord bot's client ID is not the same as its token. Keep your token and any file containing it **private**. If your token ever leaks or you suspect it may have leaked, simply `regenerate` a new token to invalidate your compromised token.
+
