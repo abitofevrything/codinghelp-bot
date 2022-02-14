@@ -8,7 +8,8 @@ module.exports = {
     usage: '++leaderboard',
     example: '++leaderboard or ++ldb or ++lbd',
     inHelp: 'yes',
-    partOnly: 'yes',
+    challengeMods: 'yes',
+    modOnly: 'yes',
     async execute (message, args) {
         let guild = message.guild.id;
         let author = message.author.id;
@@ -36,10 +37,12 @@ module.exports = {
             userNames += `${i + 1}. ${username}\n`;
             points += `${data[i].total}\n`;
         }
+        
         if(top10 === undefined || top10[0] === undefined || top10[0][0] === undefined) {
             message.channel.send('No one is on the leaderboard yet.');
         } else if(results === undefined || results[0] === undefined || results[0][0] === undefined) {
 
+        
             let embed2 = new Discord.MessageEmbed()
             .setTitle('This is the current challenge leaderboard.')
             .setColor('#c9ca66')
@@ -48,7 +51,7 @@ module.exports = {
                 {name: 'Points', value: points, inline: true},
                 {name: 'How many points do you have?', value: `${aUsername}, you currently have \`0\` point(s).`}
             )
-            .setFooter({ text: 'If there is an error here, please report this!' });
+            .setFooter('If there is an error here, please report this!');
 
             message.channel.send({ embeds: [embed2] });
 
@@ -66,7 +69,7 @@ module.exports = {
                     {name: 'Points', value: points, inline: true},
                     {name: 'How many points do you have?', value: `${aUsername}, you currently have \`${p}\` point(s).`}
                 )
-                .setFooter({ text: 'If there is an error here, please report this!' });
+                .setFooter('If there is an error here, please report this!');
 
             message.channel.send({ embeds: [embed2] });
                 }

@@ -25,21 +25,21 @@ module.exports = {
         let report = new Discord.MessageEmbed()
             .setColor('#8C1149')
             .setTitle(`Oops! A *bug* has appeared!`)
-            .setAuthor({name: authorUsername})
-            .setThumbnail(avatar)
+            .setAuthor(`${authorUsername}`)
+            .setThumbnail(`${avatar}`)
             .setDescription(`**This is the report:**\n${description}\n\n**Any files uploaded?**\n${url}`)
             .setTimestamp()
-            .setFooter({ text: 'This was all of the information I could grab from the report.', iconURL: bot.avatar });
+            .setFooter('This was all of the information I could grab from the report.', bot.avatar);
         
 
         let report2 = new Discord.MessageEmbed()
             .setColor('#11818C')
             .setTitle(`Your report has been sent to ${me.name} aka ${me.username}!`)
-            .setAuthor({name: authorUsername})
-            .setThumbnail(avatar)
+            .setAuthor(`${authorUsername}`)
+            .setThumbnail(`${avatar}`)
             .setDescription(`**This is the report:**\n${description}\n\n**Any files uploaded?**\n${url}`)
             .setTimestamp()
-            .setFooter({ text: 'This was all of the information I could grab from the report.', iconURL: bot.avatar });
+            .setFooter('This was all of the information I could grab from the report.', bot.avatar);
 
         const msg = await channel.send({ embeds: [report] });
 

@@ -9,7 +9,7 @@ module.exports = {
     usage: '++completedsugg messageID [reason]',
     example: '++completedsugg 847580954306543616 I have completed your suggestion!',
     modOnly: 'yes',
-    async execute(message, args, client) {
+    async execute(message, args) {
 
             const msgId = args[0];
             if(msgId > 0 ) {
@@ -76,14 +76,14 @@ module.exports = {
             
                 const denied = new Discord.MessageEmbed()
                     .setColor('6E3EA4')
-                    .setAuthor({name: aut, iconURL: avatar})
+                    .setAuthor(`${aut}`, `${avatar}`)
                     .setDescription(`${suggestion}`)
                     .addFields(
                         { name: 'Your suggestion was completed! This is the decision:', value: `${upStatus}`},
                         { name: 'Moderator that completed your suggestion:', value: `${moderate}`},
                     )
                     .setTimestamp()
-                    .setFooter({ text: 'If you don\'t understand this decision, please contact the moderator that completed your suggestion. Thank you!' });
+                    .setFooter('If you don\'t understand this decision, please contact the moderator that completed your suggestion. Thank you!');
     
             
                 (await message.client.users.cache.get(`${OGauthor}`)).send({ embeds: [denied] });
@@ -103,7 +103,7 @@ module.exports = {
     
                     const chnnel = await message.guild.channels.cache.find(c => c.name === 'suggestions');
                     chnnel.messages.fetch(msgId).then(message => {
-                        message.delete();
+                        message.delete(); 
                     });
             } else {
                 message.reply('You need to include the ID of the message you want to mark as completed.')

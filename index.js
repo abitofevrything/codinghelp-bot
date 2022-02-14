@@ -1,17 +1,17 @@
+/* 
+  CODINGHELP BOT
+  USING DISCORD.JS V13.1.0
+*/
 const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client({
   intents: [
     Discord.Intents.FLAGS.GUILDS,
-    Discord.Intents.FLAGS.GUILD_MESSAGES,
-    Discord.Intents.FLAGS.GUILD_MEMBERS
+    Discord.Intents.FLAGS.GUILD_MESSAGES
   ],
 });
 
 // configurations
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-const bot = require('./config/bot.json');
 const config = require('./config/config.json');
 client.commands = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
@@ -114,26 +114,9 @@ for (const file of eventFiles) {
   console.log(event.name + ' loaded successfully!');
 }
 
-const rest = new REST({ version: '9' }).setToken(config.token);
 
-
-// end of file; logging the bot in.
-console.log('|-----------------------------------|');
-console.log('            Logging in...            ');
-console.log('|-----------------------------------|');
+// end of file
 (async () => {
   connection = await require('./database.js');
   await client.login(config.token);
-  try {
-    console.log('Started refreshing application (/) commands.');
-
-    await rest.put(
-      Routes.applicationCommands(bot.id),
-      { body: client.slashCommands },
-    );
-
-    console.log('Successfully reloaded application (/) commands.');
-  } catch (error) {
-    console.error(error);
-  }
 })();

@@ -30,7 +30,7 @@ module.exports = {
                 [msgId]
             );
             const OG = results[0][0].authorId;
-            const author = client.users.cache.find(user => user.id === OG);
+            const author = client.users.cache.find(user => user.id === `${OG}`);
             const authorUsername = author.username;
             const original = results[0][0].description;
             const avatar = results[0][0].avatar;
@@ -38,9 +38,9 @@ module.exports = {
             let report = new Discord.MessageEmbed()
                 .setColor('#B3B6B7')
                 .setTitle(`Your bug report is being worked on!`)
-                .setAuthor({ name: authorUsername, iconURL: avatar })
+                .setAuthor(`${authorUsername}`, `${avatar}`)
                 .setDescription(`**This is the original report:**\n${original}\n\n**This is the updated status:**\n${description}`)
-                .setFooter({ text: 'If this is incorrect please report this!', iconURL: config.bot.avatar })
+                .setFooter('If this is incorrect please report this!', config.bot.avatar)
 
 
             chnnel.messages.fetch(msgId).then(message => {
@@ -49,7 +49,7 @@ module.exports = {
                 if (message) message.edit({ embeds: [report] });
             });
 
-            (await message.client.users.cache.get(OG)).send({ embeds: [report] });
+            (await message.client.users.cache.get(`${OG}`)).send({ embeds: [report] });
 
             message.react('✅');
 

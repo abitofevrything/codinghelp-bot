@@ -13,7 +13,7 @@ module.exports = {
 
     let usr = interaction.options.getUser('user');
     usr.send(`Hey, ${usr}!` + ' Rule 4 states: Please do not ping or message the mods directly. If you would like to contact the mods, please message <@575252669443211264> and we will get back to you shortly.');
-    interaction.editReply({ content: `📨 I just sent that user a direct message asking the user to not ping the mods.\nThey will not receive it if their DMs are closed so please check the user's roles.` });
+    interaction.editReply({ content: `📨 I just sent that user a direct message asking the user to not ping the mods.\nThey will not receive it if their DMs are closed so please check the user's roles.`, ephemeral: true });
   },
 
 };

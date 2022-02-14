@@ -10,6 +10,7 @@ module.exports = {
     example: '++clear-points 841330343641874532',
     inHelp: 'yes',
     challengeMods: 'yes',
+    modOnly: 'yes',
     userPerms: [''],
     botPerms: [''],
     async execute (message, args) {
@@ -28,7 +29,7 @@ module.exports = {
                     .setColor('#c9a066')
                     .setTitle(`I have removed all points from ${player}! Their submission is not unreviewed.`)
                     .setDescription(`Thank you for that, ${author}!`)
-                    .setFooter({ text: 'If there is a problem with this, please report it!' });
+                    .setFooter('If there is a problem with this, please report it!');
                 
                 connection.query(
                     `UPDATE Submissions SET mod = ? AND points = ? WHERE msgId = ?;`,

@@ -4,9 +4,11 @@ module.exports = {
   name: 'unthanks',
   aliases: ['nothnks', 'untks', 'notx', 'unthank'],
   usage: '++unthanks <@username or ID>',
+  cooldown: 0,
   example: '++unthanks @DudeThatsErin#8061 or ++thanks 455926927371534346',
   description: 'Allows mods to remove a thanks from a user.',
-  modOnly: 1,
+  note: 'You must have one of the following permissions to run this command: \`ADMINISTRATOR, MANAGE_CHANNELS, MANAGE_ROLES, MANAGE_MESSAGES, KICK_MEMBERS, BAN_MEMBERS\`\nIt removes one thanks at a time.',
+  modOnly: 'yes',
   async execute(message, args) {
 
     const mention = message.mentions.users.first() || message.guild.members.cache.get(args[0]);

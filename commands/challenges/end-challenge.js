@@ -8,6 +8,7 @@ module.exports = {
     example: '++end-challenge',
     inHelp: 'yes',
     challengeMods: 'yes',
+    modOnly: 'yes',
     async execute (message, args) {
         let userNames = '';
         let points = '';

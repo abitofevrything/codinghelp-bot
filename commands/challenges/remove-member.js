@@ -8,6 +8,7 @@ module.exports = {
     example: '++remove-user @DudeThatsErin',
     inHelp: 'yes',
     challengeMods: 'yes',
+    modOnly: 'yes',
     execute (message, args) {
  
 

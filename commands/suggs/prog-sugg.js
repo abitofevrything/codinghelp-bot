@@ -63,33 +63,36 @@ module.exports = {
                 [msgId]
             );
             const upStatus = result8[0][0].stat;
+    
             const moderator = await connection.query(
                 `SELECT Moderator FROM Suggs WHERE noSugg = ?;`,
                 [msgId]
             );
             const moder = moderator[0][0].Moderator;
             const moderate = moder.tag || message.author.tag;
+    
             const inprogress = new Discord.MessageEmbed()
                 .setColor('004d4d')
-                .setAuthor({name: name, iconURL: avatar})
-                .setDescription(suggestion)
+                .setAuthor(`${name}`, `${avatar}`)
+                .setDescription(`${suggestion}`)
                 .addFields(
-                    { name: 'Current Status', value: upStatus},
-                    { name: 'The moderator that last updated this was', value: moderate},
+                    { name: 'Current Status', value: `${upStatus}`},
+                    { name: 'The moderator that last updated this was', value: `${moderate}`},
                 )
-                .setFooter({ text: 'If you would like to suggest something, use ++suggestions' });
+                .setFooter('If you would like to suggest something, use ++suggestions');
+                
             const updated = new Discord.MessageEmbed()
                 .setColor('3EA493')
-                .setAuthor({name: name, iconURL: avatar})
-                .setDescription(suggestion)
+                .setAuthor(`${name}`, `${avatar}`)
+                .setDescription(`${suggestion}`)
                 .addFields(
-                    { name: 'Your suggestion has been updated! This is the current status:', value: upStatus},
-                    { name: 'Moderator that updated your suggestion:', value: moder},
+                    { name: 'Your suggestion has been updated! This is the current status:', value: `${upStatus}`},
+                    { name: 'Moderator that updated your suggestion:', value: `${moder}`},
                 )
                 .setTimestamp()
-                .setFooter({ text: 'If you don\'t understand this status, please contact the moderator that updated your suggestion. Thank you!' });
+                .setFooter('If you don\'t understand this status, please contact the moderator that updated your suggestion. Thank you!');
 
-                (await message.client.users.cache.get(OGauthor)).send({ embeds: [updated] });
+                (await message.client.users.cache.get(`${OGauthor}`)).send({ embeds: [updated] });
                 message.react('✅');
             message.channel.send(`The suggestion has been updated in the channel and the message was sent. 😃`);
 

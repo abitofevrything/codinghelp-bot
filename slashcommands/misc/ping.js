@@ -1,7 +1,5 @@
 const { MessageEmbed } = require('discord.js');
 const config = require('../../config/config.json');
-const bot = require('../../config/bot.json');
-const ee = require('../../config/embed.json');
 
 module.exports = {
   name: 'ping',
@@ -16,48 +14,12 @@ module.exports = {
     let embed = new MessageEmbed()
       .setColor('#ffffff')
       .setTitle(`${client.user.tag} is online!`)
-      .setURL('https://stats.uptimerobot.com/v56YJuEr3x')
-      .setThumbnail(bot.avatar)
-      .setDescription(`Thanks for checking if ${bot.name} was online. ${bot.name} has been awake for \`${days}d ${hours}h ${minutes}m ${seconds}s\`!\nMy prefix is \`${config.prefix}\`\nI am the official bot of the [CodingHelp](${bot.website}) Discord Server! If you want to see all of my commands run \`/help\` or [check here](https://codinghelp.site/threads/coding-help-discord-bot-commands.69/).\n\nIf you have found an issue with the bot, please run \`${config.prefix}report\` to report the issue!`)
+      .setURL(config.bot.website)
+      .setImage(config.bot.avatar)
+      .setDescription(`Thanks for checking if ${config.bot.name} was online. ${config.bot.name} has been awake for \`${days}d ${hours}h ${minutes}m ${seconds}s\`!\nMy prefix is \`${config.bot.prefix}\`\nI am the official bot of the [CodingHelp](${config.bot.website}) Discord Server! If you want to see all of my commands run \`${config.bot.prefix}help\` or [check here](${config.bot.website}/commands/).\nIf you want to know exactly how I am coded, you can see all of my pieces parts on my [GitHub Repo](${config.bot.github}).\n\nYou can find CodingHelp at these locations:\n[Reddit](${config.bot.website}/reddit)\n[Discord](${config.bot.website}/discord)\n[Website](${config.bot.website})\n\nIf you have found an issue with the bot, please run \`${config.bot.prefix}report\` to report the issue!`)
       .setTimestamp()
-      .setFooter({ text: `Thanks for using ${bot.name}!`, iconURL: ee.footericon})
+      .setFooter(`Thanks for using ${config.bot.name}!`, config.bot.avatar)
 
-      interaction.editReply({ embeds: [embed], components: [
-        {
-          type: 1,
-          components: [
-            {
-              type: 2,
-              style: 5,
-              label: 'Find us on Reddit',
-              url: bot.reddit
-            },
-            {
-              type: 2,
-              style: 5,
-              label: 'Visit our Website',
-              url: bot.url
-            },
-            {
-              type: 2,
-              style: 5,
-              label: 'Find us on GitHub',
-              url: bot.github
-            },
-            {
-              type: 2,
-              style: 5,
-              label: 'Share our Invite link!',
-              url: bot.server
-            },
-            {
-              type: 2,
-              style: 5,
-              label: 'View our Uptime',
-              url: 'https://stats.uptimerobot.com/v56YJuEr3x'
-            }
-          ]
-        }
-      ] });
+    interaction.editReply({ embeds: [embed], ephemeral: true });
   }
 };

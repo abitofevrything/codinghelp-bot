@@ -9,6 +9,7 @@ module.exports = {
     inHelp: 'yes',
     example: '++remove-points 850726247050903562 3',
     challengeMods: 'yes',
+    modOnly: 'yes',
     async execute (message, args) {
 
             let msgId = args[0];
@@ -33,7 +34,7 @@ module.exports = {
                         .setColor('#c9a066')
                         .setTitle(`I have removed ${points} points from ${playerName}!`)
                         .setDescription(`Thank you for that, ${author}!`)
-                        .setFooter({ text: 'If there is a problem with this, please report it!' });
+                        .setFooter('If there is a problem with this, please report it!');
                     
                     connection.query(
                         `UPDATE Submissions SET moderator = ?, points = points - ? WHERE msgId = ?;`,

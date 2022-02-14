@@ -12,7 +12,7 @@ module.exports = {
   execute(interaction) {
     let usr = interaction.options.getUser('user');
     usr.send(`Hey, ${usr}!` + ' It looks like you are requesting for someone to help you individually. This question is better answered at <#756992144170024991>. Please repost it there.');
-    interaction.editReply({ content: `📨 I just sent that user a direct message about using the <#756992144170024991> channel.\nThey will not receive it if their DMs are closed so please check the user's roles.` });
+    interaction.editReply({ content: `📨 I just sent that user a direct message about using the <#756992144170024991> channel.\nThey will not receive it if their DMs are closed so please check the user's roles.`, ephemeral: true });
 
   },
 

@@ -41,7 +41,7 @@ module.exports = {
                 .setTitle(`Your bug has been fixed!`)
                 .setAuthor(`${authorUsername}`, `${avatar}`)
                 .setDescription(`**This is the original report:**\n${original}\n\n**This is the current status:**\n${description}\n\n`)
-                .setFooter({ text: 'If this is incorrect please report this!', iconURL: config.bot.avatar })
+                .setFooter('If this is incorrect please report this!', config.bot.avatar)
 
             channel.messages.fetch(messageId).then(message => {
                 if (message) message.delete();

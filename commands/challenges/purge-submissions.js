@@ -8,6 +8,7 @@ module.exports = {
     example: '++purge-submissions',
     inHelp: 'yes',
     challengeMods: 'yes',
+    modOnly: 'yes',
     async execute (message, args) {
             
             connection.query(

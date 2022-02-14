@@ -10,7 +10,6 @@ module.exports = {
     note: 'Files are accepted! Just leave the `[answer]` field blank when submitting so just type `++submit [challenge number]` and then upload your file.',
     inHelp: 'yes',
     cooldown: 400,
-    partOnly: 'yes',
     note: 'You can now include attachments! If you want to submit with an attachment just run \`++sumbit [challenge number]\` and attach any files you would like to submit with your submission.',
     async execute(message, args) {
 
@@ -47,7 +46,7 @@ module.exports = {
                         .setColor('#616169')
                         .setTitle(`Thank you, ${tag}, for submitting your answer for challenge ${dayNo}.`)
                         .setDescription(`The answer you submitted was:\n${answer}\n\nIf you want to modify your answer, please copy and paste this command with your updated answer: \`++modify-answer ${msgId} [replace this with your new answer]\``)
-                        .setFooter({ text: `If you need to modify your answer please run the ++modify-answer command. Thank you!` });
+                        .setFooter(`If you need to modify your answer please run the ++modify-answer command. Thank you!`);
                     message.delete();
                     message.client.users.cache.get(`${author}`).send({ embeds: [embed] });
                 }
@@ -62,7 +61,7 @@ module.exports = {
                         .setColor('#616169')
                         .setTitle(`Thank you, ${tag}, for submitting your answer for challenge ${dayNo}.`)
                         .setDescription(`The answer you submitted was:\n${answer}\n\nThis is the attachment you submitted: ${url}\n\nIf you want to modify your answer, please copy and paste this command with your updated answer: \`++modify-answer ${msgId} [replace this with your new answer]\``)
-                        .setFooter({ text: `If you need to modify your answer please run the ++modify-answer command. Thank you!` });
+                        .setFooter(`If you need to modify your answer please run the ++modify-answer command. Thank you!`);
                     message.delete();
                     message.client.users.cache.get(`${author}`).send({ embeds: [embed] });
                 });

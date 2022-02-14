@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const connection = require('../../database.js');
 
+
 module.exports = {
     name: 'start-challenge',
     description: 'This gives **mods** the ability to start a challenge by storing the prizes for 1st, 2nd and 3rd place as well as the announcements channel ID.',
@@ -15,7 +16,11 @@ module.exports = {
         let mod = message.author.id;
         let prize = [];
         let prizes = args.slice(1).join(' ').split("|");
-
+        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
+        if(role) {
+            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
+            return;
+        } else {
             if (!announcementsChannel) {
                 message.reply('You need to include the ID of the channel where you want me to post the Challenge Questions!');
                 return;
@@ -36,7 +41,7 @@ module.exports = {
                                     {name: 'Rules', value: '1. Please be courteous to our fellow participants. Being rude, degrading, etc. will get you disqualified from the challenge.\n2. Please only submit once to each challenge. Multiple submissions can and will cause issues.'},
                                     {name: 'Prizes', value: `🥇 First Place: ${prizes[0]}\n🥈 Second Place: ${prizes[1]}\n🥉 Third Place: ${prizes[2]}`}
                                 )
-                                .setFooter({ text: 'Thanks for participating in our challenge! Good luck!' });
+                                .setFooter('Thanks for participating in our challenge! Good luck!');
                     message.guild.channels.cache.get(announcementsChannel).send({ embeds: [rules] });
                         
                         const msg = message.id;
@@ -47,6 +52,7 @@ module.exports = {
                       
                     message.react('👍');
                 }
+            }
         
         }
 

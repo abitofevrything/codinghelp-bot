@@ -12,7 +12,7 @@ module.exports = {
 	execute(interaction) {
 		let usr = interaction.options.getUser('user');
 		usr.send(`Hey, ${usr}!` + ' It looks like we have already answered this on our website. Please check it out here: https://codinghelp.site/');
-		interaction.editReply({ content: `📨 I just sent that user a direct message about how their question was answered on our wiki/knowledgebase/website.\nThey will not receive it if their DMs are closed so please check the user's roles.` });
+		interaction.editReply({ content: `📨 I just sent that user a direct message about how their question was answered on our wiki/knowledgebase/website.\nThey will not receive it if their DMs are closed so please check the user's roles.`, ephemeral: true });
 
 
 	},

@@ -15,7 +15,11 @@ module.exports = {
     async execute(interaction, client) {
         let user = interaction.options.getUser('user') || client.users.cache.get(interaction.member.user.id);
         let avs = new discord.MessageEmbed()
-            .setAuthor({ text: `Avatar from: ${user.tag}`, url: "https://discord.gg/geQEUBm", iconURL: user.displayAvatarURL({ dynamic: true }) })
+            .setAuthor(
+                `Avatar from: ${user.tag}`,
+                user.displayAvatarURL({ dynamic: true }),
+                "https://discord.gg/geQEUBm"
+            )
             .setColor(ee.rand_color)
             .addField(
                 "❱ PNG",
@@ -37,7 +41,7 @@ module.exports = {
                     dynamic: true,
                 })
             )
-            .setFooter({ text: ee.footertext, iconURL: ee.footericon })
+            .setFooter(ee.footertext, ee.footericon)
             .setImage(
                 user.displayAvatarURL({
                     dynamic: true,
@@ -45,7 +49,7 @@ module.exports = {
                 })
             );
 
-            interaction.reply({ embeds: [avs], ephermal: true })
+        interaction.editReply({ embeds: [avs], ephermal: true })
     },
 
 };

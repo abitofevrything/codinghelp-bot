@@ -32,8 +32,8 @@ module.exports = {
             let report = new Discord.MessageEmbed()
                 .setColor('#5241CE')
                 .setTitle(`This is the current status of your bug report...`)
-                .setAuthor({ name: authorUsername, iconURL: avatar })
-                .setThumbnail(avatar)
+                .setAuthor(`${authorUsername}`, `${avatar}`)
+                .setThumbnail(`${avatar}`)
                 .setDescription(`${status}\n\n**This is your original report:**\n${original}\n\n**Did you upload a file?**\n${file}`)
                 .addFields(
                     {
@@ -43,7 +43,7 @@ module.exports = {
                     name: 'Message Author ID:',
                     value: `\`${OG}\``
                 })
-                .setFooter({ text: 'If you don\'t understand this status, please ask Erin about it.', iconURL: 'https://codinghelp.site/bots/codinghelp.png' })
+                .setFooter('If you don\'t understand this status, please ask Erin about it.', 'https://codinghelp.site/bots/codinghelp.png')
 
             message.react('📨');
             usr.send({ embeds: [report] })

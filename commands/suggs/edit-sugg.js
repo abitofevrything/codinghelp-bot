@@ -54,22 +54,22 @@ module.exports = {
         
         const edited = new Discord.MessageEmbed()
             .setColor('1C3D77')
-            .setAuthor({name: author, iconURL: avatar})
+            .setAuthor(`${author}`, `${avatar}`)
             .setDescription('Your suggestion has been updated!')
             .addFields(
-                { name: 'Your old suggestion:', value: suggestion},
-                { name: 'Your new suggestion:', value: upStatus},
+                { name: 'Your old suggestion:', value: `${suggestion}`},
+                { name: 'Your new suggestion:', value: `${upStatus}`},
             )
             .setTimestamp()
-            .setFooter({ text: 'If you do\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!' });
+            .setFooter('If you do\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!');
         message.author.send({ embeds: [edited] });
             message.delete()
 
         const editedTwo = new Discord.MessageEmbed()
             .setColor('004d4d')
-            .setAuthor({name: author, iconURL: avatar})
-            .setDescription(upStatus)
-            .setFooter({ text: 'If you are interested in submitting a suggestion please use: ++suggestion' });
+            .setAuthor(`${author}`, `${avatar}`)
+            .setDescription(`${upStatus}`)
+            .setFooter('If you are interested in submitting a suggestion please use: ++suggestion');
 
             const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');
             channel.messages.fetch(mId).then(message => {

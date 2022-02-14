@@ -8,7 +8,7 @@ module.exports = {
   cooldown: 400,
   example: '++thanks @DudeThatsErin#8061 or ++thanks 455926927371534346',
   async execute(message, args, client) {
-    const mention = message.mentions.users.first();
+    const mention = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
 
     if (!mention) {
@@ -19,41 +19,23 @@ module.exports = {
     const thankee = mention.id;
     const thanker = message.author.id;
 
-    if (thankee === client.user.id || thankee === message.author.id || thankee.ClientUser === true) return message.reply('It looks like you were trying to thank yourself or a bot in your server. That is not the appropriate way to use this system.');
+    if (mention.ClientUser === true || thankee === message.author.id || thankee === client.user.id) {
+      message.reply('It looks like you were trying to thank yourself or a bot in your server. That is not the appropriate way to use this system.');
+      return;
+    }
+
     await connection.query(
       `INSERT INTO Thanks (userId, user, thanks) VALUES (?, ?, ?);`,
       [thanker, thankee, 1]
     );
 
-    if (message.mentions.users.first(2)[1]) {
-      const secondMention = message.mentions.users.first(2)[1];
-      if (secondMention === client.user.id || secondMention === message.author.id || secondMention.ClientUser === true) return message.reply('It looks like you were trying to thank yourself or a bot in your server. That is not the appropriate way to use this system.');
-      const thankee2 = secondMention.id;
-      await connection.query(
-        `INSERT INTO Thanks (userId, user, thanks) VALUES (?, ?, ?);`,
-        [thanker, thankee2, 1]
-      );
-    }
-    if (message.mentions.users.first(3)[2]) {
-      const thirdUser = message.mentions.users.first(3)[2];
-      if (thirdUser === client.user.id || thirdUser === message.author.id || thirdUser.ClientUser === true) return message.reply('It looks like you were trying to thank yourself or a bot in your server. That is not the appropriate way to use this system.');
-      const thankee3 = thirdUser.id
-      await connection.query(
-        `INSERT INTO Thanks (userId, user, thanks) VALUES (?, ?, ?);`,
-        [thanker, thankee3, 1]
-      );
-    }
-    if (message.mentions.users.first(4)[3]) {
-      const fourthUser = message.mentions.users.first(4)[3];
-      if (fourthUser === client.user.id || fourthUser === message.author.id || fourthUser.ClientUser === true) return message.reply('It looks like you were trying to thank yourself or a bot in your server. That is not the appropriate way to use this system.');
-      const thankee4 = fourthUser.id;
-      await connection.query(
-        `INSERT INTO Thanks (userId, user, thanks) VALUES (?, ?, ?);`,
-        [thanker, thankee4, 1]
-      );
-    }
+    const results = await connection.query(
+      `select sum(cast(thanks as unsigned)) as total from Thanks where user = ?;`,
+      [thankee]
+    );
+    const no = results[0][0].total;
 
-    message.reply(`I have thanked everyone for you. We all appreciate it! Use the \`++thanks-leaderboard\` command in the <#433962402292432896> channel to see where you stand.`)
+    message.reply(`You thanked ${mention.username}! They now have ${no} thanks. Use the \`++thanks-leaderboard\` command to see where you stand.`)
 
   }
 }

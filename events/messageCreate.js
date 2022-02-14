@@ -1,7 +1,6 @@
 const config = require('../config/config.json');
 const Discord = require('discord.js');
 const me = require('../config/owner.json');
-const connection = require('../database.js');
 
 module.exports = {
     name: 'messageCreate',
@@ -28,7 +27,7 @@ module.exports = {
         //console.log(command);
 
         // owner only
-        if (command.ownerOnly === 'yes' || command.ownerOnly === 1) {
+        if (command.ownerOnly === 'yes') {
             if (!message.author.id === me.id) {
                 return message.reply({ content: `This is only a command Erin (<@${me.id}>) can use. If you are seeing this in error use the \`${config.prefix}report\` command.` });
             }
@@ -36,7 +35,7 @@ module.exports = {
 
 
         const modRoles = ['780941276602302523', '822500305353703434', '718253309101867008', '751526654781685912'];
-        const modIDs = ['780941276602302523', '703347886045266061', '706528088690917538'];
+        const modIDs = ['732667572448657539', '455926927371534346', '541305895544422430'];
         const isMod = modIDs.reduce((alrdyGod, crr) => alrdyGod || message.content.toLowerCase().split(' ').includes(crr), false);
         let value = 0;
         if (message.channel.parentID === '382210817636040706') {
@@ -52,7 +51,7 @@ module.exports = {
             }
         }
 
-        if (command.modOnly === 1 || command.challengeMods === 'yes') {
+        if (command.modOnly === 'yes') {
             for (const ID of modRoles) {
                 if (!message.member.roles.cache.has(ID)) {
                     value++
@@ -67,7 +66,7 @@ module.exports = {
         }
 
         const chllMod = ['839863262026924083', '718253309101867008'];
-        if (command.challengeMods === 1 || command.challengeMods === 'yes') {
+        if (command.challengeMods === 'yes') {
             for (const ID of chllMod) {
                 if (!message.member.roles.cache.has(ID)) {
                     value++
@@ -77,19 +76,6 @@ module.exports = {
                     message.reply({ content: `This is a command only challenge moderators can use. You do not have the required permissions. Challenge moderators have the <@&${chllMod[1]}> role. Please run \`${config.prefix}report [issue]\` if you are seeing this in error.` });
                     return;
                 }
-            }
-        }
-
-        const r = await connection.query(
-            `SELECT * FROM Challenges WHERE player = ?;`,
-            [message.author.id]
-        );
-        const part = r[0][0]?.player;
-        if (command.partOnly === 'yes' || command.partOnly === 1) {
-            if (!part || part === undefined) {
-                message.react('❌');
-                message.reply({ content: `Only players that are part of the Challenge System can play with the commands. If you are getting this message and you are playing in the system, make sure you have reacted to receive the **Participants** role. If you did, please let the **Challenge Mods** know.` });
-                return;
             }
         }
 

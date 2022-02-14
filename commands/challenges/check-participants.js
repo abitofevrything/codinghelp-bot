@@ -4,8 +4,9 @@ module.exports = {
     name: 'check-participants',
     description: 'This allows **mods** to check who has the participants role in their server.',
     aliases: ['cp', 'contestants', 'challenge-users', 'check-users'],
-    usage: '++check-participants',
+    usage: '!check-participants',
     challengeMods: 'yes',
+    modOnly: 'yes',
     async execute (message, args) {
 
                 const result = await connection.query(
@@ -20,5 +21,6 @@ module.exports = {
                     message.channel.send(`${tag}`)
                   }
 
+                
                 }
 }

@@ -11,9 +11,11 @@ module.exports = {
     }
   ],
   execute(interaction) {
-    const user = interaction.options.getUser('user');
+    interaction.options.getUser('user');
+
+    interaction.editReply({ content: `📨 I sent the DM to the user!`, ephemeral: true })
     user.send({ content: `Hey, ${user}!` + ' This isn\'t the correct channel for your question. Please check our channel list on the left and ask repost in a different channel. Thank you!' });
-    interaction.editReply({ content: `📨 I just sent that user a direct message telling them they are in the wrong channel.\nThey will not receive it if their DMs are closed so please check the user's roles.`  });
+    interaction.editReply({ content: `📨 I just sent that user a direct message telling them they are in the wrong channel.\nThey will not receive it if their DMs are closed so please check the user's roles.`, ephemeral: true });
   },
 
 };

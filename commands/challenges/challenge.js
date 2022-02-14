@@ -9,7 +9,8 @@ module.exports = {
     inHelp: 'yes',
     example: '++challenge 1 What is my favorite color?',
     challengeMods: 'yes',
-    async execute (message, args, client) {
+    modOnly: 'yes',
+    async execute (message, args) {
 
         let msgId = message.id;
         let guildId = message.guild.id;
@@ -22,14 +23,14 @@ module.exports = {
             [guildId]
         );
         const announcementsChannel = result[0][0].channelD;
-        if (!result) return message.channel.send('The challenge has not started yet. Please start the challenge first with \`++start-challenge [announcements channel] Prize1|Prize2|Prize3\` before running this.');
+
 
         if (!challengeNo) {
                 const challenge = await connection.query(
                     `SELECT * FROM Challenge WHERE guildId = ? ORDER BY challengeNo DESC LIMIT 1;`,
                     [guildId]
                 );
-            const challengeNo = challenge[0][0].challengeNo || '\`0 zilch nada, there isn\'t a challenge in the database.\`';
+            const challengeNo = challenge[0][0].challengeNo;
             message.react('❓');
                 message.reply(`What challenge number are you trying to add to the database? The last challenge number in the database is ${challengeNo}.`);
                 return;
@@ -39,24 +40,21 @@ module.exports = {
                 message.reply('What is the challenge that you want to submit? You can\'t submit a blank challenge.');
                 return;
             } else {
-                let ch = client.channels.cache.get(announcementsChannel) || await client.channels.fetch(announcementsChannel).catch(console.log(err))
 
                 let embeD = new Discord.MessageEmbed()
                     .setColor('BLUE')
                     .setTitle(`Challenge ${challengeNo}`)
                     .setDescription(`${answer}`)
-                    .setFooter({ text: 'Run the ++submit command to submit answers to this challenge.' });
+                    .setFooter('Run the ++submit command to submit answers to this challenge.');
 
 
-                const s = await ch.send({ content: `Hey, <@&805104969442263070> A new challenge is up!`, embeds: [embeD] })
-                //console.log(s);
-                //console.log(s.id);
-                const msg = s.id;
-                connection.query(
-                    `INSERT INTO Challenge (msgId, guildId, title, challengeNo, moderator) VALUES (?, ?, ?, ?, ?);`,
-                    [msg, guildId, answer, challengeNo, moderator]
-                );
-
+                message.guild.channels.cache.get(announcementsChannel).send(`Hey, <@&850732454770901002> A new challenge is up!`, embeD).then(message => {
+                    const msg = message.id;
+                    connection.query(
+                        `INSERT INTO Challenge (guildId, msgId, moderator, title, challengeNo) VALUES (?, ?, ?, ?, ?)`,
+                        [guildId, msg, moderator, answer, challengeNo]
+                    );
+                });
                 const results = await connection.query(
                     `SELECT * FROM Challenge WHERE guildId = ? AND challengeNo = ?;`,
                     [guildId, challengeNo]
@@ -65,9 +63,9 @@ module.exports = {
                 const mes = res.msgId;
                 let embed = new Discord.MessageEmbed()
                     .setColor('#92caa0')
-                    .setTitle(`I have added Challenge number ${challengeNo} to the \`Challenge\` Database.`)
+                    .setTitle(`I have added Challenge number ${challengeNo} to the \`Challenge\` Database.`)                        
                     .setDescription(`The submission is as follows: ${answer} You can see it here: <#${announcementsChannel}>.\n\nThe message ID for the challenge is: \`${mes}\``)
-                    .setFooter({ text: 'If this is in error, please report this!' });
+                    .setFooter('If this is in error, please report this!');
 
                 message.channel.send({ embeds: [embed] })
                 message.delete();

@@ -8,6 +8,7 @@ module.exports = {
     usage: '++remove-submissions [message ID]',
     example: '++remove-submissions 841301824115965952',
     inHelp: 'yes',
+    modOnly: 'yes',
     challengeMods: 'yes',
     async execute (message, args) {
         let name = message.author.id;
@@ -33,7 +34,7 @@ module.exports = {
                         .setColor('#d4a066')
                         .setTitle(`The submission by ${username} for Challenge ${dayNo} has been removed.`)
                         .setDescription(`Their submission is as follows:\n${Submissions}\n\nThe moderator that removed it was: ${modname}.`)
-                        .setFooter({ text: 'If there is a problem with this, please report this!' });
+                        .setFooter('If there is a problem with this, please report this!');
 
                 message.channel.send({ embeds: [embed] });
 

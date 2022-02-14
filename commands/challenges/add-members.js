@@ -32,10 +32,10 @@ module.exports = {
                     .setColor('BLUE')
                     .setTitle(`Users with the \`Participants\` role`)
                     .setDescription(`${name}`)
-                    .setFooter({ text: 'Only users that have been online at least once since this bot was last rebooted will be shown here and only a maximum of 2,000 members will appear. Other users can be added using the s.manualadd command.' });
+                    .setFooter('Only users that have been online at least once since this bot was last rebooted will be shown here and only a maximum of 2,000 members will appear. Other users can be added using the s.manualadd command.');
                 message.channel.send({ embeds: [embed] });
 
-            }
+            }  
 
     }
 }

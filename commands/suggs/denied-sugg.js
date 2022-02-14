@@ -68,14 +68,14 @@ module.exports = {
         
         const denied = new Discord.MessageEmbed()
             .setColor('A4503E')
-            .setAuthor({name: aut, iconURL: avatar})
+            .setAuthor(`${aut}`, `${avatar}`)
             .setDescription(`${suggestion}`)
             .addFields(
                 { name: 'Unfortunately, your suggestion was denied. This is the reason:', value: `${upStatus}`},
                 { name: 'Moderator that denied your suggestion:', value: `${moderate}`},
             )
             .setTimestamp()
-            .setFooter({ text: 'If you don\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!' });
+            .setFooter('If you don\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!');
             message.client.users.cache.get(`${OGauthor}`).send({ embeds: [denied] });
             message.channel.send(`That has been denied and the suggestion has been deleted. 😃`);
             message.react('✅');
