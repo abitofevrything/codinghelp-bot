@@ -11,7 +11,7 @@ module.exports = {
     }
   ],
   execute(interaction) {
-    interaction.options.getUser('user');
+    const user = interaction.options.getUser('user');
 
     interaction.editReply({ content: `📨 I sent the DM to the user!`, ephemeral: true })
     user.send({ content: `Hey, ${user}!` + ' This isn\'t the correct channel for your question. Please check our channel list on the left and ask repost in a different channel. Thank you!' });

@@ -17,14 +17,14 @@ module.exports = {
 		}
 	],
 	inHelp: 'yes',
-	async execute(interaction) {
+	async execute(interaction, client) {
 		const pages = [];
 		const roleColor =
 			interaction.guild.me.displayHexColor === "#000000"
 				? "#ffffff"
 				: interaction.guild.me.displayHexColor;
 
-		const description = `These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`${prefix}help <command>\`.`;
+		const description = `These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`/help <command>\`.`;
 
 
 		const embed1 = new MessageEmbed()
@@ -107,7 +107,7 @@ module.exports = {
 
 		if (cmdd) { //WORKS
 
-			const cmd = interaction.client.commands.get(cmdd) || interaction.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdd));
+			const cmd = client.slashCommands.get(cmdd) || client.commands.get(cmdd) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdd));
 			//console.log(cmd)
 			if (!cmd) return interaction.editReply({ content: "That command could not be found!", ephemeral: true });
 
@@ -140,7 +140,7 @@ module.exports = {
 			if (Array.isArray(cmd.userPerms) && cmd.userPerms.length > 0) {
 				emb.addField("You must have these permissions to run this command:", cmd.userPerms.join(", "), false)
 			}
-			emb.setFooter(ee.footertext, ee.footericon);
+			emb.setFooter({ text: ee.footertext, iconURL: ee.footericon });
 			//console.log(emb.toJSON());
 
 			for (const embedField of emb.fields)
@@ -150,7 +150,6 @@ module.exports = {
 
 		} else {
 			const buttonPaginator = new ButtonPaginator(interaction, { pages });
-			await wait(4000);
 			await buttonPaginator.send();
 		}
 
