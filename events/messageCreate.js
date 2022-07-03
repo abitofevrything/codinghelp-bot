@@ -1,11 +1,15 @@
 const config = require('../config/config.json');
-const Discord = require('discord.js');
+const { MessageActionRow, MessageButton } = require('discord.js');
 const me = require('../config/owner.json');
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'messageCreate',
     async execute(message, client) {
-        //console.log(message)
+
+        //console.log(message);
+        //console.log('My ID should match this: 455926927371534346', message.mentions.repliedUser.id); // how I get the user ID on new replies.
+
         // delete slash commands
         //message.guild.commands.set([])
         //console.log(await message.guild.commands.fetch());
@@ -51,7 +55,7 @@ module.exports = {
             }
         }
 
-        if (command.modOnly === 'yes') {
+        if (command.modOnly === 1) {
             for (const ID of modRoles) {
                 if (!message.member.roles.cache.has(ID)) {
                     value++
@@ -66,7 +70,7 @@ module.exports = {
         }
 
         const chllMod = ['839863262026924083', '718253309101867008'];
-        if (command.challengeMods === 'yes') {
+        if (command.challengeMods === 1) {
             for (const ID of chllMod) {
                 if (!message.member.roles.cache.has(ID)) {
                     value++
@@ -105,26 +109,43 @@ module.exports = {
             command.execute(message, args, client);
         } catch (error) {
             console.error(error);
-            const embed = new Discord.MessageEmbed()
-                .setColor('RED')
-                .setTitle('Oh no! An _error_ has appeared!')
-                .setDescription(`**Contact Bot Owner:** <@${me.id}>`)
-                .addFields({
-                    name: '**Error Name:**',
-                    value: `\`${error.name}\``
-                }, {
-                    name: '**Error Message:**',
-                    value: `\`${error.message}\``
-                }, {
-                    name: '**Error Location:**',
-                    value: `\`${error.stack}\``
-                }, {
-                    name: '**Ways to Report:**',
-                    value: `Run the \`${config.prefix}report\` command, [Join My Support Server](https://discord.gg/tT3VEW8AYF), [Fill out this form](https://codinghelp.site/contact-us/) (Erin owns CodingHelp so that form goes directly to her), Message her on Discord, or Email her at me@dudethatserin.site\n\nPlease include all of the information in this embed (message) as well as any additional information you can think to provide. Screenshots are also VERY helpful. Thank you!`
-                })
-                .setTimestamp()
-                .setFooter(`Thanks for using ${client.user.tag}! I'm sorry you encountered this error!`, `${client.user.displayAvatarURL()}`)
-            message.channel.send({ embeds: [embed] });
+            const row = new MessageActionRow()
+                .addComponents(
+                    new MessageButton()
+                        .setLabel('Erin\'s Support Server')
+                        .setStyle('LINK')
+                        .setURL('https://discord.gg/tT3VEW8AYF'),
+                    new MessageButton()
+                        .setLabel('Fill out this form!')
+                        .setStyle('LINK')
+                        .setURL('https://codinghelp.site')
+                )
+            const embed = {
+                color: '#AA2C2C',
+                title: 'Oh no! An _error_ has appeared!',
+                description: `**Contact Bot Owner:** <@${me.id}>`,
+                fields: [
+                    {
+                        name: '**Error Name:**',
+                        value: `\`${error.name}\``
+                    }, {
+                        name: '**Error Message:**',
+                        value: `\`${error.message}\``
+                    }, {
+                        name: '**Error Location:**',
+                        value: `\`${error.stack}\``
+                    }, {
+                        name: '**Ways to Report:**',
+                        value: `Run the \`${config.prefix}report\` command, Message Erin on Discord, or use one of the links below.\n\nPlease include all of the information in this embed (message) as well as any additional information you can think to provide. Screenshots are also VERY helpful. Thank you!`
+                    }
+                ],
+                timestamp: new Date(),
+                footer: {
+                    text: `Thanks for using ${client.user.tag}! I'm sorry you encountered this error!`,
+                    icon_url: `${client.user.displayAvatarURL()}`
+                }
+            };
+            message.channel.send({ embeds: [embed], components: [row] });
         }
     }
 }// end client.on message

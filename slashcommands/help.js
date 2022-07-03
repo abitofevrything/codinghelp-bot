@@ -1,9 +1,8 @@
 const { MessageEmbed } = require("discord.js");
-const config = require('../../config/config.json');
+const config = require('../config/config.json');
 const prefix = config.prefix;
-const ee = require('../../config/embed.json');
+const ee = require('../config/embed.json');
 const { ButtonPaginator } = require('@psibean/discord.js-pagination');
-const wait = require('util').promisify(setTimeout);
 
 module.exports = {
 	name: 'help',
@@ -34,7 +33,11 @@ module.exports = {
 			.addFields(
 				{
 					name: 'These are the general commands. By general, we mean commands that are **not** slash commands.',
-					value: '```css\nprune\nreport\nstatusreport\ninvite\nserver-info\nuser-info\n```'
+					value: '```css\nreport\nuser-info\nserver-info\nflip\nreddit\ntech\ninvite\nping\navatar\n```'
+				},
+				{
+					name: 'These are the commands that have to do with message issues. You can use these commands by replying to someone\'s message as well.',
+					value: '```css\nfaq\nhire\nbin\ndocs\nelaborate\nerror\nformat\njust-ask\npatience\nshare-code\nwiki\nwrong-channel\n```'
 				}
 			);
 
@@ -45,11 +48,7 @@ module.exports = {
 			.addFields(
 				{
 					name: 'These are all of our slash commands. This means that you type `/` before the command name to access them.',
-					value: '```css\navatar\ncoin\nreddit\ntech\nrolldie\ncoinflip\nhelp\nping\n```'
-				},
-				{
-					name: 'These are the slash commands having to do with message issues.',
-					value: '```css\nbin\nchannel\ndocs\nelaboriate\nerror\nformat\nhire\njust-ask\nmods\npatience\nshare-code\nwiki\nwrong-channel\n```'
+					value: '```css\nhelp\n```'
 				}
 			)
 
@@ -59,7 +58,7 @@ module.exports = {
 			.setDescription(description)
 			.addFields({
 				name: 'These are general **moderator** only commands. Meaning only **moderators** can use these commands.',
-				value: '```css\nprune\ndm\nrules\npartner\nserver-status\nsub-status\nbot-status\nsite-status\n```'
+				value: '```css\nrules\npartner\nserver-status\nsub-status\nbot-status\nsite-status\n```'
 			});
 
 		const embed4 = new MessageEmbed()
@@ -79,7 +78,7 @@ module.exports = {
 			.setTitle('Help Menu - Thanks System Commands')
 			.setDescription(description)
 			.addFields({
-				name: 'These are the commands you can use for our Thanks System.',
+				name: 'These are the commands you can use for our Thanks System. You can use these commands by replying to someone\'s message as well.',
 				value: '```css\nthanks\nunthanks\nthanks-on\nthanks-off\nthanks-leaderboard\n```'
 			});
 

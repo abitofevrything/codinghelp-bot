@@ -41,7 +41,7 @@ module.exports = {
                     value: `Run the \`${config.prefix}report\` command, [Fill out this form](https://codinghelp.site/contact-us/), Message her on Discord, or Email her at me@dudethatserin.site\n\nPlease include all of the information in this embed (message) as well as any additional information you can think to provide. Screenshots are also VERY helpful. Thank you!`
                 })
                 .setTimestamp()
-                .setFooter({ text:`Thanks for using ${client.user.tag}! I'm sorry you encountered this error!`, iconURL: `${client.user.displayAvatarURL()}`});
+                .setFooter({ text:`Thanks for using ${client.user.tag}! I'm sorry you encountered this error!`, icon_url: `${client.user.displayAvatarURL()}`});
             interaction.editReply({ embeds: [embed], ephemeral: true });
         }
     }
