@@ -22,7 +22,7 @@ module.exports = {
             [msgId],
         );
         const OGauthor = result2[0][0].Author;
-        const aut = await message.guild.members.fetch(`${OGauthor}`);
+        const aut = await message.guild.members.fetch(OGauthor);
         const name = aut.user.username;
 
         const result3 = await connection.query(
@@ -50,7 +50,7 @@ module.exports = {
         let modd = 'No one has updated this suggestion yet.';
         if (result6[0][0].Moderator != 'New Suggestion, No Mod.') {
             mdd = result6[0][0].Moderator;
-            md = await message.guild.members.fetch(`${mdd}`);
+            md = await message.guild.members.fetch(mdd);
             modd = md.user.username;
         } else {
             mdd = result6[0][0].Moderator;
@@ -63,16 +63,16 @@ module.exports = {
         const status = result7[0][0].stat;
 
         const initial = new Discord.MessageEmbed()
-        .setColor('771C73')
-        .setAuthor(`${name}`, `${avatar}`)
-        .setDescription(`${suggestion}`)
+        .setColor('#771C73')
+        .setAuthor({name: name, iconURL: avatar})
+        .setDescription(suggestion)
         .addFields(
             {name: 'Last Edited on', value: `${date}\nYou can convert the time by using [this time converter](https://greenwichmeantime.com/time-gadgets/time-zone-converter/).`},
-            {name: 'Moderator that edited your message last?', value: `${modd}`},
-            {name: 'Status Message', value: `${status}`}
+            {name: 'Moderator that edited your message last?', value: modd},
+            {name: 'Status Message', value: status}
         )
         .setTimestamp()
-        .setFooter('This is the current status of this suggestion. If you are curious about this status, please contact the mods to see what we are waiting on.');
+        .setFooter({text: 'This is the current status of this suggestion. If you are curious about this status, please contact the mods to see what we are waiting on.'});
 
         let user = message.author;
         user.send({ embeds: [initial] });

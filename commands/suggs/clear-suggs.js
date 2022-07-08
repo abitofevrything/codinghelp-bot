@@ -6,12 +6,12 @@ module.exports = {
     description: 'Emptys the Suggestion Database. \n **Note:** Only DudeThatsErin#8061 can run this command.',
     usage: '++clearsuggs',
     ownerOnly: 'yes',
-    async execute(message, args) {
+    async execute(message) {
 
         connection.query(`TRUNCATE TABLE Suggs;`);
 
 
-            message.channel.bulkDelete(99);
+        message.channel.bulkDelete(99);
 
     }
 };

@@ -6,10 +6,10 @@ module.exports = {
   name: 'resources',
   aliases: ['resource', 'useful-links', 'usefullinks'],
   ownerOnly: 'yes',
-  execute(message, args, client) {
+  execute(message) {
 
     const docs = new Discord.MessageEmbed()
-      .setColor(ee.yellow)
+      .setColor('#60A368')
       .setTitle('Useful Resources/Links')
       .setDescription('This is an excerpt from our Useful Links listed on our Forum. The link to that is below. Use the \`++suggest\` command if you would like to add any additional resources.')
       .addFields(
@@ -20,7 +20,7 @@ module.exports = {
         },
         {
           name: 'IDEs',
-          value: `- [Visual Studio](https://visualstudio.microsoft.com/)\n- [Eclipse](http://www.eclipse.org/downloads/)\n- [Code::Blocks](http://www.codeblocks.org/)\n- [PHPStorm](https://www.jetbrains.com/phpstorm/)\n- [PyCharm](https://www.jetbrains.com/pycharm/)`,
+          value: `- [Visual Studio](https://visualstudio.microsoft.com/)\n- [Eclipse](http://www.eclipse.org/downloads/)\n- [Code::Blocks](http://www.codeblocks.org/)\n- [PHPStorm](https://www.jetbrains.com/phpstorm/)\n- [PyCharm](https://www.jetbrains.com/pycharm/)\n- [VSCodium](https://vscodium.com/)\n- [VSCode](https://code.visualstudio.com/)`,
           inline: false
         },
         {
@@ -30,7 +30,7 @@ module.exports = {
         },
         {
           name: 'Task/Bug Management',
-          value: `- [Todoist](https://todoist.com/r/erin_skidds_hizmbl)\n- [Trello](https://trello.com/)\n- [BugZilla](https://www.bugzilla.org/)\n- [Redmine](https://www.redmine.org/)`,
+          value: `- [Todoist](https://todoist.com/)\n- [Trello](https://trello.com/)\n- [UpNote](https://getupnote.com/)\n- [BugZilla](https://www.bugzilla.org/)\n- [Redmine](https://www.redmine.org/)`,
           inline: false
         },
         {
@@ -49,7 +49,7 @@ module.exports = {
               type: 2,
               style: 5,
               label: 'View more useful links',
-              url: `https://codinghelp.site/threads/useful-links.154/`
+              url: `https://codinghelp.site/useful-links/`
             }
           ]
         }

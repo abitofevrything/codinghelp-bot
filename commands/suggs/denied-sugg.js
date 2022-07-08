@@ -46,7 +46,7 @@ module.exports = {
         const mod = message.author.id;
 
         const stats = args.slice(1).join(' ');
-        if(!stats) return message.channel.send('You need to include the status of the suggestion as well as the message ID.');
+        if(!stats) return message.channel.send({text:'You need to include the status of the suggestion as well as the message ID.'});
 
         connection.query(
             `UPDATE Suggs SET stat = ?, Moderator = ? WHERE noSugg = ?;`,
@@ -67,17 +67,17 @@ module.exports = {
         const moderate = moder.tag || message.author.tag;
         
         const denied = new Discord.MessageEmbed()
-            .setColor('A4503E')
-            .setAuthor(`${aut}`, `${avatar}`)
-            .setDescription(`${suggestion}`)
+            .setColor('#A4503E')
+            .setAuthor({ name: aut, iconURL: avatar})
+            .setDescription(suggestion)
             .addFields(
-                { name: 'Unfortunately, your suggestion was denied. This is the reason:', value: `${upStatus}`},
-                { name: 'Moderator that denied your suggestion:', value: `${moderate}`},
+                { name: 'Unfortunately, your suggestion was denied. This is the reason:', value: upStatus},
+                { name: 'Moderator that denied your suggestion:', value: moderate},
             )
             .setTimestamp()
-            .setFooter('If you don\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!');
-            message.client.users.cache.get(`${OGauthor}`).send({ embeds: [denied] });
-            message.channel.send(`That has been denied and the suggestion has been deleted. 😃`);
+            .setFooter({text: 'If you don\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!'});
+            message.client.users.cache.get(OGauthor).send({ embeds: [denied] });
+            message.channel.send({text:`That has been denied and the suggestion has been deleted. 😃`});
             message.react('✅');
                 try {
                     await connection.query(
@@ -85,7 +85,7 @@ module.exports = {
                         [msgId, OGauthor],
                     );
                 } catch (error) {
-                    message.reply('There was an error deleting the suggestion from the database. Please report this!');
+                    message.reply({text:'There was an error deleting the suggestion from the database. Please report this!'});
                     console.log(error);
                 }
             const chnnel = await message.guild.channels.cache.find(c => c.name === 'suggestions');

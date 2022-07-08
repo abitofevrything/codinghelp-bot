@@ -20,7 +20,7 @@ module.exports = {
                     );
                     const mId = result[0][0].noSugg;
                 } catch(error) {
-                    message.reply('There was an error grabbing the ID from the database. Please report this!');
+                    message.reply({text: 'There was an error grabbing the ID from the database. Please report this!'});
                     console.log(error);
                 }
 
@@ -46,7 +46,7 @@ module.exports = {
             const mod = message.author.id;
     
             const stats = args.slice(1).join(' ');
-            if(!stats) return message.channel.send('You need to include the status of the suggestion as well as the message ID.');
+            if(!stats) return message.channel.send({text: 'You need to include the status of the suggestion as well as the message ID.'});
     
             try {
                 connection.query(
@@ -54,7 +54,7 @@ module.exports = {
                     [stats, mod, msgId],
                 );
             } catch (error) {
-                message.reply('There was an error updating the suggestion in the database. Please report this!');
+                message.reply({text: 'There was an error updating the suggestion in the database. Please report this!'});
                 console.log(error);
             }
 
@@ -73,28 +73,28 @@ module.exports = {
     
             const inprogress = new Discord.MessageEmbed()
                 .setColor('004d4d')
-                .setAuthor(`${name}`, `${avatar}`)
-                .setDescription(`${suggestion}`)
+                .setAuthor({name: name, iconURL: avatar})
+                .setDescription(suggestion)
                 .addFields(
-                    { name: 'Current Status', value: `${upStatus}`},
-                    { name: 'The moderator that last updated this was', value: `${moderate}`},
+                    { name: 'Current Status', value: upStatus},
+                    { name: 'The moderator that last updated this was', value: moderate},
                 )
-                .setFooter('If you would like to suggest something, use ++suggestions');
+                .setFooter({text: 'If you would like to suggest something, use ++suggestions'});
                 
             const updated = new Discord.MessageEmbed()
                 .setColor('3EA493')
-                .setAuthor(`${name}`, `${avatar}`)
-                .setDescription(`${suggestion}`)
+                .setAuthor({name: name, iconURL: avatar})
+                .setDescription(suggestion)
                 .addFields(
-                    { name: 'Your suggestion has been updated! This is the current status:', value: `${upStatus}`},
-                    { name: 'Moderator that updated your suggestion:', value: `${moder}`},
+                    { name: 'Your suggestion has been updated! This is the current status:', value: upStatus},
+                    { name: 'Moderator that updated your suggestion:', value: moder},
                 )
                 .setTimestamp()
-                .setFooter('If you don\'t understand this status, please contact the moderator that updated your suggestion. Thank you!');
+                .setFooter({text: 'If you don\'t understand this status, please contact the moderator that updated your suggestion. Thank you!'});
 
-                (await message.client.users.cache.get(`${OGauthor}`)).send({ embeds: [updated] });
+                (await message.client.users.cache.get(OGauthor)).send({ embeds: [updated] });
                 message.react('✅');
-            message.channel.send(`The suggestion has been updated in the channel and the message was sent. 😃`);
+            message.channel.send({text: `The suggestion has been updated in the channel and the message was sent. 😃`});
 
             const chnnel = await message.guild.channels.cache.find(c => c.name === 'suggestions');
             chnnel.messages.fetch(msgId).then(message => {

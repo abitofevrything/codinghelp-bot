@@ -20,7 +20,7 @@ module.exports = {
                     );
                     const mId = result[0][0].noSugg;
                 } catch(error) {
-                    message.reply('There was an error grabbing the ID from the database. Please report this!');
+                    message.reply({text:'There was an error grabbing the ID from the database. Please report this!'});
                     console.log(error);
                 }
 
@@ -47,7 +47,7 @@ module.exports = {
                 mod = message.author.id;
     
                 const stats = args.slice(1).join(' ');
-                if(!stats) return message.channel.send('You need to include the completion status message for this suggestion as well as the message ID.');
+                if(!stats) return message.channel.send({text:'You need to include the completion status message for this suggestion as well as the message ID.'});
     
                 try {
                     connection.query(
@@ -55,7 +55,7 @@ module.exports = {
                         [stats, mod, msgId],
                     );
                 } catch (error) {
-                    message.reply('There was an error updating the suggestion in the database. Please report this!');
+                    message.reply({text: 'There was an error updating the suggestion in the database. Please report this!'});
                     console.log(error);
                 }
     
@@ -75,20 +75,20 @@ module.exports = {
 
             
                 const denied = new Discord.MessageEmbed()
-                    .setColor('6E3EA4')
-                    .setAuthor(`${aut}`, `${avatar}`)
-                    .setDescription(`${suggestion}`)
+                    .setColor('#6E3EA4')
+                    .setAuthor({name: aut, iconURL:avatar})
+                    .setDescription(suggestion)
                     .addFields(
-                        { name: 'Your suggestion was completed! This is the decision:', value: `${upStatus}`},
-                        { name: 'Moderator that completed your suggestion:', value: `${moderate}`},
+                        { name: 'Your suggestion was completed! This is the decision:', value: upStatus},
+                        { name: 'Moderator that completed your suggestion:', value: moderate},
                     )
                     .setTimestamp()
-                    .setFooter('If you don\'t understand this decision, please contact the moderator that completed your suggestion. Thank you!');
+                    .setFooter({text: 'If you don\'t understand this decision, please contact the moderator that completed your suggestion. Thank you!'});
     
             
-                (await message.client.users.cache.get(`${OGauthor}`)).send({ embeds: [denied] });
+                (await message.client.users.cache.get(OGauthor)).send({ embeds: [denied] });
                 message.react('✅');
-                message.channel.send(`I have done that for you. The message is now deleted in the suggestions channel. 😃`);
+                message.channel.send({text:`I have done that for you. The message is now deleted in the suggestions channel. 😃`});
 
                     try {
                         await connection.query(
@@ -106,7 +106,7 @@ module.exports = {
                         message.delete(); 
                     });
             } else {
-                message.reply('You need to include the ID of the message you want to mark as completed.')
+                message.reply({text:'You need to include the ID of the message you want to mark as completed.'})
             }
     }
 };

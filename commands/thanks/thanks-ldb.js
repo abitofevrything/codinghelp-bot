@@ -53,7 +53,7 @@ module.exports = {
                 {name: 'Thanks', value: points, inline: true},
                 {name: 'How many thanks do you have?', value: `${aUsername}, you currently have \`0\` thank(s).`}
             )
-            .setFooter('If there is an error here, please report this!');
+            .setFooter({text:'If there is an error here, please report this!'});
 
             message.channel.send({ embeds: [embed2] });
 
@@ -71,7 +71,7 @@ module.exports = {
                     {name: 'Thanks', value: points, inline: true},
                     {name: 'How many thanks do you have?', value: `${aUsername}, you currently have \`${p}\` thank(s).`}
                 )
-                .setFooter('If there is an error here, please report this!');
+                .setFooter({text:'If there is an error here, please report this!'});
 
             message.channel.send({ embeds: [embed2] });
                 }

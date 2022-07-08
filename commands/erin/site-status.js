@@ -17,7 +17,7 @@ module.exports = {
         const channel = client.channels.cache.find(channel => channel.id === bot.announcementsId);
         let embed = new Discord.MessageEmbed()
             .setColor(ee.sub_status)
-            .setTitle('Hello, The Moderators have a new update for you!')
+            .setTitle('Hello, Erin has a new update for you!')
             .setDescription(`${reason}`)
             .setTimestamp()
             .setFooter({ text: 'Want to suggest a feature for the website? Use ++suggest'});

@@ -11,6 +11,8 @@ module.exports = {
     example: '++editsugg 847580954306543616 I need to update my suggestion!',
     async execute(message, args) {
 
+        const threadAuthor = message.member.displayName;
+
         const msgId = args[0];
         const result = await connection.query(
             `SELECT noSugg from Suggs WHERE noSugg = ?;`,
@@ -37,7 +39,7 @@ module.exports = {
         const avatar = result4[0][0].Avatar;
 
         const stats = args.slice(1).join(' ');
-        if(!stats) return message.channel.send('You need to include the updated suggestion as well as the message ID.');
+        if(!stats) return message.channel.send({text:'You need to include the updated suggestion as well as the message ID.'});
 
         const update = 'OP Updated their own suggestion.';
 
@@ -53,27 +55,32 @@ module.exports = {
         const upStatus = result8[0][0].Message;
         
         const edited = new Discord.MessageEmbed()
-            .setColor('1C3D77')
-            .setAuthor(`${author}`, `${avatar}`)
+            .setColor('#1C3D77')
+            .setAuthor({name: author, iconURL: avatar})
             .setDescription('Your suggestion has been updated!')
             .addFields(
-                { name: 'Your old suggestion:', value: `${suggestion}`},
-                { name: 'Your new suggestion:', value: `${upStatus}`},
+                { name: 'Your old suggestion:', value: suggestion},
+                { name: 'Your new suggestion:', value: upStatus },
             )
             .setTimestamp()
-            .setFooter('If you do\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!');
+            .setFooter({text: 'If you do\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!'});
         message.author.send({ embeds: [edited] });
             message.delete()
 
         const editedTwo = new Discord.MessageEmbed()
-            .setColor('004d4d')
-            .setAuthor(`${author}`, `${avatar}`)
-            .setDescription(`${upStatus}`)
-            .setFooter('If you are interested in submitting a suggestion please use: ++suggestion');
+            .setColor('#004d4d')
+            .setAuthor({name: author, iconURL: avatar})
+            .setDescription(upStatus)
+            .setFooter({text:'If you are interested in submitting a suggestion please use: ++suggestion'});
 
             const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');
             channel.messages.fetch(mId).then(message => {
-                if (message) message.edit({ embeds: [editedTwo] });
+                message.edit({ embeds: [editedTwo] });
+                message.startThread({
+                    name: `${threadAuthor}-${message.createdTimestamp}`,
+                    autoArchiveDuration: 60,
+                    type: 'GUILD_PUBLIC_THREAD'
+                });    
                 }
             )
 
