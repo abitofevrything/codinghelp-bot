@@ -39,9 +39,9 @@ module.exports = {
             let report = new Discord.MessageEmbed()
                 .setColor('#138D75')
                 .setTitle(`Your bug has been fixed!`)
-                .setAuthor(`${authorUsername}`, `${avatar}`)
+                .setAuthor({name: authorUsername, iconURL: avatar})
                 .setDescription(`**This is the original report:**\n${original}\n\n**This is the current status:**\n${description}\n\n`)
-                .setFooter('If this is incorrect please report this!', config.bot.avatar)
+                .setFooter([{name:'If this is incorrect please report this!', iconURL: config.bot.avatar}])
 
             channel.messages.fetch(messageId).then(message => {
                 if (message) message.delete();

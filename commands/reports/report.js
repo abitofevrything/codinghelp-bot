@@ -1,7 +1,7 @@
 const connection = require('../../database.js');
-const Discord = require('discord.js');
 const bot = require('../../config/bot.json');
 const me = require('../../config/owner.json');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'report',
@@ -19,27 +19,31 @@ module.exports = {
         const channel = client.channels.cache.find(channel => channel.id === bot.reportsChId);
         let authorUsername = message.author.username;
         let avatar = message.author.displayAvatarURL({ dynamic: true });
+        const url = message.attachments.first()?.url || 'No';
 
-        const url = 'no' || message.attachments.first().url;
+        const report = {
+            color: '#8C1149',
+            title: 'Oops! A *bug* has appeared!',
+            author: {
+                name: authorUsername,
+                icon_url: avatar
+            },
+            description: `**This is the report:**\n${description}\n\n**Any files uploaded?**\n${url}`,
+            timestamp: new Date(),
+            footer: {
+                text: 'This was all of the info I could grab from the report.',
+                icon_url: bot.avatar
+            }
+        };
 
-        let report = new Discord.MessageEmbed()
-            .setColor('#8C1149')
-            .setTitle(`Oops! A *bug* has appeared!`)
-            .setAuthor(`${authorUsername}`)
-            .setThumbnail(`${avatar}`)
-            .setDescription(`**This is the report:**\n${description}\n\n**Any files uploaded?**\n${url}`)
-            .setTimestamp()
-            .setFooter('This was all of the information I could grab from the report.', bot.avatar);
-        
-
-        let report2 = new Discord.MessageEmbed()
+        let report2 = new MessageEmbed()
             .setColor('#11818C')
             .setTitle(`Your report has been sent to ${me.name} aka ${me.username}!`)
-            .setAuthor(`${authorUsername}`)
-            .setThumbnail(`${avatar}`)
+            .setAuthor({name: authorUsername, iconURL: avatar})
+            .setThumbnail(avatar)
             .setDescription(`**This is the report:**\n${description}\n\n**Any files uploaded?**\n${url}`)
             .setTimestamp()
-            .setFooter('This was all of the information I could grab from the report.', bot.avatar);
+            .setFooter({ text: 'This was all of the information I could grab from the report.', iconURL: bot.avatar});
 
         const msg = await channel.send({ embeds: [report] });
 
@@ -47,7 +51,6 @@ module.exports = {
         const reportNo = msg.id;
         report2.addField('Message ID', `\`${reportNo}\``);
         report2.addField('Please save this message ID. Use the following command to check the status of the report in the future:', `\`++statusreport ${reportNo}\``);
-
         await connection.query(
             `INSERT INTO reports (messageId, authorId, avatar, description, file) VALUES(?, ?, ?, ?, ?);`,
             [reportNo, author, avatar, description, url]

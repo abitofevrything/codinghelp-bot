@@ -54,7 +54,6 @@ module.exports = {
 
         usr.send({ content: `Hey, ${usr}!`, embeds: [formatEmbed], components: [row] });
       }
-      message.channel.bulkDelete(1);
       message.channel.send({ content: `📨 Hey, ${user} I just sent you a DM about formatting your code! Please check it!` });
     } else {
       let usr = message.mentions.repliedUser;
@@ -79,7 +78,6 @@ module.exports = {
       };
 
       usr.send({ content: `Hey, ${usr.username}!`, embeds: [formatEmbed], components: [row] });
-      message.channel.bulkDelete(1);
       message.channel.send({ content: `📨 Hey, ${usr.username} I just sent you a DM about formatting your code! Please check it!` });
     }
   },

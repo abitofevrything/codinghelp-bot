@@ -103,7 +103,6 @@ module.exports = {
         usr.send({ content: `${usr}, Please follow the rules: \n`, embeds: [rules[nb - 1]], components: [buttons] }); // DMs the user.
       }
 
-      //message.channel.bulkDelete(1); //Happens To Every Command
       message.reply({ content: `📨 Hey, ${user} I just sent you a DM about our rules! Please check it!` });
     }
     else { // if new message reply
@@ -131,7 +130,6 @@ module.exports = {
 
       const usr = message.mentions.repliedUser;
 
-      //message.channel.bulkDelete(1); //Happens To Every Command
       message.reply({ content: `📨 Hey, ${usr.username} I just sent you a DM about our rules! Please check it!` });
     }
   }

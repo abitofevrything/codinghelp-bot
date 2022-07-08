@@ -30,12 +30,10 @@ module.exports = {
         let usr = message.mentions.members.first();
         usr.send({ content: `Hey, ${usr}!\n\nPlease just ask your question according to our rules. Rule 2 explains that you should just ask instead of asking any of the following questions. Click either of the links below as your question could have been answered there as well.\n**Do not ask the following quesitons:**\n\`\`\`css\nIs anyone available?\nCan someone please help me?\nWhenever someone gets online, can you help me?\n\`\`\``, components: [row] });
       }
-      message.channel.bulkDelete(1);
       message.channel.send({ content: `📨 Hey, ${user.username} I just sent you a DM! Please check it!` });
     } else {
-      let usr = message.mentions.repliedUser;
-      usr.send({ content: `Hey, ${user.username}!\n\nPlease just ask your question according to our rules. Rule 2 explains that you should just ask instead of asking any of the following questions. Click either of the links below as your question could have been answered there as well.\n**Do not ask the following quesitons:**\n\`\`\`css\nIs anyone available?\nCan someone please help me?\nWhenever someone gets online, can you help me?\n\`\`\``, components: [row] });
-      message.channel.bulkDelete(1);
+      let user = message.mentions.repliedUser;
+      user.send({ content: `Hey, ${user.username}!\n\nPlease just ask your question according to our rules. Rule 2 explains that you should just ask instead of asking any of the following questions. Click either of the links below as your question could have been answered there as well.\n**Do not ask the following quesitons:**\n\`\`\`css\nIs anyone available?\nCan someone please help me?\nWhenever someone gets online, can you help me?\n\`\`\``, components: [row] });
       message.channel.send({ content: `📨 Hey, ${user.username} I just sent you a DM! Please check it!` });
     }
   },

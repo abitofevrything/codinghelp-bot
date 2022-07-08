@@ -9,7 +9,7 @@ module.exports = {
     usage: '++clear-reports',
     ownerOnly: 'yes',
     example: '++clear-reports',
-    async execute(message, args, client) {
+    async execute(message) {
         await connection.query(
             `TRUNCATE TABLE reports;`
         );
