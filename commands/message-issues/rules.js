@@ -51,6 +51,36 @@ const rule5 = {
   description: `Do not ask our members personal questions like gender, age, sexual preference, etc. This is not a dating server, nor is it a place where those questions matter. They mean nothing when it comes to whether or not someone can code. If someone decides to share anything, they can do so using their own free will. Explicitly asking these questions will get you warned, muted, or banned depending on the circumstances. **NO EXCEPTIONS.**`
 }
 
+const rule6 = {
+  color: '#1a1a1a',
+  title: 'Rule 6',
+  url: 'https://codinghelp.site',
+  thumbnail: {
+    url: 'https://imgur.com/U6cwQxj.png'
+  },
+  description: 'We are not going to spoon feed you answers. Meaning we will not tell you exactly how to get from point A to point C without you already knowing how to do points A, B & C. Will can give you some tips on how to get from point A to point C but we will not spoon feed you the answers. [Spoon feeding will not help you learn, it will only be harmful to your learning](https://smiletutor.sg/how-spoon-feeding-is-harmful-to-learning/). If you are new to something, please learn the basics before asking for help with something more advanced. If you are not new and we are saying that we are spoon feeding you, then you may need to go back and re-learn the basics.'
+}
+
+const rule7 = {
+  color: '#1a1a1a',
+  title: 'Rule 6',
+  url: 'https://codinghelp.site',
+  thumbnail: {
+    url: 'https://imgur.com/U6cwQxj.png'
+  },
+  description: 'Do not send mass DMs to users. If you are caught DMing a massive number of people (determined by our mods) at a time, you will be permanently banned (perma-banned) from our server. We will not warn you, we will not discuss it. We do not put up with that. Please only DM users that have the **DMs Open** role.'
+}
+
+const rule8 = {
+  color: '#1a1a1a',
+  title: 'Rule 6',
+  url: 'https://codinghelp.site',
+  thumbnail: {
+    url: 'https://imgur.com/U6cwQxj.png'
+  },
+  description: 'Please wait 1 hour before pinging any of the language roles. You can avoid this hour wait by becoming one of our Server Boosters. You also get additional benefits detailed below. This is to avoid useless and unneeded pinging of our users.'
+}
+
 // Actual Rule Command
 module.exports = {
   name: "rules",
@@ -61,18 +91,14 @@ module.exports = {
   modOnly: 'yes',
   execute(message, args) {
     const rules = []; // Keeps all of the rules inside an array.
-    rules.push(rule1); // Pushes the rule1 embed. Each one below it pushes it's own embed. Each line is a separate rule and that is how the array knows 1 from 2 from 3, etc.
-    rules.push(rule2);
-    rules.push(rule3);
-    rules.push(rule4);
-    rules.push(rule5);
+    rules.push([rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8]); // pushes all of the embeds from above to the array.
 
     const buttons = new MessageActionRow()
       .addComponents(
         new MessageButton()
           .setLabel('All our Rules')
           .setStyle('LINK')
-          .setURL('https://codinghelp.site'),
+          .setURL('https://codinghelp.site/all-rules'),
         new MessageButton()
           .setLabel('Our Knowledgebase')
           .setStyle('LINK')

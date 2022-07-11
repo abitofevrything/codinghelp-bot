@@ -30,7 +30,7 @@ module.exports = {
                 }, {
                   type: 2,
                   style: 5,
-                  label: 'Visit our Forum!',
+                  label: 'Visit our Knowledgebase!',
                   url: `https://codinghelp.site`
                 }
               ]
