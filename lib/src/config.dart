@@ -39,3 +39,6 @@ final String reddit = getEnv('REDDIT', 'https://reddit.com/r/CodingHelp');
 
 /// The URL to the CodingHelp Discord server.
 final String discord = getEnv('DISCORD', 'https://discord.gg/geQEUBm/');
+
+/// The ID of the bot owner
+final Snowflake ownerId = Snowflake(getEnv('OWNER_ID'));
