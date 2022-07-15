@@ -26,7 +26,8 @@ void main() async {
     ..addCommand(ping)
     ..addCommand(links)
     ..addCommand(userInfo)
-    ..addCommand(coinFlip);
+    ..addCommand(coinFlip)
+    ..addCommand(serverInfo);
 
   client
     ..registerPlugin(Logging())
