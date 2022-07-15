@@ -24,7 +24,7 @@ void main() async {
 
   commands
     ..addCommand(ping)
-    ..addCommand(wiki)
+    ..addCommand(links)
     ..addCommand(userInfo)
     ..addCommand(coinFlip);
 
