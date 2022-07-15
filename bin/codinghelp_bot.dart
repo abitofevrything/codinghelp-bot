@@ -24,7 +24,8 @@ void main() async {
 
   commands
     ..addCommand(ping)
-    ..addCommand(wiki);
+    ..addCommand(wiki)
+    ..addCommand(userInfo);
 
   client
     ..registerPlugin(Logging())
