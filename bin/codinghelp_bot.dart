@@ -22,7 +22,9 @@ void main() async {
     const Duration(seconds: 1),
   ));
 
-  commands.addCommand(ping);
+  commands
+    ..addCommand(ping)
+    ..addCommand(wiki);
 
   client
     ..registerPlugin(Logging())
