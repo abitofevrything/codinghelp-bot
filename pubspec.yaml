@@ -1,0 +1,14 @@
+name: codinghelp_bot
+description: The Discord bot for the r/CodingHelp Discord server
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: '>=2.17.5 <3.0.0'
+
+dependencies:
+  nyxx: ^3.4.2
+  nyxx_commands: ^4.2.0
+
+dev_dependencies:
+  lints: ^2.0.0
