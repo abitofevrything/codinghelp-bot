@@ -29,7 +29,8 @@ void main() async {
     ..addCommand(coinFlip)
     ..addCommand(serverInfo)
     ..addCommand(tech)
-    ..addCommand(access);
+    ..addCommand(access)
+    ..addCommand(welcome);
 
   client
     ..registerPlugin(Logging())
