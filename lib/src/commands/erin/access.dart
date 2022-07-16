@@ -13,6 +13,6 @@ final access = ChatCommand.textOnly(
       ..description =
           'Please check <#703989632110690324> and react to the correct message to get access to our server!';
 
-    await context.respond(MessageBuilder.embed(embed));
+    await context.channel.sendMessage(MessageBuilder.embed(embed));
   },
 );

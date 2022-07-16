@@ -29,7 +29,7 @@ final welcome = ChatCommand.textOnly(
         footer.text = 'Logo by Matt aka v4#1503.';
       });
 
-    await context.respond(
+    await context.channel.sendMessage(
       ComponentMessageBuilder()
         ..embeds = [embed]
         ..addComponentRow(ComponentRowBuilder()
