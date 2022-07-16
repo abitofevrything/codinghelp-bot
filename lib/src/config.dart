@@ -42,3 +42,10 @@ final String discord = getEnv('DISCORD', 'https://discord.gg/geQEUBm/');
 
 /// The ID of the bot owner
 final Snowflake ownerId = Snowflake(getEnv('OWNER_ID'));
+
+/// The IDs of the bot moderators
+final List<Snowflake> modIds =
+    getEnv('MOD_IDS').split(' ').where((s) => s.isNotEmpty).map(Snowflake.new).toList();
+
+/// The ID of the announcement channel
+final Snowflake announcementChannelId = Snowflake(getEnv('ANNOUNCEMENT_CHANNEL'));

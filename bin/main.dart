@@ -31,7 +31,8 @@ void main() async {
     ..addCommand(tech)
     ..addCommand(access)
     ..addCommand(welcome)
-    ..addCommand(boosters);
+    ..addCommand(boosters)
+    ..addCommand(botStatus);
 
   client
     ..registerPlugin(Logging())
