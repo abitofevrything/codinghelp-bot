@@ -30,7 +30,8 @@ void main() async {
     ..addCommand(serverInfo)
     ..addCommand(tech)
     ..addCommand(access)
-    ..addCommand(welcome);
+    ..addCommand(welcome)
+    ..addCommand(boosters);
 
   client
     ..registerPlugin(Logging())
