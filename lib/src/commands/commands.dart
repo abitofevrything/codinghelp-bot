@@ -12,3 +12,4 @@ export 'erin/boosters.dart';
 export 'erin/bot_status.dart';
 export 'erin/sub_status.dart';
 export 'erin/dm.dart';
+export 'erin/channel.dart';

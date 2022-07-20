@@ -34,7 +34,8 @@ void main() async {
     ..addCommand(boosters)
     ..addCommand(botStatus)
     ..addCommand(subStatus)
-    ..addCommand(dm);
+    ..addCommand(dm)
+    ..addCommand(channel);
 
   client
     ..registerPlugin(Logging())
