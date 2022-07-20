@@ -33,7 +33,8 @@ void main() async {
     ..addCommand(welcome)
     ..addCommand(boosters)
     ..addCommand(botStatus)
-    ..addCommand(subStatus);
+    ..addCommand(subStatus)
+    ..addCommand(dm);
 
   client
     ..registerPlugin(Logging())
