@@ -6,7 +6,7 @@ final uptimeTimer = Stopwatch();
 /// A [Converter] that greedily converts a String
 const greedyStringConverter = Converter<String>(_greedyString);
 
-String? _greedyString(view, context) {
+String? _greedyString(StringView view, IChatContext context) {
   String result = view.remaining;
   view.index = view.end;
 
