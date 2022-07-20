@@ -10,3 +10,4 @@ export 'erin/access.dart';
 export 'erin/welcome.dart';
 export 'erin/boosters.dart';
 export 'erin/bot_status.dart';
+export 'erin/sub_status.dart';
